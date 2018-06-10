@@ -28,7 +28,7 @@ gem 'devise'
 
 # ページング機能
 gem 'kaminari'
-# gem 'kaminari-bootstrap' # これいるんか？
+gem 'kaminari-bootstrap'
 
 # 検索機能用
 # これ使うかまだ確定ではない
