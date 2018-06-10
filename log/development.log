@@ -1,0 +1,51 @@
+Started GET "/" for 150.249.153.63 at 2018-06-10 11:36:55 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /usr/local/rvm/gems/ruby-2.3.6@rails516/gems/railties-5.1.6/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.6@rails516/gems/railties-5.1.6/lib/rails/templates/rails/welcome/index.html.erb (4.4ms)
+Completed 200 OK in 168ms (Views: 11.6ms)
+
+
+Started GET "/" for 150.249.153.63 at 2018-06-10 11:36:59 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /usr/local/rvm/gems/ruby-2.3.6@rails516/gems/railties-5.1.6/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.6@rails516/gems/railties-5.1.6/lib/rails/templates/rails/welcome/index.html.erb (3.0ms)
+Completed 200 OK in 6ms (Views: 4.5ms)
+
+
+Started GET "/items/index" for 150.249.153.63 at 2018-06-10 11:37:07 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#show as HTML
+  Parameters: {"id"=>"index"}
+  Rendering items/show.html.erb within layouts/application
+  Rendered items/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 7192ms (Views: 7190.4ms)
+
+
+Started GET "/items/show" for 150.249.153.63 at 2018-06-10 11:37:55 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#show as HTML
+  Parameters: {"id"=>"show"}
+  Rendering items/show.html.erb within layouts/application
+  Rendered items/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 66ms (Views: 64.6ms)
+
+
+Started GET "/items/index" for 150.249.153.63 at 2018-06-10 11:38:02 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#show as HTML
+  Parameters: {"id"=>"index"}
+  Rendering items/show.html.erb within layouts/application
+  Rendered items/show.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 68ms (Views: 67.4ms)
+
+
+Started GET "/items/" for 150.249.153.63 at 2018-06-10 11:39:11 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#index as HTML
+  Rendering items/index.html.erb within layouts/application
+  Rendered items/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 599ms (Views: 446.5ms)
+
+
