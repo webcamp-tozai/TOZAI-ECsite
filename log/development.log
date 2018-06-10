@@ -49,3 +49,859 @@ Processing by ItemsController#index as HTML
 Completed 200 OK in 599ms (Views: 446.5ms)
 
 
+Started GET "/items/" for 150.249.153.63 at 2018-06-10 12:16:44 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#index as HTML
+  Rendering items/index.html.erb within layouts/application
+  Rendered items/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 588ms (Views: 438.4ms)
+
+
+Started GET "/items/" for 150.249.153.63 at 2018-06-10 12:17:36 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#index as HTML
+  Rendering items/index.html.erb within layouts/application
+  Rendered items/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 69ms (Views: 67.6ms)
+
+
+Started GET "/items/" for 150.249.153.63 at 2018-06-10 12:18:47 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#index as HTML
+  Rendering items/index.html.erb within layouts/application
+  Rendered items/index.html.erb within layouts/application (0.4ms)
+Completed 500 Internal Server Error in 10ms
+
+
+  
+SyntaxError (/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:12: syntax error, unexpected '<', expecting keyword_end
+    <nav class="navbar navbar-expa...
+     ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:12: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+...r-dark fixed-top bg-dark" style="height: 100px;">
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:13: syntax error, unexpected '<'
+      <div class="container">
+       ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:14: syntax error, unexpected '<'
+        <!-- 東西チームロゴ -->
+         ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:14: syntax error, unexpected unary-, expecting keyword_do or '{' or '('
+        <!-- 東西チームロゴ -->
+                                    ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+...   <a class="navbar-brand" href="#"><img src="logo.png" widt...
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:15: syntax error, unexpected '<'
+...class="navbar-brand" href="#"><img src="logo.png" width="60p...
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+...f="#"><img src="logo.png" width="60px" height="60px"></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+...="logo.png" width="60px" height="60px"></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:15: syntax error, unexpected '<'
+...g" width="60px" height="60px"></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:17: unknown regexp options - pt
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:18: syntax error, unexpected '<'
+        <!-- 検索アイコン -->
+         ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:18: syntax error, unexpected unary-, expecting keyword_do or '{' or '('
+        <!-- 検索アイコン -->
+                                 ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:19: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+...xt-white fa-lg text-right" href="#"></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:19: syntax error, unexpected '<'
+...te fa-lg text-right" href="#"></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:25: unknown regexp options - pa
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:25: regexp encoding option 's' differs from source encoding 'UTF-8'
+/.../n has a non escaped non ASCII character in non ASCII-8BIT script: /a>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <!-- \u30E6\u30FC\u30B6\u30FC\u30DA\u30FC\u30B8\u7528\u30EA\u30F3\u30AF -->
+            <li class="nav-item">
+              <a class="nav-link fa fa-user fa-lg text-white text-center" href="#"><span class="small"><br>user name</
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:25: syntax error, unexpected '<'
+...s="small"><br>user name</span></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:26: unknown regexp option - l
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:27: syntax error, unexpected '<'
+            <!-- ログアウトリンク -->
+             ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:27: syntax error, unexpected unary-, expecting keyword_do or '{' or '('
+            <!-- ログアウトリンク -->
+                                           ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:29: syntax error, unexpected '<'
+              <a class="nav-link fa fa-sign-...
+               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:29: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+...lg text-white text-center" href="#"><span class="small"><br>...
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:29: syntax error, unexpected '<'
+...t-white text-center" href="#"><span class="small"><br>Logout...
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:29: syntax error, unexpected '<'
+... href="#"><span class="small"><br>Logout</span></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:29: unknown regexp option - a
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:30: syntax error, unexpected '<'
+            </li>
+             ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:33: unknown regexp options - pa
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:33: regexp encoding option 's' differs from source encoding 'UTF-8'
+/.../n has a non escaped non ASCII character in non ASCII-8BIT script: /li>
+            <!-- \u30AB\u30FC\u30C8\u30DA\u30FC\u30B8\u7528\u30EA\u30F3\u30AF -->
+            <li class="nav-item">
+             <a class="nav-link fa fa-shopping-cart text-white fa-lg text-center" href="#"><span class="small"><br>2items</
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:33: syntax error, unexpected '<'
+...lass="small"><br>2items</span></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:34: unknown regexp option - l
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:35: syntax error, unexpected '<'
+          </ul>
+           ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:36: unknown regexp options - dv
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:37: syntax error, unexpected '<'
+      </div>
+       ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:38: unknown regexp options - av
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:39: syntax error, unexpected '<'
+  </header>
+   ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:43: unknown regexp options - bdy
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:44: syntax error, unexpected '<'
+</html>
+ ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:49: unterminated regexp meets end of file):
+  
+app/views/layouts/application.html.erb:12: syntax error, unexpected '<', expecting keyword_end
+app/views/layouts/application.html.erb:12: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+app/views/layouts/application.html.erb:13: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:14: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:14: syntax error, unexpected unary-, expecting keyword_do or '{' or '('
+app/views/layouts/application.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+app/views/layouts/application.html.erb:15: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+app/views/layouts/application.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+app/views/layouts/application.html.erb:15: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:17: unknown regexp options - pt
+app/views/layouts/application.html.erb:18: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:18: syntax error, unexpected unary-, expecting keyword_do or '{' or '('
+app/views/layouts/application.html.erb:19: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+app/views/layouts/application.html.erb:19: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:25: unknown regexp options - pa
+app/views/layouts/application.html.erb:25: regexp encoding option 's' differs from source encoding 'UTF-8'
+app/views/layouts/application.html.erb:25: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:26: unknown regexp option - l
+app/views/layouts/application.html.erb:27: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:27: syntax error, unexpected unary-, expecting keyword_do or '{' or '('
+app/views/layouts/application.html.erb:29: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:29: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+app/views/layouts/application.html.erb:29: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:29: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:29: unknown regexp option - a
+app/views/layouts/application.html.erb:30: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:33: unknown regexp options - pa
+app/views/layouts/application.html.erb:33: regexp encoding option 's' differs from source encoding 'UTF-8'
+app/views/layouts/application.html.erb:33: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:34: unknown regexp option - l
+app/views/layouts/application.html.erb:35: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:36: unknown regexp options - dv
+app/views/layouts/application.html.erb:37: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:38: unknown regexp options - av
+app/views/layouts/application.html.erb:39: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:43: unknown regexp options - bdy
+app/views/layouts/application.html.erb:44: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:49: unterminated regexp meets end of file
+Started GET "/items/" for 150.249.153.63 at 2018-06-10 12:20:03 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#index as HTML
+  Rendering items/index.html.erb within layouts/application
+  Rendered items/index.html.erb within layouts/application (0.5ms)
+Completed 500 Internal Server Error in 6ms
+
+
+  
+SyntaxError (/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:12: syntax error, unexpected '<', expecting keyword_end
+    <nav class="navbar navbar-expa...
+     ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:12: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+...r-dark fixed-top bg-dark" style="height: 100px;">
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:13: syntax error, unexpected '<'
+      <div class="container">
+       ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:14: syntax error, unexpected '<'
+        <!-- 東西チームロゴ -->
+         ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:14: syntax error, unexpected unary-, expecting keyword_do or '{' or '('
+        <!-- 東西チームロゴ -->
+                                    ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+...   <a class="navbar-brand" href="#"><img src="logo.png" widt...
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:15: syntax error, unexpected '<'
+...class="navbar-brand" href="#"><img src="logo.png" width="60p...
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+...f="#"><img src="logo.png" width="60px" height="60px"></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+...="logo.png" width="60px" height="60px"></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:15: syntax error, unexpected '<'
+...g" width="60px" height="60px"></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:17: unknown regexp options - pt
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:18: syntax error, unexpected '<'
+        <!-- 検索アイコン -->
+         ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:18: syntax error, unexpected unary-, expecting keyword_do or '{' or '('
+        <!-- 検索アイコン -->
+                                 ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:19: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+...xt-white fa-lg text-right" href="#"></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:19: syntax error, unexpected '<'
+...te fa-lg text-right" href="#"></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:25: unknown regexp options - pa
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:25: regexp encoding option 's' differs from source encoding 'UTF-8'
+/.../n has a non escaped non ASCII character in non ASCII-8BIT script: /a>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <!-- \u30E6\u30FC\u30B6\u30FC\u30DA\u30FC\u30B8\u7528\u30EA\u30F3\u30AF -->
+            <li class="nav-item">
+              <a class="nav-link fa fa-user fa-lg text-white text-center" href="#"><span class="small"><br>user name</
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:25: syntax error, unexpected '<'
+...s="small"><br>user name</span></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:26: unknown regexp option - l
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:27: syntax error, unexpected '<'
+            <!-- ログアウトリンク -->
+             ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:27: syntax error, unexpected unary-, expecting keyword_do or '{' or '('
+            <!-- ログアウトリンク -->
+                                           ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:29: syntax error, unexpected '<'
+              <a class="nav-link fa fa-sign-...
+               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:29: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+...lg text-white text-center" href="#"><span class="small"><br>...
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:29: syntax error, unexpected '<'
+...t-white text-center" href="#"><span class="small"><br>Logout...
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:29: syntax error, unexpected '<'
+... href="#"><span class="small"><br>Logout</span></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:29: unknown regexp option - a
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:30: syntax error, unexpected '<'
+            </li>
+             ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:33: unknown regexp options - pa
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:33: regexp encoding option 's' differs from source encoding 'UTF-8'
+/.../n has a non escaped non ASCII character in non ASCII-8BIT script: /li>
+            <!-- \u30AB\u30FC\u30C8\u30DA\u30FC\u30B8\u7528\u30EA\u30F3\u30AF -->
+            <li class="nav-item">
+             <a class="nav-link fa fa-shopping-cart text-white fa-lg text-center" href="#"><span class="small"><br>2items</
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:33: syntax error, unexpected '<'
+...lass="small"><br>2items</span></a>
+...                               ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:34: unknown regexp option - l
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:35: syntax error, unexpected '<'
+          </ul>
+           ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:36: unknown regexp options - dv
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:37: syntax error, unexpected '<'
+      </div>
+       ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:38: unknown regexp options - av
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:39: syntax error, unexpected '<'
+  </header>
+   ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:43: unknown regexp options - bdy
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:44: syntax error, unexpected '<'
+</html>
+ ^
+/home/ec2-user/environment/TOZAI-ECsite/app/views/layouts/application.html.erb:49: unterminated regexp meets end of file):
+  
+app/views/layouts/application.html.erb:12: syntax error, unexpected '<', expecting keyword_end
+app/views/layouts/application.html.erb:12: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+app/views/layouts/application.html.erb:13: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:14: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:14: syntax error, unexpected unary-, expecting keyword_do or '{' or '('
+app/views/layouts/application.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+app/views/layouts/application.html.erb:15: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+app/views/layouts/application.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+app/views/layouts/application.html.erb:15: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:17: unknown regexp options - pt
+app/views/layouts/application.html.erb:18: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:18: syntax error, unexpected unary-, expecting keyword_do or '{' or '('
+app/views/layouts/application.html.erb:19: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+app/views/layouts/application.html.erb:19: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:25: unknown regexp options - pa
+app/views/layouts/application.html.erb:25: regexp encoding option 's' differs from source encoding 'UTF-8'
+app/views/layouts/application.html.erb:25: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:26: unknown regexp option - l
+app/views/layouts/application.html.erb:27: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:27: syntax error, unexpected unary-, expecting keyword_do or '{' or '('
+app/views/layouts/application.html.erb:29: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:29: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+app/views/layouts/application.html.erb:29: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:29: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:29: unknown regexp option - a
+app/views/layouts/application.html.erb:30: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:33: unknown regexp options - pa
+app/views/layouts/application.html.erb:33: regexp encoding option 's' differs from source encoding 'UTF-8'
+app/views/layouts/application.html.erb:33: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:34: unknown regexp option - l
+app/views/layouts/application.html.erb:35: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:36: unknown regexp options - dv
+app/views/layouts/application.html.erb:37: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:38: unknown regexp options - av
+app/views/layouts/application.html.erb:39: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:43: unknown regexp options - bdy
+app/views/layouts/application.html.erb:44: syntax error, unexpected '<'
+app/views/layouts/application.html.erb:49: unterminated regexp meets end of file
+Started GET "/items/" for 150.249.153.63 at 2018-06-10 12:20:09 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#index as HTML
+  Rendering items/index.html.erb within layouts/application
+  Rendered items/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 48ms (Views: 46.8ms)
+
+
+Started GET "/items/logo.png" for 150.249.153.63 at 2018-06-10 12:20:10 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#show as PNG
+  Parameters: {"id"=>"logo"}
+Completed 406 Not Acceptable in 10ms
+
+
+  
+ActionController::UnknownFormat (ItemsController#show is missing a template for this request format and variant.
+
+request.formats: ["image/png"]
+request.variant: []):
+  
+actionpack (5.1.6) lib/action_controller/metal/implicit_render.rb:40:in `default_render'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+actionpack (5.1.6) lib/abstract_controller/base.rb:186:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.1.6) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+activesupport (5.1.6) lib/active_support/callbacks.rb:131:in `run_callbacks'
+actionpack (5.1.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/rescue.rb:20:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+activesupport (5.1.6) lib/active_support/notifications.rb:166:in `block in instrument'
+activesupport (5.1.6) lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+activesupport (5.1.6) lib/active_support/notifications.rb:166:in `instrument'
+actionpack (5.1.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+activerecord (5.1.6) lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+actionpack (5.1.6) lib/abstract_controller/base.rb:124:in `process'
+actionview (5.1.6) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.1.6) lib/action_controller/metal.rb:189:in `dispatch'
+actionpack (5.1.6) lib/action_controller/metal.rb:253:in `dispatch'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:844:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.5) lib/rack/etag.rb:25:in `call'
+rack (2.0.5) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.5) lib/rack/head.rb:12:in `call'
+rack (2.0.5) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.5) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.6) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/items/" for 150.249.153.63 at 2018-06-10 12:20:42 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#index as HTML
+  Rendering items/index.html.erb within layouts/application
+  Rendered items/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 49ms (Views: 47.6ms)
+
+
+Started GET "/items/logo.png" for 150.249.153.63 at 2018-06-10 12:20:42 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#show as PNG
+  Parameters: {"id"=>"logo"}
+Completed 406 Not Acceptable in 10ms
+
+
+  
+ActionController::UnknownFormat (ItemsController#show is missing a template for this request format and variant.
+
+request.formats: ["image/png"]
+request.variant: []):
+  
+actionpack (5.1.6) lib/action_controller/metal/implicit_render.rb:40:in `default_render'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+actionpack (5.1.6) lib/abstract_controller/base.rb:186:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.1.6) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+activesupport (5.1.6) lib/active_support/callbacks.rb:131:in `run_callbacks'
+actionpack (5.1.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/rescue.rb:20:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+activesupport (5.1.6) lib/active_support/notifications.rb:166:in `block in instrument'
+activesupport (5.1.6) lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+activesupport (5.1.6) lib/active_support/notifications.rb:166:in `instrument'
+actionpack (5.1.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+activerecord (5.1.6) lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+actionpack (5.1.6) lib/abstract_controller/base.rb:124:in `process'
+actionview (5.1.6) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.1.6) lib/action_controller/metal.rb:189:in `dispatch'
+actionpack (5.1.6) lib/action_controller/metal.rb:253:in `dispatch'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:844:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.5) lib/rack/etag.rb:25:in `call'
+rack (2.0.5) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.5) lib/rack/head.rb:12:in `call'
+rack (2.0.5) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.5) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.6) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/items/" for 150.249.153.63 at 2018-06-10 12:20:58 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#index as HTML
+  Rendering items/index.html.erb within layouts/application
+  Rendered items/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 59ms (Views: 57.8ms)
+
+
+Started GET "/items/logo.png" for 150.249.153.63 at 2018-06-10 12:20:58 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#show as PNG
+  Parameters: {"id"=>"logo"}
+Completed 406 Not Acceptable in 10ms
+
+
+  
+ActionController::UnknownFormat (ItemsController#show is missing a template for this request format and variant.
+
+request.formats: ["image/png"]
+request.variant: []):
+  
+actionpack (5.1.6) lib/action_controller/metal/implicit_render.rb:40:in `default_render'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+actionpack (5.1.6) lib/abstract_controller/base.rb:186:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.1.6) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+activesupport (5.1.6) lib/active_support/callbacks.rb:131:in `run_callbacks'
+actionpack (5.1.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/rescue.rb:20:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+activesupport (5.1.6) lib/active_support/notifications.rb:166:in `block in instrument'
+activesupport (5.1.6) lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+activesupport (5.1.6) lib/active_support/notifications.rb:166:in `instrument'
+actionpack (5.1.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+activerecord (5.1.6) lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+actionpack (5.1.6) lib/abstract_controller/base.rb:124:in `process'
+actionview (5.1.6) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.1.6) lib/action_controller/metal.rb:189:in `dispatch'
+actionpack (5.1.6) lib/action_controller/metal.rb:253:in `dispatch'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:844:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.5) lib/rack/etag.rb:25:in `call'
+rack (2.0.5) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.5) lib/rack/head.rb:12:in `call'
+rack (2.0.5) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.5) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.6) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/items/" for 150.249.153.63 at 2018-06-10 12:22:03 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#index as HTML
+  Rendering items/index.html.erb within layouts/application
+  Rendered items/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 52ms (Views: 50.6ms)
+
+
+Started GET "/items/logo.png" for 150.249.153.63 at 2018-06-10 12:22:03 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#show as PNG
+  Parameters: {"id"=>"logo"}
+Completed 406 Not Acceptable in 10ms
+
+
+  
+ActionController::UnknownFormat (ItemsController#show is missing a template for this request format and variant.
+
+request.formats: ["image/png"]
+request.variant: []):
+  
+actionpack (5.1.6) lib/action_controller/metal/implicit_render.rb:40:in `default_render'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+actionpack (5.1.6) lib/abstract_controller/base.rb:186:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.1.6) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+activesupport (5.1.6) lib/active_support/callbacks.rb:131:in `run_callbacks'
+actionpack (5.1.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/rescue.rb:20:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+activesupport (5.1.6) lib/active_support/notifications.rb:166:in `block in instrument'
+activesupport (5.1.6) lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+activesupport (5.1.6) lib/active_support/notifications.rb:166:in `instrument'
+actionpack (5.1.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+activerecord (5.1.6) lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+actionpack (5.1.6) lib/abstract_controller/base.rb:124:in `process'
+actionview (5.1.6) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.1.6) lib/action_controller/metal.rb:189:in `dispatch'
+actionpack (5.1.6) lib/action_controller/metal.rb:253:in `dispatch'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:844:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.5) lib/rack/etag.rb:25:in `call'
+rack (2.0.5) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.5) lib/rack/head.rb:12:in `call'
+rack (2.0.5) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.5) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.6) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/items/" for 150.249.153.63 at 2018-06-10 12:23:12 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#index as HTML
+  Rendering items/index.html.erb within layouts/application
+  Rendered items/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 48ms (Views: 47.5ms)
+
+
+Started GET "/items/logo.png" for 150.249.153.63 at 2018-06-10 12:23:12 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#show as PNG
+  Parameters: {"id"=>"logo"}
+Completed 406 Not Acceptable in 10ms
+
+
+  
+ActionController::UnknownFormat (ItemsController#show is missing a template for this request format and variant.
+
+request.formats: ["image/png"]
+request.variant: []):
+  
+actionpack (5.1.6) lib/action_controller/metal/implicit_render.rb:40:in `default_render'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+actionpack (5.1.6) lib/abstract_controller/base.rb:186:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.1.6) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+activesupport (5.1.6) lib/active_support/callbacks.rb:131:in `run_callbacks'
+actionpack (5.1.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/rescue.rb:20:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+activesupport (5.1.6) lib/active_support/notifications.rb:166:in `block in instrument'
+activesupport (5.1.6) lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+activesupport (5.1.6) lib/active_support/notifications.rb:166:in `instrument'
+actionpack (5.1.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+activerecord (5.1.6) lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+actionpack (5.1.6) lib/abstract_controller/base.rb:124:in `process'
+actionview (5.1.6) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.1.6) lib/action_controller/metal.rb:189:in `dispatch'
+actionpack (5.1.6) lib/action_controller/metal.rb:253:in `dispatch'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:844:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.5) lib/rack/etag.rb:25:in `call'
+rack (2.0.5) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.5) lib/rack/head.rb:12:in `call'
+rack (2.0.5) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.5) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.6) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/items/" for 150.249.153.63 at 2018-06-10 12:26:53 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#index as HTML
+  Rendering items/index.html.erb within layouts/application
+  Rendered items/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 51ms (Views: 48.8ms)
+
+
+Started GET "/items/logo.png" for 150.249.153.63 at 2018-06-10 12:26:53 +0000
+Cannot render console from 150.249.153.63! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ItemsController#show as PNG
+  Parameters: {"id"=>"logo"}
+Completed 406 Not Acceptable in 10ms
+
+
+  
+ActionController::UnknownFormat (ItemsController#show is missing a template for this request format and variant.
+
+request.formats: ["image/png"]
+request.variant: []):
+  
+actionpack (5.1.6) lib/action_controller/metal/implicit_render.rb:40:in `default_render'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+actionpack (5.1.6) lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+actionpack (5.1.6) lib/abstract_controller/base.rb:186:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.1.6) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+activesupport (5.1.6) lib/active_support/callbacks.rb:131:in `run_callbacks'
+actionpack (5.1.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/rescue.rb:20:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+activesupport (5.1.6) lib/active_support/notifications.rb:166:in `block in instrument'
+activesupport (5.1.6) lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+activesupport (5.1.6) lib/active_support/notifications.rb:166:in `instrument'
+actionpack (5.1.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+actionpack (5.1.6) lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+activerecord (5.1.6) lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+actionpack (5.1.6) lib/abstract_controller/base.rb:124:in `process'
+actionview (5.1.6) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.1.6) lib/action_controller/metal.rb:189:in `dispatch'
+actionpack (5.1.6) lib/action_controller/metal.rb:253:in `dispatch'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:844:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.5) lib/rack/etag.rb:25:in `call'
+rack (2.0.5) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.5) lib/rack/head.rb:12:in `call'
+rack (2.0.5) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.5) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.6) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
