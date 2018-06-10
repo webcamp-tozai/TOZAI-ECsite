@@ -16,7 +16,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 # bootstrap
-gem 'bootstrap-sass'  # '~>4.1.1'にする？蜂須賀さんのしてた
+gem 'bootstrap', '~>4.1.1'
 gem 'jquery-rails'
 
 # ジャケット画像投稿用
