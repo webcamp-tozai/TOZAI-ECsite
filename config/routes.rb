@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   registrations: 'users/registrations'
   }
   
-  resources :items, except: [:destroy]
+  resources :items, except: [:destroy] do
+  	resource:item_reviews,only:[:index,:create,:new,:edit,:update,:destroy]
+  end
 end
