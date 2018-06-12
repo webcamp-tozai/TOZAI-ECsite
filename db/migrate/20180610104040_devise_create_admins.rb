@@ -37,8 +37,8 @@ class DeviseCreateAdmins < ActiveRecord::Migration[5.1]
       t.string :given_name_kanji, null: false, index: true
       t.string :family_name_kana, null: false, index: true
       t.string :given_name_kana, null: false, index: true
-      t.boolean :is_main_administer, null: false, index: true, default: 0
-      t.boolean :is_deleted, null: false, index: true, default: 0
+      t.boolean :is_main_administer, null: false, index: true, default: false
+      t.boolean :is_deleted, null: false, index: true, default: false
 
       t.timestamps null: false, index: true
     end

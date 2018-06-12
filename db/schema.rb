@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20180610104040) do
     t.string "phone_number", null: false
     t.string "post_code", null: false
     t.string "address", null: false
-    t.boolean "is_deleted", default: false, null: false
+    t.integer "member_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cart_item_id"], name: "index_users_on_cart_item_id"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20180610104040) do
     t.index ["family_name_kanji"], name: "index_users_on_family_name_kanji"
     t.index ["given_name_kana"], name: "index_users_on_given_name_kana"
     t.index ["given_name_kanji"], name: "index_users_on_given_name_kanji"
-    t.index ["is_deleted"], name: "index_users_on_is_deleted"
+    t.index ["member_status"], name: "index_users_on_member_status"
     t.index ["order_id"], name: "index_users_on_order_id"
     t.index ["phone_number"], name: "index_users_on_phone_number"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
