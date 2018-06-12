@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612101207) do
+ActiveRecord::Schema.define(version: 20180612174541) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(version: 20180612101207) do
     t.index ["is_main_administer"], name: "index_admins_on_is_main_administer"
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
     t.index ["updated_at"], name: "index_admins_on_updated_at"
+  end
+
+  create_table "artists", force: :cascade do |t|
+    t.integer "track_id", null: false
+    t.string "name", null: false
+    t.string "name_kana", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_artists_on_name"
+    t.index ["name_kana"], name: "index_artists_on_name_kana"
+    t.index ["track_id"], name: "index_artists_on_track_id"
   end
 
   create_table "items", force: :cascade do |t|
