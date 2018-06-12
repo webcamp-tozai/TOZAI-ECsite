@@ -18,7 +18,7 @@ class ItemReviewsController < ApplicationController
 	end
 
 	private
-	def item_reviews_params
-		params.require(:item_reviews).permit(:user_id,:item_id,:review)
+	def item_review_params
+		params.require(:item_review).permit(:user_id,:item_id,:review)
 	end
 end
