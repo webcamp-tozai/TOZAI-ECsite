@@ -1,69 +1,21 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-
-    <title>東西レコード - 管理者一覧</title>
-
-  </head>
-
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="height: 100px;">
-      <div class="container">
-        <!-- 東西チームロゴ -->
-        <a class="navbar-brand" href="#"><img src="logo.png" width="60px" height="60px"></a>
-        <!-- 検索フォーム -->
-        <input type="text" class="form-control pl" id="formGroupExampleInput2" placeholder="曲名、CDタイトル、アーティスト名、ジャンルで検索"></input>
-        <!-- 検索アイコン -->
-        <a class="nav-link fa fa-search text-white fa-lg text-right" href="#"></a>
-
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <!-- ユーザーページ用リンク -->
-            <li class="nav-item">
-              <a class="nav-link fa fa-user fa-lg text-white text-center" href="#"><span class="small"><br>admin name</span></a>
-            </li>
-            <!-- ログアウトリンク -->
-            <li class="nav-item">
-              <a class="nav-link fa fa-sign-out-alt fa-lg text-white text-center" href="#"><span class="small"><br>Logout</span></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <body>
-    <div class="container" style="margin-top: 100px;">
-      <div class="row">
-        <div class="col-6 mx-auto" style="margin-top: 60px;">
-            <div class="jumbotron">
-             <h1 class="text-center font-weight-light">送付先住所追加</h1>
-              <label for="InputName">名前</label>
-              <p class="h4">矢沢永吉</p>
-              <div class="form-group">
-                <label for="InputAddress">郵便番号</label>
-                <input class="form-control" id="InputAddress" placeholder="ハイフンなし"></input>
-              </div>
-              <div class="form-group">
-                <label for="InputAddress">住所(全角)</label>
-                <input class="form-control" id="InputAddress" placeholder="住所"></input>
-              </div>
-              <a href="#" class="btn btn-warning btn-block">-住所を追加-</a><br>
-              <a href="#" class="btn btn-sm btn btn-outline-secondary">Back</a>
+<div class="container" style="margin-top: 100px;">
+  <div class="row">
+    <div class="col-6 mx-auto" style="margin-top: 60px;">
+        <div class="jumbotron">
+         <h1 class="text-center font-weight-light">送付先住所追加</h1>
+          <label for="InputName">名前</label>
+          <p class="h4">矢沢永吉</p>
+          <div class="form-group">
+            <label for="InputAddress">郵便番号</label>
+            <input class="form-control" id="InputAddress" placeholder="ハイフンなし"></input>
           </div>
-        </div><!-- メインページの閉じタグ -->
-      </div><!-- 全体rowの閉じタグ -->
-    </div><!-- 全体containerの閉じタグ -->
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+          <div class="form-group">
+            <label for="InputAddress">住所(全角)</label>
+            <input class="form-control" id="InputAddress" placeholder="住所"></input>
+          </div>
+          <a href="#" class="btn btn-warning btn-block">-住所を追加-</a><br>
+          <a href="#" class="btn btn-sm btn btn-outline-secondary">Back</a>
       </div>
-    </footer>
-    <!-- Bootstrap core JavaScript 位置はここから動かさない -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->
