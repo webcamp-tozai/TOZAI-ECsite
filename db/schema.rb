@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612175226) do
+ActiveRecord::Schema.define(version: 20180612180422) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -101,6 +101,19 @@ ActiveRecord::Schema.define(version: 20180612175226) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["payment_method"], name: "index_payments_on_payment_method"
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.integer "disc_number_id", null: false
+    t.integer "number", null: false
+    t.string "name", null: false
+    t.integer "length_hour", default: 0, null: false
+    t.integer "length_minute", null: false
+    t.integer "length_second", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["disc_number_id"], name: "index_tracks_on_disc_number_id"
+    t.index ["name"], name: "index_tracks_on_name"
   end
 
   create_table "users", force: :cascade do |t|
