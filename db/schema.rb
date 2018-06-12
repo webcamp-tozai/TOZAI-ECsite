@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612083802) do
+ActiveRecord::Schema.define(version: 20180612101207) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -52,6 +52,31 @@ ActiveRecord::Schema.define(version: 20180612083802) do
     t.index ["is_main_administer"], name: "index_admins_on_is_main_administer"
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
     t.index ["updated_at"], name: "index_admins_on_updated_at"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "item_review_id"
+    t.integer "track_id", null: false
+    t.integer "disc_number_id", null: false
+    t.integer "label_id", null: false
+    t.integer "artist_id", null: false
+    t.integer "genre_id", null: false
+    t.text "item_introduction"
+    t.string "title", null: false
+    t.text "image_id", null: false
+    t.integer "stock", null: false
+    t.integer "price_without_tax", null: false
+    t.string "type", null: false
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_items_on_artist_id"
+    t.index ["disc_number_id"], name: "index_items_on_disc_number_id"
+    t.index ["genre_id"], name: "index_items_on_genre_id"
+    t.index ["item_review_id"], name: "index_items_on_item_review_id"
+    t.index ["label_id"], name: "index_items_on_label_id"
+    t.index ["title"], name: "index_items_on_title"
+    t.index ["track_id"], name: "index_items_on_track_id"
   end
 
   create_table "payments", force: :cascade do |t|
