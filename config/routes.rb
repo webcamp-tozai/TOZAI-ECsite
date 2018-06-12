@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   passwords:     'users/passwords',
   registrations: 'users/registrations'
   }
-  
+
   resources :items, except: [:destroy] do
   	resource :item_reviews,only:[:index,:create,:new,:edit,:update,:destroy]
   end

@@ -16,6 +16,7 @@ class ItemReviewsController < ApplicationController
 
 	def destroy
 	end
+
 	private
 	def item_review_params
 		params.require(:item_review).permit(:user_id,:item_id,:review)
