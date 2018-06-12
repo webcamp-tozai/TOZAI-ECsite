@@ -1,14 +1,4 @@
 Rails.application.routes.draw do
-  get 'admins/top'
-
-  get 'admins/index'
-
-  get 'admins/show'
-
-  get 'admins/edit'
-
-  get 'admins/update'
-
   devise_for :admins, controllers: {
   sessions:      'admins/sessions',
   passwords:     'admins/passwords',
