@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180613041511) do
+ActiveRecord::Schema.define(version: 20180613041838) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -69,6 +69,15 @@ ActiveRecord::Schema.define(version: 20180613041511) do
     t.integer "number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "genre_english", null: false
+    t.string "genre_kana", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_english"], name: "index_genres_on_genre_english"
+    t.index ["genre_kana"], name: "index_genres_on_genre_kana"
   end
 
   create_table "items", force: :cascade do |t|
