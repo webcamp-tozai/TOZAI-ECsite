@@ -10,6 +10,9 @@ class ContactsController < ApplicationController
 
 	def show
 	end
+	
+	def update
+	end
 
 	private
 	def contact_params
