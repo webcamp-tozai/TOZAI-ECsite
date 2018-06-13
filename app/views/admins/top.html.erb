@@ -1,2 +1,25 @@
-<h1>Admins#top</h1>
-<p>Find me in app/views/admins/top.html.erb</p>
+<div class="container-fluid" style="margin-top: 100px;">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-9">
+      <div class="row">
+        <div class="container">
+          <span class="font-weight-bold h2">管理画面TOP</span>
+            <div class="box" style="height:10px;background-color:#005684;">
+            </div>
+            <p>The .table-striped class adds zebra-stripes to a table:</p>
+            <div class="row">
+              <div class="col">
+                <img class="mx-auto d-block img-thumbnail" src="logo.png" style="width:400px;height:400px;">
+              </div>
+           </div>
+        </div>
+      </div>
+    </div><!-- メインページの閉じタグ -->
+
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

@@ -1,2 +1,118 @@
-<h1>Items#new</h1>
-<p>Find me in app/views/items/new.html.erb</p>
+
+<div class="container-fluid" style="margin-top: 100px;"><!-- 全体container-->
+  <div class="row"><!-- 全体row -->
+
+		<!-- サイドバー -->
+		<%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+		<!-- メインページ -->
+    <div class="container col-10">
+      <div class="row">
+        <div class="container">
+          <span class="font-weight-bold h2">商品追加</span>
+           <div class="box" style="height:10px;background-color:#005684;">
+           </div>
+          <p>The .table-striped class adds zebra-stripes to a table:</p>
+
+          <div class="container">
+            <div class="jumbotron">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label class="font-weight-bold">タイトル</label>
+                  <input class="form-control" type="text">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label class="control-label font-weight-bold">商品タイプ</label>
+
+                  <div class="radio">
+                    <label><input type="radio" name="radio">シングルCD</label>
+                    <label><input type="radio" name="radio">アルバムCD</label>
+                    <label><input type="radio" name="radio">レコード</label>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label class="font-weight-bold">レーベル名</label>
+                  <input class="form-control" type="text">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label class="font-weight-bold">ジャンル</label>
+                  <input class="form-control" type="text">
+                </div>
+
+              </div>
+
+              <div class="form-group">
+                <label class="font-weight-bold">商品紹介</label>
+                <textarea class="form-control" type="text"></textarea>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-2">
+                  <label class="font-weight-bold">入庫数</label>
+                  <input class="form-control" type="text">
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label class="font-weight-bold">商品単価</label>
+                  <input class="form-control" type="text">
+                </div>
+
+              </div>
+
+              <a href="#" class="form-control-file">ファイルを選択</a>
+              <table class="table table-responsive">
+                <thead>
+                  <th class="text-center">ディスク番号</th>
+                  <th class="text-center">アーティスト名</th>
+                  <th class="text-center">アーティスト名<br>(カナ)</th>
+                  <th class="text-center">トラック番号</th>
+                  <th class="text-center">曲名</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                  <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
+                  <td><input class="form-control" type="text"></td>
+                  <td><input class="form-control" type="text"></td>
+                  <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
+                  <td><input class="form-control" type="text"></td>
+                </tbody>
+                <tbody>
+                  <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
+                  <td><input class="form-control" type="text"></td>
+                  <td><input class="form-control" type="text"></td>
+                  <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
+                  <td><input class="form-control" type="text"></td>
+                </tbody>
+                <tbody>
+                  <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
+                  <td><input class="form-control" type="text"></td>
+                  <td><input class="form-control" type="text"></td>
+                  <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
+                  <td><input class="form-control" type="text"></td>
+                </tbody>
+                <tbody>
+                  <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
+                  <td><input class="form-control" type="text"></td>
+                  <td><input class="form-control" type="text"></td>
+                  <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
+                  <td><input class="form-control" type="text"></td>
+                  <td><a href="#" class="btn btn-outline-danger btn-sm">delete</></td>
+                </tbody>
+              </table>
+
+            	<button class="btn btn-success">追加</button>
+
+            </div>
+          </div>
+        </div><!-- メインページcontainerの閉じタグ -->
+      </div><!-- メインページrowの閉じタグ -->
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->
