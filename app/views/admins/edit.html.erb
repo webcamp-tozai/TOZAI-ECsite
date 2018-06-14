@@ -1,2 +1,57 @@
-<h1>Admins#edit</h1>
-<p>Find me in app/views/admins/edit.html.erb</p>
+<!-- 管理者の編集画面 -->
+
+<div class="container-fluid" style="margin-top: 100px;">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-9">
+      <div class="row">
+        <div class="container">
+          <span class="font-weight-bold h2">管理者情報編集</span>
+          <div class="box" style="height:10px;background-color:#005684;">
+          </div>
+          <p>変更箇所を入力し、Updateを押して下さい。</p>
+          <div class="row">
+            <div class="col-6">
+              <div class="jumbotron" style="height:25em;">
+                <b>詳細</b>
+                <p>Name: 管理者A</p>
+                <p>Name(カナ): カンリシャエー</p>
+                <p>Email: 管理A@example.com</p>
+                <p>PassWord: ******</p>
+                <button type="button" class="btn btn-info col-sm-offset-3 col-sm-6" style="margin:10px auto;">Back</button>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="jumbotron"style="height:25em;">
+                <b>編集</b>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <input type="name" class="form-control" id="InputName" placeholder="管理者"></input>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <input type="name" class="form-control" id="InputName" placeholder="A"></input>
+                  </div>
+                </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <input type="name" class="form-control" id="InputName" placeholder="カンリシャ"></input>
+                </div>
+                <div class="form-group col-md-6">
+                  <input type="name" class="form-control" id="InputName" placeholder="エー"></input>
+                </div>
+              </div>
+                <input class="form-control" id="InputTextarea" placeholder="管理A@example.com">
+                <input class="form-control" id="InputTextarea" placeholder="******" style="margin-top:10px;">
+                <button type="button" class="btn btn-success col-sm-offset-3 col-sm-6" style="margin:15px auto;">Update</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

@@ -15,23 +15,25 @@ Rails.application.routes.draw do
   get '/admins_top' => 'admins#top', as: 'admins_top'
 
   resources :items, except: [:destroy] do
-  	resource :item_reviews, only: [:index, :create, :new, :edit, :update, :destroy]
+  	resources :item_reviews, only: [:create, :new, :edit, :update, :destroy, :index]
   end
 
   resources :admins, except: [:destroy]
 
   resources :users, except: [:destroy] do
-    resource :user_carts, only: [:create, :new, :edit, :update, :destroy]
+    resource :cart_items, only: [:create, :new, :edit, :update, :destroy]
   end
 
+  resources :addresses, except: [:index, :show]
+
   resources :orders, except: [:destroy] do
-    resource :order_items, only: [:index, :create, :new]
+    resource :order_items, only: [:create, :new]
   end
   #支払い画面で表示、選択するためにID無しとID有りのURL生成
   resources :payments, only: [:index, :show]
 
   resources :contacts, except: [:edit, :update, :destroy] do
     #問い合わせ管理画面で絞り込むためにID無しとID有りのURL生成
-    resource :contact_statuses, only: [:index, :show]
+    resources :contact_statuses, only: [:index, :show]
   end
 end
