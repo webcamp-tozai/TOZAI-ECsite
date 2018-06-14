@@ -37,6 +37,9 @@ gem 'ransack'
 # クレジットカード決済システム
 gem 'payjp'
 
+# font-awesome用
+gem 'font-awesome-rails'
+
 # メールの送信確認　どっちかあればいい
 # gem 'letter-opener'
 # gem 'mailcatcher'
