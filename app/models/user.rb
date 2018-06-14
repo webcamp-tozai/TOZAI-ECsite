@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  
+  # Validatoin
   validates :encrypted_password,
   				length: {
   					in: 6..20,
@@ -33,8 +35,16 @@ class User < ApplicationRecord
   					with: /\A\d{10}\z|\A\d{11}\z/,
   					message: "ハイフン無しの半角数字のみで入力してください"
   					}
-  validates :post_code, format: {
+  validates :post_code,
+          format: {
   					with: /\A\d{7}\z/,
   					message: "ハイフン無しの半角数字のみで入力してください"
   					}
+  					
+  # Association
+  has_one :cart_item
+  has_many :addresses # address belongs_to user
+  has_many :orders # order belongs_to user
+  has_many :item_reviews
+  has_many :items, through: :item_reviews
 end

@@ -3,6 +3,8 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+   
+  # Validation
   validates :encrypted_password,
   				length: {
   					in: 6..20,
@@ -28,4 +30,7 @@ class Admin < ApplicationRecord
 					with: /\A[ァ-ンー－]+\z/,
 					message: "全角のカタカナで入力して下さい"
 					}
+	
+	# Association
+	has_many :contact_statuses #contact_status belongs_to :admin
 end
