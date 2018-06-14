@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180614033652) do
+ActiveRecord::Schema.define(version: 20180614034805) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -87,6 +87,17 @@ ActiveRecord::Schema.define(version: 20180614033652) do
     t.datetime "updated_at", null: false
     t.index ["genre_english"], name: "index_genres_on_genre_english"
     t.index ["genre_kana"], name: "index_genres_on_genre_kana"
+  end
+
+  create_table "item_reviews", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "user_id", null: false
+    t.text "review", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_reviews_on_item_id"
+    t.index ["review"], name: "index_item_reviews_on_review"
+    t.index ["user_id"], name: "index_item_reviews_on_user_id"
   end
 
   create_table "items", force: :cascade do |t|
