@@ -1,5 +1,13 @@
-<div class="container" style="margin-top: 100px;">
+<!-- 送付先住所の編集画面 -->
+
+<div class="container-fluid" style="margin-top: 100px;">
   <div class="row">
+
+    <% if admin_signed_in? %>
+      <!-- 管理者がログインしていれば管理者サイドバーを表示 -->
+      <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+    <% else %>
+
     <div class="col-6 mx-auto" style="margin-top: 60px;">
       <div class="jumbotron">
        <h1 class="text-center font-weight-light">送付先住所の変更</h1>
@@ -16,6 +24,9 @@
         <a href="#" class="btn btn-warning btn-block">-住所を変更-</a><br>
         <a href="#" class="btn btn-sm btn btn-outline-secondary">Back</a>
       </div>
-    </div><!-- メインページの閉じタグ -->
+    </div>
+
+    <% end %>
+
   </div><!-- 全体rowの閉じタグ -->
 </div><!-- 全体containerの閉じタグ -->
