@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612083802) do
+ActiveRecord::Schema.define(version: 20180614035915) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -54,11 +54,146 @@ ActiveRecord::Schema.define(version: 20180612083802) do
     t.index ["updated_at"], name: "index_admins_on_updated_at"
   end
 
+  create_table "artists", force: :cascade do |t|
+    t.integer "track_id", null: false
+    t.string "name", null: false
+    t.string "name_kana", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_artists_on_name"
+    t.index ["name_kana"], name: "index_artists_on_name_kana"
+    t.index ["track_id"], name: "index_artists_on_track_id"
+  end
+
+  create_table "cart_items", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "user_id"
+    t.integer "item_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_cart_items_on_item_id"
+  end
+
+  create_table "contact_statuses", force: :cascade do |t|
+    t.integer "admin_id", null: false
+    t.string "status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_contact_statuses_on_admin_id"
+    t.index ["status"], name: "index_contact_statuses_on_status"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.integer "contact_status_id", null: false
+    t.string "name", null: false
+    t.string "title", null: false
+    t.string "email", null: false
+    t.text "message", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_status_id"], name: "index_contacts_on_contact_status_id"
+    t.index ["email"], name: "index_contacts_on_email"
+    t.index ["name"], name: "index_contacts_on_name"
+  end
+
+  create_table "disc_numbers", force: :cascade do |t|
+    t.integer "number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "genre_english", null: false
+    t.string "genre_kana", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_english"], name: "index_genres_on_genre_english"
+    t.index ["genre_kana"], name: "index_genres_on_genre_kana"
+  end
+
+  create_table "item_reviews", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "user_id", null: false
+    t.text "review", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_reviews_on_item_id"
+    t.index ["review"], name: "index_item_reviews_on_review"
+    t.index ["user_id"], name: "index_item_reviews_on_user_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "item_review_id"
+    t.integer "track_id", null: false
+    t.integer "disc_number_id", null: false
+    t.integer "label_id", null: false
+    t.integer "artist_id", null: false
+    t.integer "genre_id", null: false
+    t.text "item_introduction"
+    t.string "title", null: false
+    t.text "image_id", null: false
+    t.integer "stock", null: false
+    t.integer "price_without_tax", null: false
+    t.string "type", null: false
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_items_on_artist_id"
+    t.index ["disc_number_id"], name: "index_items_on_disc_number_id"
+    t.index ["genre_id"], name: "index_items_on_genre_id"
+    t.index ["item_review_id"], name: "index_items_on_item_review_id"
+    t.index ["label_id"], name: "index_items_on_label_id"
+    t.index ["title"], name: "index_items_on_title"
+    t.index ["track_id"], name: "index_items_on_track_id"
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "item_count", null: false
+    t.integer "total_price_without_tax", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_order_items_on_item_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.integer "user_id", null: false
+    t.integer "address_id", null: false
+    t.integer "payment_id", null: false
+    t.string "status", null: false
+    t.integer "total_count", null: false
+    t.integer "total_price_without_tax", null: false
+    t.integer "total_price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_orders_on_product_id"
+    t.index ["status"], name: "index_orders_on_status"
+  end
+
   create_table "payments", force: :cascade do |t|
     t.string "payment_method", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["payment_method"], name: "index_payments_on_payment_method"
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.integer "disc_number_id", null: false
+    t.integer "number", null: false
+    t.string "name", null: false
+    t.integer "length_hour", default: 0, null: false
+    t.integer "length_minute", null: false
+    t.integer "length_second", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["disc_number_id"], name: "index_tracks_on_disc_number_id"
+    t.index ["name"], name: "index_tracks_on_name"
   end
 
   create_table "users", force: :cascade do |t|
