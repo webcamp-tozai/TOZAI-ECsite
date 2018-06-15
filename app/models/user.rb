@@ -5,11 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   
   # Validatoin
-  validates :password,
-  	length: {
-  		in: 6..20,
-  		message: "6〜20文字までのパスワードを入力してください"
-  		}
+  # validates :password,
+  # 	length: {
+  # 		in: 6..20,
+  # 		message: "6〜20文字までのパスワードを入力してください"
+  # 		}
   validates :family_name_kanji,
   	format: {
   		with: /\A[ぁ-んァ-ン一-龥a-zA-Z]/,

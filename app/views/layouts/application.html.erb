@@ -17,7 +17,7 @@
         <div class="container">
         <!-- 東西チームロゴ -->
           <%= link_to root_path, target: "_blank" do  %>
-            <%= image_tag "logo.png", class: "mr-4", :size =>'60x60' %>
+            <%= image_tag "logo.png", class: "mr-6", :size =>'60x60' %>
           <% end %>
         <!-- 検索フォーム -->
           <input type="text" class="form-control pl" id="formGroupExampleInput2" placeholder="曲名、CDタイトル、アーティスト名、ジャンルで検索"></input>
@@ -28,12 +28,19 @@
             <ul class="navbar-nav ml-auto">
             <!-- ユーザーページ用リンク -->
               <li class="nav-item">
-                <a class="nav-link fa fa-user fa-lg text-white text-center" href="#"><span class="small"><br>user name</span></a>
+                <%= link_to user_path(current_user.id) do %>
+                  <i class="fa fa-user fa-lg text-white text-center" ></i>
+                  <p class="text-white small">
+                    <%= current_user.family_name_kanji %>
+                    <%= current_user.given_name_kanji %>
+                  </p>
+                <% end %>
               </li>
               <!-- ログアウトリンク -->
               <li class="nav-item">
                 <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out fa-lg text-white"></i><span class="nav-link small text-white text-center">Logout</span>
+                <i class="fa fa-sign-out fa-lg text-white"></i>
+                <span class="nav-link small text-white text-center">Logout</span>
                 <% end %>
               </li>
               <!-- カートページ用リンク -->
@@ -62,16 +69,16 @@
             <ul class="navbar-nav ml-auto">
               <!-- サインアップ用リンク -->
               <li class="nav-item">
-                <%= link_to new_user_registration_path, target: "_blank" do %>
-                <i class="fa fa-user-plus fa-lg text-white text-center"></i>
-                <span class="nav-link small text-white text-center">Signup</span>
+                <%= link_to new_user_registration_path do %>
+                  <i class="fa fa-user-plus fa-lg text-white"></i>
+                  <span class="nav-link small text-white text-center">Signup</span>
                 <% end %>
               </li>
               <!-- ログインリンク -->
               <li class="nav-item">
-                <%= link_to new_user_session_path, target: "_blank" do %>
-                <i class="fa fa-sign-in-alt fa-lg text-white"></i>
-                <span class="nav-link small text-white text-center">Login</span>
+                <%= link_to new_user_session_path do %>
+                  <i class="fa fa-sign-in-alt fa-lg text-white"></i>
+                  <span class="nav-link small text-white text-center">Login</span>
                 <% end %>
               </li>
             </ul>
