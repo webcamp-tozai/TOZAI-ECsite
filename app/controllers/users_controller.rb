@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:cart_item_id, :order_id, :family_name_kanji, :given_name_kanji, :family_name_kana, :given_name_kana, :phone_number, :email, :encrypted_password, :post_code, :address, :id)
+    params.require(:user).permit(:cart_item_id, :order_id, :family_name_kanji, :given_name_kanji, :family_name_kana, :given_name_kana, :phone_number, :email, :password, :post_code, :address, :id)
   end
 
 end

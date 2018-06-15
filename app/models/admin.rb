@@ -5,7 +5,7 @@ class Admin < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
    
   # Validation
-  validates :encrypted_password,
+  validates :password,
 		length: {
 			in: 6..20,
 			message: "6〜20文字までのパスワードを入力してください"
