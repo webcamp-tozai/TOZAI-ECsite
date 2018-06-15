@@ -32,7 +32,9 @@
               </li>
               <!-- ログアウトリンク -->
               <li class="nav-item">
-                <a class="nav-link fa fa-sign-out-alt fa-lg text-white text-center" href="#"><span class="small"><br>Logout</span></a>
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                <i class="fa fa-sign-out fa-lg text-white"></i><span class="nav-link small text-white text-center">Logout</span>
+                <% end %>
               </li>
               <!-- カートページ用リンク -->
               <li class="nav-item">
@@ -58,13 +60,19 @@
 
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-              <!-- ユーザーページ用リンク -->
+              <!-- サインアップ用リンク -->
               <li class="nav-item">
-                <a class="nav-link fa fa-user-plus fa-lg text-white text-center" href="#"><span class="small"><br>Signup</span></a>
+                <%= link_to new_user_registration_path, target: "_blank" do %>
+                <i class="fa fa-user-plus fa-lg text-white text-center"></i>
+                <span class="nav-link small text-white text-center">Signup</span>
+                <% end %>
               </li>
-              <!-- ログアウトリンク -->
+              <!-- ログインリンク -->
               <li class="nav-item">
-                <a class="nav-link fa fa-sign-in-alt fa-lg text-white text-center" href="#"><span class="small"><br>Login</span></a>
+                <%= link_to new_user_session_path, target: "_blank" do %>
+                <i class="fa fa-sign-in-alt fa-lg text-white"></i>
+                <span class="nav-link small text-white text-center">Login</span>
+                <% end %>
               </li>
             </ul>
           </div>

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   
   # Validatoin
-  validates :encrypted_password,
+  validates :password,
   	length: {
   		in: 6..20,
   		message: "6〜20文字までのパスワードを入力してください"
@@ -30,7 +30,7 @@ class User < ApplicationRecord
 	  	with: /\A[ァ-ンー－]+\z/,
 	  	message: "全角のカタカナで入力して下さい"
 	  	}
-  validates :truephone_number,
+  validates :phone_number,
 		format: {
 			with: /\A\d{10}\z|\A\d{11}\z/,
 			message: "ハイフン無しの半角数字のみで入力してください"
