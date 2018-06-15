@@ -8,6 +8,6 @@ class CartItem < ApplicationRecord
               message: "0以上の半角数字で入力して下さい。"  }
               
   # Association
-  # belongs_to :user # user has_one :cart_item
-  # belongs_to :item # item 
+  belongs_to :user # user has_one :cart_item
+  belongs_to :item # item 
 end
