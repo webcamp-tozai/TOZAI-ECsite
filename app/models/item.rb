@@ -20,8 +20,7 @@ class Item < ApplicationRecord
               
   validates :content_type,      presence: true
   
-  validates :is_deleted,        inclusion: { in: [true, false] },
-                                default: false # false => 販売中
+  validates :is_deleted,        inclusion: { in: [true, false] }
                                 
   # Association
   has_many :disc_numbers # disc_number belongs_to :item
