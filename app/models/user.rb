@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   
   # Validatoin
-  validates :encrypted_password,
+  validates :password,
   	length: {
   		in: 6..20,
   		message: "6〜20文字までのパスワードを入力してください"

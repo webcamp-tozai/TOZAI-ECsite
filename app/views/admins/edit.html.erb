@@ -1,52 +1,89 @@
 <!-- 管理者の編集画面 -->
 
-<div class="container-fluid" style="margin-top: 100px;">
+<div class="container-fluid">
   <div class="row">
 
     <!-- サイドバー -->
     <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
 
     <!-- メインページ -->
-    <div class="col-9">
+    <div class="col-9  my-4">
       <div class="row">
         <div class="container">
-          <span class="font-weight-bold h2">管理者情報編集</span>
+          <span class="font-weight-bold h2">
+            <%= current_admin.family_name_kanji %>
+            <%= current_admin.given_name_kanji %>
+            の情報</span>
+
           <div class="box" style="height:10px;background-color:#005684;">
           </div>
           <p>変更箇所を入力し、Updateを押して下さい。</p>
           <div class="row">
             <div class="col-6">
-              <div class="jumbotron" style="height:25em;">
+              <div class="jumbotron" style="height:33em;">
                 <b>詳細</b>
-                <p>Name: 管理者A</p>
-                <p>Name(カナ): カンリシャエー</p>
-                <p>Email: 管理A@example.com</p>
-                <p>PassWord: ******</p>
-                <button type="button" class="btn btn-info col-sm-offset-3 col-sm-6" style="margin:10px auto;">Back</button>
+                <p>Name: 
+                  <%= current_admin.family_name_kanji %>
+                  <%= current_admin.given_name_kanji %>
+                </p>
+                <p>Name(カナ): 
+                  <%= current_admin.family_name_kana %>
+                  <%= current_admin.given_name_kana %>
+                </p>
+                <p>Email: 
+                  <%= current_admin.email %>
+                </p>
+
+                <%= link_to admins_path do %>
+                  <button type="button" class="btn btn-info col-sm-offset-3 col-sm-6" style="margin:10px auto;">管理者一覧へ</button>
+                <% end %>
               </div>
             </div>
+
             <div class="col-6">
-              <div class="jumbotron"style="height:25em;">
+              <div class="jumbotron"style="height:33em;">
                 <b>編集</b>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <input type="name" class="form-control" id="InputName" placeholder="管理者"></input>
+                <%= form_for(@admin) do |f| %>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <%= f.label :姓 %>
+                      <%= f.text_field :family_name_kanji, class: "form-control", id: "InputName" %>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <%= f.label :名 %>
+                      <%= f.text_field :given_name_kanji, class: "form-control", id: "InputName" %>
+                    </div>
                   </div>
-                  <div class="form-group col-md-6">
-                    <input type="name" class="form-control" id="InputName" placeholder="A"></input>
+
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <%= f.label :セイ %>
+                      <%= f.text_field :family_name_kana, class: "form-control", id: "InputName" %>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <%= f.label :メイ %>
+                      <%= f.text_field :given_name_kana, class: "form-control", id: "InputName" %>
+                    </div>
                   </div>
-                </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <input type="name" class="form-control" id="InputName" placeholder="カンリシャ"></input>
-                </div>
-                <div class="form-group col-md-6">
-                  <input type="name" class="form-control" id="InputName" placeholder="エー"></input>
-                </div>
-              </div>
-                <input class="form-control" id="InputTextarea" placeholder="管理A@example.com">
-                <input class="form-control" id="InputTextarea" placeholder="******" style="margin-top:10px;">
-                <button type="button" class="btn btn-success col-sm-offset-3 col-sm-6" style="margin:15px auto;">Update</button>
+
+                  <div class="form-row">
+                    <div class="form-group col-12">
+                      <%= f.label :メールアドレス %>
+                      <%= f.email_field :email, class: "form-control", id: "InputEmail" %>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group col-12">
+                      <%= f.label :パスワード %>
+                      <%= f.password_field :password, class: "form-control", id: "InputPassword" %>
+                    </div>
+                  </div>
+
+                  <%= f.submit "-変更-", class:"btn btn-success col-sm-offset-3 col-sm-6", style:"margin:15px auto;" %>
+
+                <% end %>
+
               </div>
             </div>
           </div>

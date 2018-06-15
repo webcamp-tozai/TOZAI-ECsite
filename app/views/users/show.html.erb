@@ -1,76 +1,84 @@
-<!-- メインページ -->
-<div class="container" style="min-height: 100%; margin-bottom: -120px;">
-  <div class="row text-center" style="margin-top: 120px;">
-    <div class="col-12 font-weight-bold h3">
-      <p>田中 太郎さんのマイページ</p>
-    </div>
-  </div>
+<% if admin_signed_in? %>
 
-  <div class="row justify-content-center">
-    <div class="col-4">
-      <div class="card border-secondary text-white text-center">
-        <div class="card-header font-weight-bold" style="background-color:#00008b;">
-          ユーザー情報
-        </div>
-        <div class="card-body">
-          <ul class="list-group list-group-flush text-dark">
-            <li class="list-group-item"><p class="small text-secondary">名前</p>田中 太郎</li>
-            <li class="list-group-item"><p class="small text-secondary">メールアドレス</p>tarou_dayo@xxx.com</li>
-            <li class="list-group-item"><p class="small text-secondary">住所</p>〒150-0041<br>東京都渋谷区神南１丁目１９−１０</li>
-            <li class="list-group-item"><p class="small text-secondary">電話番号</p>03-6868-8470</li>
-          </ul>
-          <a href="#" class="btn btn-secondary btn-sm mt-4">編集</a>
-        </div>
+  <%= render 'users/show_admins' %>
+
+<% else %>
+
+  <!-- メインページ -->
+  <div class="container" style="min-height: 100%; margin-bottom: -120px;">
+    <div class="row text-center" style="margin-top: 120px;">
+      <div class="col-12 font-weight-bold h3">
+        <p>田中 太郎さんのマイページ</p>
       </div>
     </div>
 
-    <div class="col-4">
-      <div class="row">
-        <div class="col-12">
-          <div class="card border-secondary text-white text-center">
-            <div class="card-header font-weight-bold" style="background-color:#00008b;">
-              注文履歴
-            </div>
-            <div class="card-body">
-              <p class="small text-secondary">配送状況の確認・注文のキャンセル</p>
-              <a href="#" class="btn btn-secondary btn-sm">一覧へ</a>
-            </div>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <div class="card border-secondary text-white text-center">
+          <div class="card-header font-weight-bold" style="background-color:#00008b;">
+            ユーザー情報
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush text-dark">
+              <li class="list-group-item"><p class="small text-secondary">名前</p>田中 太郎</li>
+              <li class="list-group-item"><p class="small text-secondary">メールアドレス</p>tarou_dayo@xxx.com</li>
+              <li class="list-group-item"><p class="small text-secondary">住所</p>〒150-0041<br>東京都渋谷区神南１丁目１９−１０</li>
+              <li class="list-group-item"><p class="small text-secondary">電話番号</p>03-6868-8470</li>
+            </ul>
+            <a href="#" class="btn btn-secondary btn-sm mt-4">編集</a>
           </div>
         </div>
-
-        <div class="col-12 mt-4">
-          <div class="card border-secondary text-white text-center">
-            <div class="card-header font-weight-bold" style="background-color:#00008b">
-              送付先住所
-            </div>
-            <div class="card-body">
-              <ul class="list-group list-group-flush text-dark">
-                <li class="list-group-item"><p class="small text-secondary">名前</p>田中 太郎</li>
-                <li class="list-group-item"><p class="small text-secondary">住所</p>〒150-0041<br>東京都渋谷区神南１丁目１９−１０</li>
-              </ul>
-              <p class="small text-secondary mt-2">・<br>その他1件</p>
-              <a href="#" class="btn btn-secondary btn-sm">登録・変更</a>
-            </div>
-          </div>
-        </div>
-
       </div>
+
+      <div class="col-4">
+        <div class="row">
+          <div class="col-12">
+            <div class="card border-secondary text-white text-center">
+              <div class="card-header font-weight-bold" style="background-color:#00008b;">
+                注文履歴
+              </div>
+              <div class="card-body">
+                <p class="small text-secondary">配送状況の確認・注文のキャンセル</p>
+                <a href="#" class="btn btn-secondary btn-sm">一覧へ</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 mt-4">
+            <div class="card border-secondary text-white text-center">
+              <div class="card-header font-weight-bold" style="background-color:#00008b">
+                送付先住所
+              </div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush text-dark">
+                  <li class="list-group-item"><p class="small text-secondary">名前</p>田中 太郎</li>
+                  <li class="list-group-item"><p class="small text-secondary">住所</p>〒150-0041<br>東京都渋谷区神南１丁目１９−１０</li>
+                </ul>
+                <p class="small text-secondary mt-2">・<br>その他1件</p>
+                <a href="#" class="btn btn-secondary btn-sm">登録・変更</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="w-100">
+      </div>
+
+      <div class="col-12 text-center text-white mt-4">
+        <a href="#" class="btn btn-dark">買い物へ戻る</a>
+      </div>
+
+      <div class="col-12 text-center mt-5">
+        <a href="#" class="text-secondary">退会する</a>
+      </div>
+
     </div>
 
-    <div class="w-100">
-    </div>
+    <!-- footerを下にするための空要素 -->
+    <div style="height: 120px;"></div>
 
-    <div class="col-12 text-center text-white mt-4">
-      <a href="#" class="btn btn-dark">買い物へ戻る</a>
-    </div>
+  </div><!-- 全体containerの閉じタグ -->
 
-    <div class="col-12 text-center mt-5">
-      <a href="#" class="text-secondary">退会する</a>
-    </div>
-
-  </div>
-
-  <!-- footerを下にするための空要素 -->
-  <div style="height: 120px;"></div>
-
-</div><!-- 全体containerの閉じタグ -->
+<% end %>
