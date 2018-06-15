@@ -13,12 +13,12 @@ class Track < ApplicationRecord
               message: "半角数字で入力して下さい。"  }
               
   validates :length_minute,   presence: true,
-    format: { with: /\A\d{1,2}\z/, # 60以上の数字も入る。範囲指定が上手くいけへん。。。
-              message: "半角数字で入力して下さい。"  }
+    format: { with: /\A[0-9]\z|\A[1-5][0-9]\z/, # 0-59までの数字
+              message: "0から59までの半角数字で入力して下さい。"  }
               
   validates :length_second,   presence: true,
-    format: { with: /\A\d{1,2}\z/, # 60以上の数字も入る。範囲指定が上手くいけへん。。。
-              message: "半角数字で入力して下さい。"  }
+    format: { with: /\A[0-9]\z|\A[1-5][0-9]\z/, # 0-59までの数字
+              message: "0から59までの半角数字で入力して下さい。"  }
               
   # Association
   belongs_to :disc_number # dics_number has_many :tracks
