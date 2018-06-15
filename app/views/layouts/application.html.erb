@@ -8,52 +8,55 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <header> <%# #TODO ヘッダー全面的に直す%>
+  <header> <%# # TODO: ヘッダー全面的に直す%>
   <% if admin_signed_in? %>
-
+  <!-- 管理者でサインインした場合 -->
+  
   <% else %>
     <% if user_signed_in? %>
+    <!-- ユーザーでサインインした場合 -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 100px;">  <!--class="fixed-top"-->
         <div class="container">
-        <!-- 東西チームロゴ -->
+          <!-- 東西チームロゴ -->
           <%= link_to root_path, target: "_blank" do  %>
             <%= image_tag "logo.png", class: "mr-6", :size =>'60x60' %>
           <% end %>
-        <!-- 検索フォーム -->
+          <!-- 検索フォーム -->
           <input type="text" class="form-control pl" id="formGroupExampleInput2" placeholder="曲名、CDタイトル、アーティスト名、ジャンルで検索"></input>
-        <!-- 検索アイコン -->
+          <!-- 検索アイコン -->
           <a class="nav-link fa fa-search text-white fa-lg text-right" href="#"></a>
 
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-            <!-- ユーザーページ用リンク -->
+              <!-- マイページ -->
+              <%= link_to user_path(current_user.id) do %>
+                <i class="fa fa-user fa-lg text-white text-center" ></i>
+                <p class="text-white small">
+                  <%= @user.family_name_kanji %>
+                  <%= @user.given_name_kanji %>
+                </p>
+              <% end %>
+
+              <!-- ログアウト -->
               <li class="nav-item">
-                <%= link_to user_path(current_user.id) do %>
-                  <i class="fa fa-user fa-lg text-white text-center" ></i>
-                  <p class="text-white small">
-                    <%= @user.family_name_kanji %>
-                    <%= @user.given_name_kanji %>
-                  </p>
+                <%= link_to destroy_user_session_path, class: 'nav-link text-white text-center' do %>
+                  <%= fa_icon("sign-out 2x", text: "SignOut") %>
                 <% end %>
               </li>
-              <!-- ログアウトリンク -->
-              <li class="nav-item">
-                <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out fa-lg text-white"></i>
-                <span class="nav-link small text-white text-center">Logout</span>
-                <% end %>
-              </li>
+
               <!-- カートページ用リンク -->
               <li class="nav-item">
-                <a class="nav-link fa fa-shopping-cart text-white fa-lg text-center" href="#"><span class="small"><br>2items</span></a>
+                <%= link_to user_cart_items_path(user), class: 'nav-link text-white text-center' do %>
+                  <%= fa_icon("shopping-cart 2x", text: "アイテム数") %>
+                <% end %>
               </li>
             </ul>
-          </div>
-        </div>
+          </div>  <!-- ログイン閉じタグ -->
+        </div>  <!-- cinteiner閉じタグ -->
       </nav>
 
     <% else %>
-
+      <!-- ログインしていない場合 -->
       <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="height: 100px;">
         <div class="container">
           <!-- 東西チームロゴ -->
@@ -67,6 +70,7 @@
 
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+
               <!-- サインアップ用リンク -->
               <li class="nav-item">
                 <%= link_to new_user_registration_path do %>
@@ -82,8 +86,8 @@
                 <% end %>
               </li>
             </ul>
-          </div>
-        </div>
+          </div>  <!-- ログイン閉じタグ -->
+        </div>  <!-- cinteiner閉じタグ -->
       </nav>
 
     <% end %>
@@ -98,7 +102,7 @@
 
   </body>
 
-  <footer class="bg-dark" style="height: 120px; line-height: 120px;">
+  <footer class="bg-dark">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; 2018 WebCampPro TOZAI Records</p>
     </div>
