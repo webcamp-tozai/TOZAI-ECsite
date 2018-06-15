@@ -19,7 +19,7 @@
         <div class="container">
           <!-- 東西チームロゴ -->
           <%= link_to root_path, target: "_blank" do  %>
-            <%= image_tag "logo.png", class: "mr-4", :size =>'60x60' %>
+            <%= image_tag "logo.png", class: "mr-6", :size =>'60x60' %>
           <% end %>
           <!-- 検索フォーム -->
           <input type="text" class="form-control pl" id="formGroupExampleInput2" placeholder="曲名、CDタイトル、アーティスト名、ジャンルで検索"></input>
@@ -29,16 +29,22 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <!-- マイページ -->
-              <%= link_to user_path(current_user.id), class: 'nav-link text-white text-center' do %>
-                  <%= fa_icon("user 2x", text: "MyPage") %>
-                <% end %>
+              <%= link_to user_path(current_user.id) do %>
+                <i class="fa fa-user fa-lg text-white text-center" ></i>
+                <p class="text-white small">
+                  <%= @user.family_name_kanji %>
+                  <%= @user.given_name_kanji %>
+                </p>
+              <% end %>
+
               <!-- ログアウト -->
               <li class="nav-item">
                 <%= link_to destroy_user_session_path, class: 'nav-link text-white text-center' do %>
                   <%= fa_icon("sign-out 2x", text: "SignOut") %>
                 <% end %>
               </li>
-              <!-- カート -->
+
+              <!-- カートページ用リンク -->
               <li class="nav-item">
                 <%= link_to user_cart_items_path(user), class: 'nav-link text-white text-center' do %>
                   <%= fa_icon("shopping-cart 2x", text: "アイテム数") %>
@@ -64,16 +70,19 @@
 
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-              <!-- 新規登録 -->
+
+              <!-- サインアップ用リンク -->
               <li class="nav-item">
-                <%= link_to new_user_registration_path, class: 'nav-link text-white text-center' do %>
-                  <%= fa_icon("user-plus 2x", text: "SignUp") %>
+                <%= link_to new_user_registration_path do %>
+                  <i class="fa fa-user-plus fa-lg text-white"></i>
+                  <span class="nav-link small text-white text-center">Signup</span>
                 <% end %>
               </li>
-              <!-- ログイン -->
+              <!-- ログインリンク -->
               <li class="nav-item">
-                <%= link_to new_user_session_path, class: 'nav-link text-white text-center' do %>
-                  <%= fa_icon("sign-in 2x", text: "SignIn") %>
+                <%= link_to new_user_session_path do %>
+                  <i class="fa fa-sign-in-alt fa-lg text-white"></i>
+                  <span class="nav-link small text-white text-center">Login</span>
                 <% end %>
               </li>
             </ul>

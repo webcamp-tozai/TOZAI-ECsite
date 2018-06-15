@@ -14,12 +14,15 @@
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush text-dark">
-            <li class="list-group-item"><p class="small text-secondary">名前</p>田中 太郎</li>
-            <li class="list-group-item"><p class="small text-secondary">メールアドレス</p>tarou_dayo@xxx.com</li>
-            <li class="list-group-item"><p class="small text-secondary">住所</p>〒150-0041<br>東京都渋谷区神南１丁目１９−１０</li>
-            <li class="list-group-item"><p class="small text-secondary">電話番号</p>03-6868-8470</li>
+            <li class="list-group-item"><p class="small text-secondary">名前</p><%= @user.family_name_kanji %><%= @user.given_name_kanji %></li>
+            <li class="list-group-item"><p class="small text-secondary">メールアドレス</p><%= @user.email %></li>
+            <li class="list-group-item"><p class="small text-secondary">住所</p>〒<%= current_user.post_code %><br><%= @user.address %></li>
+            <li class="list-group-item"><p class="small text-secondary">電話番号</p><%= @user.phone_number %></li>
           </ul>
-          <a href="#" class="btn btn-secondary btn-sm mt-4">編集</a>
+          <%= link_to edit_user_path(@user.id) do%>
+          <i class="btn btn-secondary btn-sm mt-4">
+            <span class="small">編集</span></i>
+          <% end %>
         </div>
       </div>
     </div>
@@ -33,7 +36,9 @@
             </div>
             <div class="card-body">
               <p class="small text-secondary">配送状況の確認・注文のキャンセル</p>
-              <a href="#" class="btn btn-secondary btn-sm">一覧へ</a>
+              <%= link_to orders_path(@user.id) do %>
+              <i class="btn btn-secondary btn-sm">一覧へ</i>
+              <% end %>
             </div>
           </div>
         </div>
@@ -45,11 +50,13 @@
             </div>
             <div class="card-body">
               <ul class="list-group list-group-flush text-dark">
-                <li class="list-group-item"><p class="small text-secondary">名前</p>田中 太郎</li>
-                <li class="list-group-item"><p class="small text-secondary">住所</p>〒150-0041<br>東京都渋谷区神南１丁目１９−１０</li>
+                <li class="list-group-item"><p class="small text-secondary">名前</p><%=  %><%= %></li>
+                <li class="list-group-item"><p class="small text-secondary">住所</p>〒<%=  %><br>東京都渋谷区神南１丁目１９−１０</li>
               </ul>
               <p class="small text-secondary mt-2">・<br>その他1件</p>
+              <%= link_to do%>
               <a href="#" class="btn btn-secondary btn-sm">登録・変更</a>
+              <% end %>
             </div>
           </div>
         </div>
