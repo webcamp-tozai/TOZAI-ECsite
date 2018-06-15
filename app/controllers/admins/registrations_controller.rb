@@ -33,8 +33,8 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def update_resource
-    resource.update_without_current_password(params)
+  def update_resource(resource, params)
+    resource.update_without_password(params)
   end
 
   # before_action :configure_sign_up_params, only: [:create]
