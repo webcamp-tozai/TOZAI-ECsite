@@ -12,12 +12,12 @@ class Admin < ApplicationRecord
 			}
   validates :family_name_kanji,
 		format: {
-			with: /\A[ぁ-んァ-ン一-龥a-zA-Z]/,
+			with: /\A[ぁ-んァ-ン一-龥a-zA-Z]+\z/,
 			message: "全角の日本語か半角の英語で入力して下さい"
 			}
   validates :given_name_kanji,
 		format: {
-			with: /\A[ぁ-んァ-ン一-龥a-zA-Z]/,
+			with: /\A[ぁ-んァ-ン一-龥a-zA-Z]+\z/,
 			message: "全角の日本語か半角の英語で入力して下さい"
 			}
   validates :family_name_kana,

@@ -5,19 +5,19 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   
   # Validatoin
-  validates :encrypted_password,
+  validates :password,
   	length: {
   		in: 6..20,
   		message: "6〜20文字までのパスワードを入力してください"
   		}
   validates :family_name_kanji,
   	format: {
-  		with: /\A[ぁ-んァ-ン一-龥a-zA-Z]/,
+  		with: /\A[ぁ-んァ-ン一-龥a-zA-Z]+\z/,
   		message: "全角の日本語か半角の英語で入力して下さい"
   		}
   validates :given_name_kanji,
   	format: {
-  		with: /\A[ぁ-んァ-ン一-龥a-zA-Z]/,
+  		with: /\A[ぁ-んァ-ン一-龥a-zA-Z]+\z/,
   		message: "全角の日本語か半角の英語で入力して下さい"
   		}
   validates :family_name_kana,
