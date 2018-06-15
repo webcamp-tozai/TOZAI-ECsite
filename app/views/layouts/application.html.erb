@@ -31,8 +31,8 @@
                 <%= link_to user_path(current_user.id) do %>
                   <i class="fa fa-user fa-lg text-white text-center" ></i>
                   <p class="text-white small">
-                    <%= current_user.family_name_kanji %>
-                    <%= current_user.given_name_kanji %>
+                    <%= @user.family_name_kanji %>
+                    <%= @user.given_name_kanji %>
                   </p>
                 <% end %>
               </li>
