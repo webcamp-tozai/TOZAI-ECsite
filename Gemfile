@@ -40,6 +40,9 @@ gem 'payjp'
 # font-awesome用
 gem 'font-awesome-rails'
 
+# 初期データ投入用
+gem 'seed-fu', '~> 2.3'
+
 # メールの送信確認　どっちかあればいい
 # gem 'letter-opener'
 # gem 'mailcatcher'
