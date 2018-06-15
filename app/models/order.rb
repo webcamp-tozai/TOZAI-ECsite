@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   # Validations
+  validates :order_item_id,            presence: true
   validates :user_id,                 presence: true
   validates :address_id,              presence: true
   validates :payment_id,              presence: true
