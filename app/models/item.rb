@@ -9,16 +9,16 @@ class Item < ApplicationRecord
   validates :image_id,          presence: true
   
   validates :stock,             presence: true,
-    length: { minimum: 0 },
-    format: { with: /\A\d\z/,
-              message: "半角数字で入力して下さい。"  }
+    numericality: { greater_than_or_equal_to: 0 }, #0以上
+    format: { with: /\A\d+\z/, # 半角数字のみ
+              message: "0以上の半角数字のみ。"  }
               
   validates :price_without_tax, presence: true,
-    length: { minimum: 1 },
-    format: { with: /\A\d\z/,
-              message: "半角数字で入力して下さい。" }
+    numericality: { greater_than_or_equal_to: 0 }, #0以上
+    format: { with: /\A\d+\z/, # 半角数字のみ
+              message: "0以上の半角数字のみ。"  }
               
-  validates :type,              presence: true
+  validates :content_type,      presence: true
   
   validates :is_deleted,        inclusion: { in: [true, false] },
                                 default: false # false => 販売中
