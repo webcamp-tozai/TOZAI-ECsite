@@ -36,7 +36,7 @@ Item.seed do |s|
   s.id = 3
   s.item_review_id = 3
   s.track_id = 3
-  s.disc_number_id = 3
+  s.disc_number_id = 1
   s.label_id = 3
   s.artist_id = 3
   s.genre_id = 3
@@ -53,7 +53,7 @@ Item.seed do |s|
   s.id = 4
   s.item_review_id = 4
   s.track_id = 4
-  s.disc_number_id = 4
+  s.disc_number_id = 1
   s.label_id = 4
   s.artist_id = 4
   s.genre_id = 4
