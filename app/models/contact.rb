@@ -3,7 +3,13 @@ class Contact < ApplicationRecord
   validates :contact_status_id, presence: true
   validates :name,              presence: true
   validates :title,             presence: true
-  validates :email,             presence: true
+  
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  validates :email,             presence: true, 
+                                uniqueness: true,
+    format: { with: VALID_EMAIL_REGEX, 
+              message: "記入内容を確認して下さい。"  }
+              
   validates :message,           presence: true
   
   # Association

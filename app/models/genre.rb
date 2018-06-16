@@ -1,7 +1,7 @@
 class Genre < ApplicationRecord
   # Validation
   validates :genre_english, presence: true,
-    format: { with: /\A\w+\z/, # [a-zA-Z_0-9]
+    format: { with: /\A[a-zA-Z0-9_`-]+\z/,
               message: "半角英数字で入力して下さい。"  }
               
   validates :genre_kana,    presence: true,
