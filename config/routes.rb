@@ -15,7 +15,12 @@ Rails.application.routes.draw do
   get '/admins_top' => 'admins#top', as: 'admins_top'
 
   resources :items, except: [:destroy] do
-  	resources :item_reviews, only: [:create, :new, :edit, :update, :destroy, :index]
+    resources :item_reviews, only: [:create, :new, :edit, :update, :destroy, :index]
+    resource :artists, only: [:create, :new, :edit, :update]
+    resource :disc_numbers, only: [:create, :new, :edit, :update]
+    resource :tracks, only: [:create, :new, :edit, :update]
+    resource :labels, only: [:create, :new, :edit, :update]
+    resource :genres, only: [:create, :new, :edit, :update]
   end
 
   resources :admins, except: [:destroy]

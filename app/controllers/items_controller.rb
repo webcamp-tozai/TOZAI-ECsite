@@ -3,9 +3,13 @@ class ItemsController < ApplicationController
   end
 
   def create
+    item = Item.new(item_params)
+    item.save
+    redirect_to root_path
   end
 
   def new
+    @item = Item.new
   end
 
   def edit
@@ -16,4 +20,10 @@ class ItemsController < ApplicationController
 
   def update
   end
+
+  private
+  def item_params
+    params.require(:item).permit(:item_introduction,:title,:image,:stock,:price_without_tax,:content_type)
+  end
+
 end
