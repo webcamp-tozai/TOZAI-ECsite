@@ -6,6 +6,7 @@ class User < ApplicationRecord
   
   # Validatoin
   validates :family_name_kanji, presence: true,
+
     format: {
       with: /\A[ぁ-んァ-ン一-龥a-zA-Z]+\z/,
       message: "全角の日本語か半角の英語で入力して下さい"
@@ -60,7 +61,7 @@ class User < ApplicationRecord
       with: /\A\d\z/, # 0 => 入会、1 => 退会済み、2 => 強制退会
       message: "半角数字で入力して下さい。"
     }
-            
+
   # Association
   has_one :cart_item
   has_many :addresses # address belongs_to user
