@@ -1,40 +1,41 @@
-<div class="container col-5" style="margin-top: 150px;">
-  <div class="jumbotron">
-		<h1 class="text-center font-weight-bold">新規登録</h1>
-    <label for="InputName">名前</label>
-    <div class="form-inline">
-      <input type="name" class="form-control" id="InputName" placeholder="姓"></input>
-      <input type="name" class="form-control" id="InputName" placeholder="名"></input>
+<div>
+  <div class="container col-5" style="margin-top: 100px;">
+    <div class="jumbotron">
+  		<h1 class="text-center font-weight-bold">登録情報編集</h1>
+      <%= form_for(@user) do |f| %>
+        <%= f.label :名前 %>
+        <div class="form-inline">
+          <%= f.text_field :family_name_kanji, class:"form-control" %>
+          <%= f.text_field :given_name_kanji, class:"form-control" %>
+        </div>
+        <%= f.label :フリガナ全角 %>
+        <div class="form-inline">
+          <%= f.text_field :family_name_kana, class:"form-control" %>
+          <%= f.text_field :given_name_kana, class:"form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :Emailアドレス %>
+          <%= f.email_field :email, class:"form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :郵便番号 %>
+          <%= f.text_field :post_code, class:"form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :住所全角 %>
+          <%= f.text_field :address, class:"form-control" %>
+        <div class="form-group">
+          <%=  f.label :電話番号 %>
+          <%= f.text_field :phone_number, class:"form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :Password %>
+          <%= f.password_field :password, class:"form-control", id:"InputPassword", placeholder:"半角英数字(6文字~20文字)" %>
+        </div>
+
+        <%= f.submit "-情報を更新-", class:"btn btn-warning btn-block" %>
+      <% end %>
     </div>
-    <label for="InputPassword">フリガナ(全角):</label>
-    <div class="form-inline">
-      <input type="name" class="form-control" id="InputName" placeholder="セイ"></input>
-      <input type="name" class="form-control" id="InputName" placeholder="メイ"></input>
-    </div>
-    <div class="form-group">
-      <label for="InputEmail">Emailアドレス</label>
-      <input class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい"></input>
-    </div>
-    <div class="form-group">
-      <label for="InputAddress">郵便番号</label>
-      <input class="form-control" id="InputAddress" placeholder="ハイフンなし"></input>
-    </div>
-    <div class="form-group">
-      <label for="InputAddress">住所(全角)</label>
-      <input class="form-control" id="InputAddress" placeholder="住所"></input>
-    </div>
-    <div class="form-group">
-      <label for="InputTell">電話番号</label>
-      <input class="form-control" id="InputTell" placeholder="ハイフンなし"></input>
-    </div>
-    <div class="form-group">
-      <label for="InputPassword">Password</label>
-      <input class="form-control" id="InputPassword" placeholder="半角英数字(6文字~20文字)"></input>
-    </div>
-    <div class="form-group">
-      <label for="InputPassword">Password確認</label>
-      <input class="form-control" id="InputPassword" placeholder="もう一度、パスワードを入力して下さい"></input>
-    </div>
-    <button type="button" class="btn btn-warning btn-block">-東西アカウントを作成-</button>
-   </div>
+  </div>
 </div>
