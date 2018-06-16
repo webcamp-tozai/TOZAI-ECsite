@@ -8,7 +8,7 @@ class Track < ApplicationRecord
               
   validates :name,            presence: true # 曲名
   
-  validates :length_hour,     presence: true, default: 0,
+  validates :length_hour,     presence: true,
     format: { with: /\A\d\z/,
               message: "半角数字で入力して下さい。"  }
               
