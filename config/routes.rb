@@ -16,11 +16,11 @@ Rails.application.routes.draw do
 
   resources :items, except: [:destroy] do
     resources :item_reviews, only: [:create, :new, :edit, :update, :destroy, :index]
-    resource :artists, only: [:create, :new, :edit, :update]
-    resource :disc_numbers, only: [:create, :new, :edit, :update]
-    resource :tracks, only: [:create, :new, :edit, :update]
-    resource :labels, only: [:create, :new, :edit, :update]
-    resource :genres, only: [:create, :new, :edit, :update]
+    resources :artists, only: [:create, :new, :edit, :update]
+    resources :disc_numbers, only: [:create, :new, :edit, :update]
+    resources :tracks, only: [:create, :new, :edit, :update]
+    resources :labels, only: [:create, :new, :edit, :update]
+    resources :genres, only: [:create, :new, :edit, :update]
   end
 
   resources :admins, except: [:destroy]

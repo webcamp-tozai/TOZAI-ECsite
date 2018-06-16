@@ -10,6 +10,8 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @label = Label.new
+    @genre = Genre.new
   end
 
   def edit
