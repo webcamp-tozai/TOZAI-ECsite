@@ -9,7 +9,7 @@ end
 
 Contact.seed do |s|
   s.id = 2
-  s.contact_status_id = 1
+  s.contact_status_id = 2
   s.name = "絵里"
   s.title = "私からのお問い合わせ"
   s.email = "contact@sample.com"
@@ -18,7 +18,7 @@ end
 
 Contact.seed do |s|
   s.id = 3
-  s.contact_status_id = 2
+  s.contact_status_id = 3
   s.name = "由美"
   s.title = "今日の朝ごはん"
   s.email = "contact@sample.com"
