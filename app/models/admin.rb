@@ -34,7 +34,7 @@ class Admin < ApplicationRecord
                                   uniqueness: true,
     format: { with: VALID_EMAIL_REGEX, 
               message: "記入内容を確認して下さい。"  }
-
+  # Validation on create
   validates :password,            presence: true,
     length: { in: 6..20,
               message: "6〜20文字までのパスワードを入力してください" }
