@@ -1,27 +1,24 @@
 class Item < ApplicationRecord
   # Validation
-  validates :track_id,          presence: true
-  validates :disc_number_id,    presence: true
   validates :label_id,          presence: true
-  validates :artist_id,         presence: true
   validates :genre_id,          presence: true
   validates :title,             presence: true
   validates :image_id,          presence: true
-  
+
   validates :stock,             presence: true,
     numericality: { greater_than_or_equal_to: 0 }, #0以上
     format: { with: /\A\d+\z/, # 半角数字のみ
               message: "0以上の半角数字のみ。"  }
-              
+
   validates :price_without_tax, presence: true,
     numericality: { greater_than_or_equal_to: 0 }, #0以上
     format: { with: /\A\d+\z/, # 半角数字のみ
               message: "0以上の半角数字のみ。"  }
-              
+
   validates :content_type,      presence: true
-  
+
   validates :is_deleted,        inclusion: { in: [true, false] }
-                                
+
   # Association
   has_many :disc_numbers # disc_number belongs_to :item
   belongs_to :label #label has_many :items
