@@ -5,6 +5,6 @@ class DiscNumber < ApplicationRecord
               message: "半角数字で入力して下さい。"  }
   
   # Association
-  belongs_to :item # item has_many :disc_numbers
+  has_many :items # item has_many :disc_numbers
   has_many :tracks # track belongs_to :disc_number
 end
