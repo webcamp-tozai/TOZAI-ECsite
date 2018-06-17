@@ -3,9 +3,13 @@ class ItemsController < ApplicationController
   end
 
   def create
+    item = Item.new(item_params)
+    item.save
+    redirect_to root_path
   end
 
   def new
+    @item = Item.new
   end
 
   def edit
