@@ -1,8 +1,13 @@
 class Track < ApplicationRecord
   # Validation
-  validates :disc_number_id,  presence: true
+  validates :item_id,         presence: true
+  validates :artist_id,         presence: true
+
+  validates :disc_number, presence: true,
+    format: { with: /\A\d{1}\z/, # 1桁の半角数字のみ。2桁もいけへんやろ。。。
+              message: "半角数字で入力して下さい。"  }
   
-  validates :number,          presence: true,
+  validates :track_number,          presence: true,
     format: { with: /\A\d\z/,
               message: "1桁の半角数字で入力して下さい。"  }
               
@@ -21,6 +26,6 @@ class Track < ApplicationRecord
               message: "0から59までの半角数字で入力して下さい。"  }
               
   # Association
-  belongs_to :disc_number # dics_number has_many :tracks
-  has_many :artists # artist belongs_to track
+  belongs_to :item # dics_number has_many :tracks
+  belongs_to :artist # artist belongs_to track
 end
