@@ -1,44 +1,4 @@
 Rails.application.routes.draw do
-  get 'artists/create'
-
-  get 'artists/new'
-
-  get 'artists/edit'
-
-  get 'artists/update'
-
-  get 'tracks/create'
-
-  get 'tracks/new'
-
-  get 'tracks/edit'
-
-  get 'tracks/update'
-
-  get 'genres/create'
-
-  get 'genres/new'
-
-  get 'genres/edit'
-
-  get 'genres/update'
-
-  get 'labels/create'
-
-  get 'labels/new'
-
-  get 'labels/edit'
-
-  get 'labels/update'
-
-  get 'disk_numbers/create'
-
-  get 'disk_numbers/new'
-
-  get 'disk_numbers/edit'
-
-  get 'disk_numbers/update'
-
   devise_for :admins, controllers: {
   sessions:      'admins/sessions',
   passwords:     'admins/passwords',

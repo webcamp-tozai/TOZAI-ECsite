@@ -10,8 +10,11 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    @label = Label.new
-    @genre = Genre.new
+    @item.disk_numbers.build
+    @item.tracks.build
+    @item.labers.build
+    @item.genres.build
+    @item.artists.build
   end
 
   def edit
@@ -26,6 +29,10 @@ class ItemsController < ApplicationController
   private
   def item_params
     params.require(:item).permit(:item_introduction,:title,:image,:stock,:price_without_tax,:content_type)
+    params.require(:item).permit(disk_numbers_attributes: [:number,published_at])
+    params.require(:item).permit(labers_attributes:[:name.published_at])
+    params.require(:item).permit(genres_attributes:[:name.published_at])
+    params.require(:item).permit(tracks_attriburtes:[:number.published_at])
   end
 
 end
