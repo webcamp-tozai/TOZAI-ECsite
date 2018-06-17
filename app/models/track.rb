@@ -1,6 +1,6 @@
 class Track < ApplicationRecord
   # Validation
-  validates :item_id,         presence: true
+  # validates :item_id,         presence: true
   validates :artist_id,         presence: true
 
   validates :disc_number, presence: true,

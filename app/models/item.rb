@@ -1,10 +1,11 @@
 class Item < ApplicationRecord
+  attachment :image
   # Validation
   validates :label_id,          presence: true
   validates :genre_id,          presence: true
   validates :artist_id,         presence: true
   validates :title,             presence: true
-  validates :image_id,          presence: true
+  # validates :image_id,          presence: true
   
   validates :stock,             presence: true,
     numericality: { greater_than_or_equal_to: 0 }, #0以上
@@ -30,4 +31,5 @@ class Item < ApplicationRecord
   has_many :users, through: :item_reviews
   has_many :order_items
   has_many :orders, through: :order_items
+  accepts_nested_attributes_for :tracks
 end

@@ -14,7 +14,7 @@
 
           <div class="container">
             <div class="jumbotron">
-                <%= form_for [@item,@label,@genre] do |f| %>
+                <%= form_for @item do |f| %>
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label class="font-weight-bold">タイトル</label>
@@ -37,12 +37,17 @@
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label class="font-weight-bold">レーベル名</label>
-                      <%= f.text_field :label_name %>
+                      <%= f.fields_for @label do |t| %>
+                        <%= t.text_field :name %>
+                      <% end %>
                     </div>
 
                     <div class="form-group col-md-6">
                       <label class="font-weight-bold">ジャンル</label>
-                      <%= f.text_field :genre_genre_english %>
+                      <%= f.fields_for @genre do |t| %>
+                        <%= t.text_field :genre_english %>
+                        <%= t.text_field :genre_kana %>
+                      <% end %>
                     </div>
 
                   </div>
@@ -70,19 +75,27 @@
                   <table class="table table-responsive">
                     <thead>
                       <th class="text-center">ディスク番号</th>
-                      <th class="text-center">アーティスト名</th>
-                      <th class="text-center">アーティスト名<br>(カナ)</th>
                       <th class="text-center">トラック番号</th>
                       <th class="text-center">曲名</th>
-                      <th></th>
+                      <th class="text-center">曲の長さ時</th>
+                      <th class="text-center">曲の長さ分</th>
+                      <th class="text-center">曲の長さ秒</th>
+                      <th class="text-center">アーティスト名</th>
+                      <th class="text-center">アーティスト名<br>(カナ)</th>
                     </thead>
                     <tbody>
-                      <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
-                      <td><input class="form-control" type="text"></td>
-                      <td><input class="form-control" type="text"></td>
-                      <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
-                      <td><input class="form-control" type="text"></td>
+                    <%= f.fields_for :tracks do |t| %>
+                      <td><%= t.text_field :disc_number, class:"form-control  mx-auto" %></td>
+                      <td><%= t.text_field :track_number, class:"form-control  mx-auto" %></td>
+                      <td><%= t.text_field :name, class:"form-control" %></td>
+                      <td><%= t.text_field :length_hour, class:"form-control col-sm3 mx-auto" %>
+                      <td><%= t.text_field :length_minute, class:"form-control col-sm3 mx-auto" %>
+                      <td><%= t.text_field :length_second, class:"form-control col-sm3 mx-auto" %>
+                      <% end %>
+                      <td><%= text_field :artist, :name, class:"form-control" %></td>
+                      <td><%= text_field :artist, :name_kana, class:"form-control" %></td>
                     </tbody>
+
                     <tbody>
                       <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
                       <td><input class="form-control" type="text"></td>
