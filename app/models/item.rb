@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  attachment :image
   # Validation
   validates :label_id,          presence: true
   validates :genre_id,          presence: true
