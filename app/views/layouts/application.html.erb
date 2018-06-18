@@ -112,10 +112,11 @@
           <%= link_to root_path do  %>
             <%= image_tag "logo.png", class: "mr-4", :size =>'60x60' %>
           <% end %>
-          <!-- 検索フォーム -->
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="曲名、CDタイトル、アーティスト名、ジャンルで検索"></input>
-          <!-- 検索アイコン -->
-          <a class="mx-2 fa fa-search text-white fa-lg" href="#"></a>
+          <!-- 検索機能（仮 -->
+          <%= search_form_for @search do |f| %>
+            <%= f.text_field :title_cont, class: 'form-control pl', id: 'formGroupExampleInput2', placeholder: '商品名で検索' %>
+            <%= f.submit class: 'nav-link fa fa-search text-white fa-lg text-right' %>
+          <% end %>
 
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
