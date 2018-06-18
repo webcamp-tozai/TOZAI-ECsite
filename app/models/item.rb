@@ -1,6 +1,5 @@
 class Item < ApplicationRecord
   attachment :image
-=begin
   # Validation
   validates :label_id,          presence: true
   validates :genre_id,          presence: true
@@ -21,7 +20,6 @@ class Item < ApplicationRecord
   validates :content_type,      presence: true
 
   validates :is_deleted,        inclusion: { in: [true, false] }
-=end
   # Association
   belongs_to :label #label has_many :items
   belongs_to :genre #genre has_many :items
