@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+
     if label = Label.find_by(name: params[:label][:name])
       # return label
     else
@@ -28,7 +29,6 @@ class ItemsController < ApplicationController
     @item.tracks.each do |t|
       t.artist_id = artist.id
     end
- #binding pry
     @item.save
     redirect_to root_path
   end
@@ -45,6 +45,8 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:id])
+    @track = Track.find(params[:id])
   end
 
   def show

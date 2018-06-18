@@ -86,21 +86,23 @@
                       <label class="font-weight-bold">商品単価</label>
                       <%= f.text_field :price_without_tax, class:"form-control" %>
                     </div>
-
+                    <div class="form-group my-auto">
+                    <%= f.attachment_field :image,class:"form-control-file" %>
+                  </div>
                   </div>
 
-                    <%= f.attachment_field :image %>
+                    
 
                   <table class="table table-responsive">
                     <thead>
-                      <th class="text-center">ディスク番号</th>
-                      <th class="text-center">トラック番号</th>
-                      <th class="text-center">曲名</th>
-                      <th class="text-center">曲の長さ時</th>
-                      <th class="text-center">曲の長さ分</th>
-                      <th class="text-center">曲の長さ秒</th>
-                      <th class="text-center">アーティスト名</th>
-                      <th class="text-center">アーティスト名<br>(カナ)</th>
+                      <th class="text-center small font-weight-bold">ディスク<br>番号</th>
+                      <th class="text-center small font-weight-bold">トラック<br>番号</th>
+                      <th class="text-center small font-weight-bold">曲名</th>
+                      <th class="text-center small font-weight-bold">時間(h)</th>
+                      <th class="text-center small font-weight-bold">時間(m)</th>
+                      <th class="text-center small font-weight-bold">時間(s)</th>
+                      <th class="text-center small font-weight-bold">アーティスト名</th>
+                      <th class="text-center small font-weight-bold">アーティスト名<br>(カナ)</th>
                     </thead>
                     <tbody>
                     <%= f.fields_for :tracks do |t| %>
@@ -131,16 +133,9 @@
                             <% end %>
                           </datalist>
                       </td>
-                    </tbody>
-
-                    <tbody>
-                      <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
-                      <td><input class="form-control" type="text"></td>
-                      <td><input class="form-control" type="text"></td>
-                      <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
-                      <td><input class="form-control" type="text"></td>
                       <td><a href="#" class="btn btn-outline-danger btn-sm">delete</></td>
                     </tbody>
+
                   </table>
                   <%= f.submit "-商品追加-",class:"btn btn-success" %>
                 <% end %>
