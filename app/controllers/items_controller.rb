@@ -4,18 +4,31 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-
-    label = Label.create(name: params[:item][:label][:name])
-    @item.label_id = label.id
-    genre = Genre.create(genre_english: params[:item][:genre][:genre_english],genre_kana: params[:item][:genre][:genre_kana])
+    if label = Label.find_by(name: params[:label][:name])
+      # return label
+    else
+      label = Label.create(name: params[:label][:name])
+    end
+      @item.label_id = label.id
+      # binding pry
+    if genre = Genre.find_by(genre_english: params[:genre][:genre_english],genre_kana: params[:genre][:genre_kana])
+      # return genre
+    else
+      genre = Genre.create(genre_english: params[:genre][:genre_english],genre_kana: params[:genre][:genre_kana])
+    end
     @item.genre_id = genre.id
-    artist = Artist.create(name: params[:artist][:name],name_kana: params[:artist][:name_kana])
-    @item.artist_id = artist.id
+
+    if artist = Artist.find_by(name: params[:artist][:name])
+      # return artist
+    else
+      artist = Artist.create(name: params[:artist][:name],name_kana: params[:artist][:name_kana])
+    end
+      @item.artist_id = artist.id
 
     @item.tracks.each do |t|
       t.artist_id = artist.id
     end
-    #binding pry
+ #binding pry
     @item.save
     redirect_to root_path
   end
@@ -23,8 +36,11 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.tracks.build
+    @label_name = Label.all
     @label = Label.new
+    @genre_name = Genre.all
     @genre = Genre.new
+    @artist_name = Artist.all
     @artist = Artist.new
   end
 

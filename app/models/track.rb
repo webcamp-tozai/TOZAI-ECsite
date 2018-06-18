@@ -1,4 +1,5 @@
 class Track < ApplicationRecord
+=begin
   # Validation
   # validates :item_id,         presence: true
   validates :artist_id,         presence: true
@@ -24,7 +25,7 @@ class Track < ApplicationRecord
   validates :length_second,   presence: true,
     format: { with: /\A[0-9]\z|\A[1-5][0-9]\z/, # 0-59までの数字
               message: "0から59までの半角数字で入力して下さい。"  }
-              
+=end
   # Association
   belongs_to :item # dics_number has_many :tracks
   belongs_to :artist # artist belongs_to track
