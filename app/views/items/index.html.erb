@@ -3,7 +3,7 @@
   <%= render 'items/index_admins', {} %> <!-- 変数を再定義する必要有り -->
 
 <% else %>
-
+  <%# ユーザーページ %>
   <div class="container-fluid">
     <div class="row">
 
@@ -177,11 +177,14 @@
           <div class="col-12">
             <nav aria-label="Page navigation example">
               <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item">
+                  <%= paginate @items %>
+                </li>
+                <!--<li class="page-item"><a class="page-link" href="#">Previous</a></li>-->
+                <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+                <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+                <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+                <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
               </ul>
             </nav>
           </div>
