@@ -10,19 +10,49 @@
       <div class="row">
         <!-- ジャケット画像 -->
         <div class="col-4">
-          <img src="http://placehold.it/250x250" class="mw-100" style="max-width: 250px; max-height: 250px;">
+          <%= attachment_image_tag @item, :image, fallback: "no_image.jpg",class: "card-img" %>
         </div>
         <!-- 商品　大情報 -->
         <div class="col-5" style="word-break: break-all;">
           <div>
-            <p><a href="#" class="btn btn-success btn-sm text-white">J-Pop</a></p>
-            <a href="#" class="font-weight-bold" style="color:#0033cc; font-size: 18px;">長文アーティスト名長文アーティスト名</a><br>
-            <a href="#" class="font-weight-bold" style="color:#1a1a1a;">長文CDタイトル長文CDタイトル</a>
+            <p>
+              <%= link_to @item.genre.genre_english, genres_path(@item), class: "btn btn-sm btn-secondary" %>
+            </p>
+
+            <span>
+              <%= link_to @item.artist.name, artists_path(@item), class: "font-weight-bold", style: "color: #0033cc; font-size: 18px;" %>
+            </span><br>
+
+            <span class="font-weight-bold", style="color: #1a1a1a;">
+              <%= @item.title %>
+            </span>
           </div>
 
           <div class="mt-3">
-            <span class="text-dark small">2,000円(税込)</span><br>
-            <span class="text-danger small">在庫残り10点</span>
+            <span class="text-dark small">
+              <%= number_to_currency @item.price_without_tax, :unit => "￥", :precision => 0 %>
+            </span><br>
+            <!-- 在庫が20以下の場合 -->
+            <% if @item.stock <= 20 && @item.stock >= 1 %>
+              <span class="text-danger small">
+                在庫残り<%= item.stock %>点
+              </span>
+            <!-- 在庫切れの場合 -->
+            <% elsif @item.stock == 0 && @item.is_deleted == false %>
+              <span class="text-secondary small">
+                【在庫切れ】再入荷中
+              </span>
+            <!-- 削除フラグtrueの場合 -->
+            <% elsif @item.is_deleted == true %>
+              <span class="text-secondary small">
+                取扱終了
+              </span>
+            <!-- 在庫が21以上の場合 -->
+            <% else %>
+              <span class="text-dark small font-weight-bold">
+                在庫有り
+              </span>
+            <% end %>
           </div>
 
         </div>
@@ -60,15 +90,18 @@
             <tbody>
               <tr>
                 <th class="bg-secondary text-white">商品タイプ</th>
-                <td>シングル</td>
+                <td><%= @item.content_type %></td>
                 <th class="bg-secondary text-white">レーベル</th>
-                <td>ほにゃらら</td>
+                <td><%= @item.label.name %></td>
               </tr>
               <tr>
                 <th class="bg-secondary text-white">ディスク枚数</th>
-                <td>1</td>
+                <td>
+                  <%= Track.count('DISTINCT disc_number') %>
+                </td>
                 <th class="bg-secondary text-white">収録曲数</th>
-                <td>3</td>
+                <td><%= Item.joins(:tracks).group('tracks.item_id').count %>
+                  <%= Track.count('name') %></td>
               </tr>
             </tbody>
           </table>
@@ -81,27 +114,19 @@
           <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">収録曲</p>
             <table class="table table-sm table-striped small"  style="width: 100%; table-layout: fixed; overflow: hidden;">
               <tbody>
-                <tr>
-                  <th scope="row" style="width: 3%;">1</th>
-                  <td style="width: 47%;">曲名text曲名text曲名text曲名text曲名text曲名text曲名text曲名text曲名text曲名text曲名text曲名text曲名text曲名text曲名text</td>
-                  <td style="width: 50%;">
-                    アーティスト名（全曲共通なら非表示にしたい）アーティスト名（全曲共通なら非表示にしたい）
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row" style="width: 3%;">2</th>
-                  <td style="width: 47%;">曲名</td>
-                  <td>
-                    アーティスト名（全曲共通なら非表示にしたい）
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row" style="width: 3%;">3</th>
-                  <td style="width: 47%;">曲名</td>
-                  <td>
-                    アーティスト名（全曲共通なら非表示にしたい）
-                  </td>
-                </tr>
+                <% @item.tracks.each do |track| %>
+                  <tr>
+                    <th scope="row" style="width: 3%;">
+                      <%= track.track_number %>
+                    </th>
+                    <td style="width: 47%;">
+                      <%= track.name %>
+                    </td>
+                    <td style="width: 50%;">
+                      <%= track.artist.name %>
+                    </td>
+                  </tr>
+                <% end %>
               </tbody>
             </table>
         </div>
@@ -111,7 +136,7 @@
         <div class="col-12">
           <p class="text-center my-4 h5 text-white " style="background-color:#B40404;">商品紹介</p>
           <div class="small" style="word-break: break-all;">
-            texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+            <%= @item.item_introduction %>
           </div>
         </div>
       </div>
@@ -121,39 +146,28 @@
           <p class="text-center my-4 h5 text-white " style="background-color:#B40404;">購入者レビュー</p>
             <table class="table" style="word-break: break-all;">
               <tbody>
+                <% if @item.item_reviews.exists? %>
+                  <%= @item.item_reviews.each do |reviews| %>
+                    <tr>
+                      <td>
+                        <p class="text-dark">
+                          <%= reviews.user.name %>
+                        </p>
+                        <span class="text-secondary">
+                          <%= reviews.created_at %>
+                        </span>
+                        <div class="mt-1 small text-dark">
+                          <%= reviews.review %>
+                        </div>
+                      </td>
+                    </tr>
+                  <% end %>
 
-                <tr>
-                  <td>
-                    <p class="text-dark">ユーザーネーム</p>
-                    <span class="font-weight-bold">レビュータイトル</span><br>
-                    <span class="text-secondary">2018/6/8</span>
-                    <div class="mt-1 small text-dark">
-                      購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext
-                    </div>
-                  </td>
-                </tr>
+                <% else %>
 
-                <tr>
-                  <td>
-                    <p class="text-dark">ユーザーネーム</p>
-                    <span class="font-weight-bold">レビュータイトル</span><br>
-                    <span class="text-secondary">2018/6/8</span>
-                    <div class="mt-1 small text-dark">
-                      購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext購入者レビューtext
-                    </div>
-                  </td>
-                </tr>
+                  <p class='text-center'>レビューは投稿されていません</p>
 
-                <tr>
-                  <td>
-                    <p class="text-dark">user name</p>
-                    <span class="font-weight-bold">review title</span><br>
-                    <span class="text-secondary">2018/6/8</span>
-                    <div class="mt-1 small text-dark">
-                      texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </div>
-                  </td>
-                </tr>
+                <% end %>
 
               </tbody>
             </table>
