@@ -55,14 +55,12 @@ ActiveRecord::Schema.define(version: 20180615094725) do
   end
 
   create_table "artists", force: :cascade do |t|
-    t.integer "track_id", null: false
     t.string "name", null: false
     t.string "name_kana", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_artists_on_name"
     t.index ["name_kana"], name: "index_artists_on_name_kana"
-    t.index ["track_id"], name: "index_artists_on_track_id"
   end
 
   create_table "cart_items", force: :cascade do |t|
@@ -96,12 +94,6 @@ ActiveRecord::Schema.define(version: 20180615094725) do
     t.index ["name"], name: "index_contacts_on_name"
   end
 
-  create_table "disc_numbers", force: :cascade do |t|
-    t.integer "number", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "genres", force: :cascade do |t|
     t.string "genre_english", null: false
     t.string "genre_kana", null: false
@@ -123,15 +115,12 @@ ActiveRecord::Schema.define(version: 20180615094725) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.integer "item_review_id"
-    t.integer "track_id", null: false
-    t.integer "disc_number_id", null: false
     t.integer "label_id", null: false
-    t.integer "artist_id", null: false
     t.integer "genre_id", null: false
+    t.integer "artist_id", null: false
     t.text "item_introduction"
     t.string "title", null: false
-    t.text "image_id", null: false
+    t.text "image_id"
     t.integer "stock", null: false
     t.integer "price_without_tax", null: false
     t.string "content_type", null: false
@@ -139,12 +128,9 @@ ActiveRecord::Schema.define(version: 20180615094725) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_items_on_artist_id"
-    t.index ["disc_number_id"], name: "index_items_on_disc_number_id"
     t.index ["genre_id"], name: "index_items_on_genre_id"
-    t.index ["item_review_id"], name: "index_items_on_item_review_id"
     t.index ["label_id"], name: "index_items_on_label_id"
     t.index ["title"], name: "index_items_on_title"
-    t.index ["track_id"], name: "index_items_on_track_id"
   end
 
   create_table "labels", force: :cascade do |t|
@@ -185,15 +171,17 @@ ActiveRecord::Schema.define(version: 20180615094725) do
   end
 
   create_table "tracks", force: :cascade do |t|
-    t.integer "disc_number_id", null: false
-    t.integer "number", null: false
+    t.integer "item_id", null: false
+    t.integer "artist_id", null: false
+    t.integer "disc_number", null: false
+    t.integer "track_number", null: false
     t.string "name", null: false
     t.integer "length_hour", default: 0, null: false
     t.integer "length_minute", null: false
     t.integer "length_second", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["disc_number_id"], name: "index_tracks_on_disc_number_id"
+    t.index ["disc_number"], name: "index_tracks_on_disc_number_id"
     t.index ["name"], name: "index_tracks_on_name"
   end
 
