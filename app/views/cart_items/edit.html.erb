@@ -17,53 +17,51 @@
         </thead>
 
         <tbody>
-          <tr style="line-height: 80px;"><!-- ここからcart_itemsのeach開始 -->
-            <td>
-              <a href="#"><img src="http://placehold.it/80x80" alt=""></a>
-            </td>
-            <td style="line-height: 20px; overflow: hidden;">
-              <div class="text-truncate">
-                <a href="#" class="font-weight-bold" style="color:#0033cc;">texttexttexttexttexttexttexttexttexttexttexttexttext</a><br>
-                <a href="#" class="font-weight-bold" style="color:#1a1a1a;">長文CDタイトル長文CDタイトル</a>
-              </div>
-            </td>
-            <td class="text-center">¥2,000</td>
-            <td>
-              <form class="form-inline">
-                <div class="form-group">
-                  <span>2</span>
-                  <input class="col-2 mx-2 form-control form-control-sm" type="text">
-                  <a href="#" class="btn btn-secondary btn-sm">変更</a>
+            <tr style="line-height: 80px;"><!-- ここからcart_itemsのeach開始 -->
+              <td>
+                <%= attachment_image_tag @item, :image, fallback: "no_image.jpg",class: "card-img" %>
+              </td>
+              <td style="line-height: 20px; overflow: hidden;">
+                <div class="text-truncate">
+                  <span class="font-weight-bold" style="color:#0033cc;">
+                    <%= link_to cart_item.item.artist.name, artists_path(cart_item), class: "font-weight-bold", style: "color: #0033cc;" %>
+                  </span><br>
+                  <span href="#" >
+                    <%= link_to cart_item.item.title, item_path(cart_item.item), class: "font-weight-bold", style: "color:#1a1a1a;" %>
+                  </span>
                 </div>
-              </form>
-            </td>
-            <td class="text-center">¥4,000</td>
-            <td><a href="#" class="btn btn-danger btn-sm">削除</a></td>
-          </tr><!-- ここでcart_itemsのeach終了 -->
+              </td>
+              <td class="text-center">
+                <%= number_to_currency cart_item.item.price_without_tax, :unit => "￥", :precision => 0 %>
+              </td>
+              <td>
+                <form class="form-inline">
+                  <div class="form-group">
+                    <span>
+                      <%= cart_item.item_count %>
+                    </span>
 
-          <tr style="line-height: 80px;"><!-- ここからcart_itemsのeach開始 -->
-            <td>
-              <a href="#"><img src="http://placehold.it/80x80" alt=""></a>
-            </td>
-            <td style="line-height: 20px; overflow: hidden;">
-              <div class="text-truncate">
-                <a href="#" class="font-weight-bold" style="color:#0033cc;">texttexttexttexttexttexttexttexttexttexttexttexttext</a><br>
-                <a href="#" class="font-weight-bold" style="color:#1a1a1a;">長文CDタイトル長文CDタイトル</a>
-              </div>
-            </td>
-            <td class="text-center">¥2,000</td>
-            <td>
-              <form class="form-inline">
-                <div class="form-group">
-                  <span>2</span>
-                  <input class="col-2 mx-2 form-control form-control-sm" type="text">
-                  <a href="#" class="btn btn-secondary btn-sm">変更</a>
-                </div>
-              </form>
-            </td>
-            <td class="text-center">¥4,000</td>
-            <td><a href="#" class="btn btn-danger btn-sm">削除</a></td>
-          </tr><!-- ここでcart_itemsのeach終了 -->
+                    <%= form_for [current_user, @cart_item], :url => {:action => 'update'}, :id => {cart_item.user_id}, :method => {post} do |f| %>
+                      <%= f.number_field :item_count, class: "col-2 mx-2 form-control form-control-sm" %>
+
+                      <%= f.submit "変更", class: "btn btn-secondary btn-sm" %>
+
+                    <% end %>
+
+                    <%= link_to "edit", edit_user_cart_item_path(cart_item.id) %>
+
+                  </div>
+                </form>
+              </td>
+
+              <td class="text-center">
+                <%= number_to_currency cart_item.item.price_without_tax * cart_item.item_count, :unit => "￥", :precision => 0 %>
+              </td>
+
+              <td>
+                <%= link_to "削除", user_cart_items_path(cart_item.user_id), method: :delete, class: "btn btn-danger btn-sm" %>
+              </td>
+            </tr><!-- ここでcart_itemsのeach終了 -->
 
         </tbody>
       </table>

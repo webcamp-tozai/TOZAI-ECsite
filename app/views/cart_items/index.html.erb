@@ -1,0 +1,131 @@
+<!-- カートの中身確認、編集画面 -->
+
+<div class="container pt-4">
+  <div class="row">
+    <!-- カートテーブル -->
+    <div class="col-9">
+
+      <% if current_user.cart_items.exists? %>
+
+        <table class="table table-striped small" style="width: 100%; table-layout: fixed;">
+          <thead>
+            <tr class="text-center">
+              <th scope="col" style="width: 15%;"></th>
+              <th scope="col" style="width: 30%;">商品名</th>
+              <th scope="col" style="width: 12%;">単価</th>
+              <th scope="col" style="width: 17%;">数量</th>
+              <th scope="col" style="width: 14%;">小計価格</th>
+              <th scope="col" style="width: 12%;"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% current_user.cart_items.each do |cart_item| %>
+              <tr style="line-height: 80px;"><!-- ここからcart_itemsのeach開始 -->
+                <td>
+                  <%= attachment_image_tag @item, :image, fallback: "no_image.jpg",class: "card-img" %>
+                </td>
+                <td style="line-height: 20px; overflow: hidden;">
+                  <div class="text-truncate">
+                    <span class="font-weight-bold" style="color:#0033cc;">
+                      <%= link_to cart_item.item.artist.name, artists_path(cart_item), class: "font-weight-bold", style: "color: #0033cc;" %>
+                    </span><br>
+                    <span href="#" >
+                      <%= link_to cart_item.item.title, item_path(cart_item.item), class: "font-weight-bold", style: "color:#1a1a1a;" %>
+                    </span>
+                  </div>
+                </td>
+                <td class="text-center">
+                  <%= number_to_currency cart_item.item.price_without_tax, :unit => "￥", :precision => 0 %>
+                </td>
+                <td>
+                  <form class="form-inline">
+                    <div class="form-group">
+                      <span>
+                        <%= cart_item.item_count %>
+                      </span>
+
+                      <%= form_for [current_user, cart_item] do |f| %>
+                        <%= f.number_field :item_count, class: "col-2 mx-2 form-control form-control-sm" %>
+
+                        <%= f.submit "変更", class: "btn btn-secondary btn-sm" %>
+
+                      <% end %>
+
+                    </div>
+                  </form>
+                </td>
+
+                <td class="text-center">
+                  <%= number_to_currency cart_item.item.price_without_tax * cart_item.item_count, :unit => "￥", :precision => 0 %>
+                </td>
+
+                <td>
+                  <%= link_to "削除", user_cart_item_path(id: cart_item.id), method: :delete, class: "btn btn-danger btn-sm" %>
+                </td>
+              </tr><!-- ここでcart_itemsのeach終了 -->
+
+            <% end %>
+
+          </tbody>
+        </table>
+
+      <% else %>
+
+        <p class="text-center h4">カートに商品がありません</p>
+
+      <% end %>
+
+    </div>
+
+    <!-- サイドバー -->
+    <div class="col-3">
+
+      <% if current_user.cart_items.exists? %>
+
+        <p class="text-center h5 text-white" style="background-color:#B40404;">注文</p>
+        <div class="list-group">
+          <div class="list-group-item">
+            <p class="text-center">合計価格</p>
+            <p class="h3 text-center">
+
+            </p>
+          </div>
+
+          <%= link_to "注文画面へ", new_order_path, class: "list-group-item text-center" %>
+
+        </div>
+
+        <div class="text-center">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <%= link_to "カートを空にする", all_destroy_cart_items_path(current_user), method: :delete, "data-confirm" => "カートの商品を全て削除しますか？", class: "btn btn-outline-danger mt-2" %>
+            </li>
+            <li class="list-group-item">
+              <%= link_to "マイページへ", user_path(current_user), class: "btn btn-outline-secondary mt-2" %>
+            </li>
+            <li class="list-group-item">
+              <%= link_to "買い物を続ける", items_path, class: "btn btn-outline-secondary mt-2" %>
+            </li>
+          </ul>
+        </div>
+
+      <% else %>
+
+        <div class="text-center">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <%= link_to "マイページへ", user_path(current_user), class: "btn btn-outline-secondary mt-2" %>
+            </li>
+            <li class="list-group-item">
+              <%= link_to "買い物を続ける", items_path, class: "btn btn-outline-secondary mt-2" %>
+            </li>
+          </ul>
+        </div>
+
+      <% end %>
+
+    </div>
+
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

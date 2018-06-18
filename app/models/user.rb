@@ -62,7 +62,7 @@ class User < ApplicationRecord
     }
 
   # Association
-  has_one :cart_item
+  has_many :cart_items
   has_many :addresses # address belongs_to user
   has_many :orders # order belongs_to user
   has_many :item_reviews

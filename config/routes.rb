@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :labels, only: [:create, :new, :edit, :update]
     resources :genres, only: [:create, :new, :edit, :update]
     resources :artists, only: [:create, :new, :edit, :update]
+    resources :cart_items
   end
 
   resources :item_reviews, only: [:index, :destroy]
@@ -34,8 +35,10 @@ Rails.application.routes.draw do
 
   resources :users, except: [:destroy] do
     resources :item_reviews, only: [:index, :destroy]
-    resource :cart_items, only: [:create, :new, :edit, :update, :destroy]
+    resources :cart_items
   end
+
+  delete '/users/:id/cart_items' => 'cart_items#all_destroy', as: 'all_destroy_cart_items'
 
   resources :addresses, except: [:index, :show]
 
