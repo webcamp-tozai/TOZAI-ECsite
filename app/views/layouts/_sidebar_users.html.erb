@@ -1,4 +1,4 @@
-<!-- ユーザー側サイドバー -->
+  <!-- ユーザー側サイドバー -->
 <div class="col-3">
 
   <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">スタッフオススメ</p>
@@ -10,11 +10,9 @@
 
   <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">ジャンル</p>
   <div class="list-group">
-    <a href="#" class="list-group-item">J-Pop</a>
-    <a href="#" class="list-group-item">Rock</a>
-    <a href="#" class="list-group-item">Jazz</a>
-    <a href="#" class="list-group-item">Soul</a>
-    <a href="#" class="list-group-item">Soundtrack</a>
+    <% @genres.each do |genre| %>
+      <%= link_to genre.genre_english, '#', class: 'list-group-item' %>
+    <% end %>
   </div>
 
   <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">売上ランキング</p>
