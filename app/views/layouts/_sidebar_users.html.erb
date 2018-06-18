@@ -10,6 +10,7 @@
 
   <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">ジャンル</p>
   <div class="list-group">
+    <!--#TODO: ジャンルボタン押したらそのジャンルの検索が出来るようにする-->
     <% @genres.each do |genre| %>
       <%= link_to genre.genre_english, '#', class: 'list-group-item' %>
     <% end %>
