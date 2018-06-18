@@ -1,7 +1,13 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.page(params[:page]).reverse_order
     @genres = Genre.all
+
+    # ransack
+    # 検索オブジェクト
+    @items = Item.all
+    @search = Item.ransack(params[:q])
+    # 検索結果
+    @items = @search.result.page(params[:page]).reverse_order
   end
 
   def create
