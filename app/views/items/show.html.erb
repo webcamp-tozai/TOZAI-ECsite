@@ -7,6 +7,11 @@
 
     <!-- 商品情報 -->
     <div class="col-9 my-4">
+      <p class="flash-message text-danger">
+        <%= flash[:cart_item_create_faled] %>
+        <%= flash[:cart_item_update_faled] %>
+      </p>
+
       <div class="row">
         <!-- ジャケット画像 -->
         <div class="col-4">
@@ -58,9 +63,40 @@
         </div>
         <!-- カート追加関連 -->
         <% if user_signed_in? %>
-          <div class="col-3 align-self-end">
-            <!-- カートに入れる数量 -->
-            <ul class="list-group list-group-flush">
+
+          <% if @item.is_deleted == false && @item.stock == 0  %>
+
+            <div class="col-3 align-self-end">
+              <ul class="list-group list-group-flush">
+
+                <li class="list-group-item form-group">
+                  <p class="text-center">【在庫切れ】再入荷中</p>
+                </li>
+
+                <li class="list-group-item">
+                  <a href="#" class="btn btn-primary btn-sm">リストに追加</a>
+                </li>
+
+              </ul>
+            </div>
+
+          <% elsif @item.is_deleted == true %>
+
+            <div class="col-3 align-self-center">
+              <ul class="list-group list-group-flush">
+
+                <li class="list-group-item form-group">
+                  <p class="text-center">取扱終了</p>
+                </li>
+
+              </ul>
+            </div>
+
+          <% else %>
+
+            <div class="col-3 align-self-end">
+              <ul class="list-group list-group-flush">
+
               <%= form_for [@item,@cart_item] do |f| %>
 
                 <li class="list-group-item form-group">
@@ -73,16 +109,18 @@
 
               <% end %>
 
-              <li class="list-group-item"><a href="#" class="btn btn-primary btn-sm">リストに追加</a></li>
-            </ul>
-          </div>
+                <li class="list-group-item"><a href="#" class="btn btn-primary btn-sm">リストに追加</a></li>
+
+              </ul>
+            </div>
+
+          <% end %>
 
         <% else %>
 
           <div class="col-3 align-self-end">
-            <!-- カートに入れる数量 -->
             <ul class="list-group list-group-flush">
-              <!-- カートか欲しいものリストに追加 -->
+
               <li class="list-group-item">
                 <%= link_to new_user_registration_path do %>
                   <span class="btn btn-primary btn-sm">会員登録</span>

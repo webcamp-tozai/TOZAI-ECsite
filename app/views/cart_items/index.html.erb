@@ -4,6 +4,18 @@
   <div class="row">
     <!-- カートテーブル -->
     <div class="col-9">
+      <p class="flash-message text-danger">
+        <%= flash[:cart_item_destroyed] %>
+        <%= flash[:cart_item_all_destroyed] %>
+      </p>
+
+      <p class="flash-message text-primary">
+        <%= flash[:cart_item_updated] %>
+      </p>
+
+      <p class="flash-message text-success">
+        <%= flash[:cart_item_created] %>
+      </p>
 
       <% if current_user.cart_items.exists? %>
 
@@ -13,18 +25,20 @@
               <th scope="col" style="width: 15%;"></th>
               <th scope="col" style="width: 30%;">商品名</th>
               <th scope="col" style="width: 12%;">単価</th>
-              <th scope="col" style="width: 17%;">数量</th>
+              <th scope="col" style="width: 19%;">数量</th>
               <th scope="col" style="width: 14%;">小計価格</th>
-              <th scope="col" style="width: 12%;"></th>
+              <th scope="col" style="width: 10%;"></th>
             </tr>
           </thead>
 
           <tbody>
+            <% total = 0 %>
             <% current_user.cart_items.each do |cart_item| %>
               <tr style="line-height: 80px;"><!-- ここからcart_itemsのeach開始 -->
                 <td>
                   <%= attachment_image_tag @item, :image, fallback: "no_image.jpg",class: "card-img" %>
                 </td>
+
                 <td style="line-height: 20px; overflow: hidden;">
                   <div class="text-truncate">
                     <span class="font-weight-bold" style="color:#0033cc;">
@@ -35,33 +49,33 @@
                     </span>
                   </div>
                 </td>
+
                 <td class="text-center">
                   <%= number_to_currency cart_item.item.price_without_tax, :unit => "￥", :precision => 0 %>
                 </td>
+
                 <td>
-                  <form class="form-inline">
+                  <%= form_for ([current_user, cart_item]), :html => { :class => "form-inline" } do |f| %>
                     <div class="form-group">
                       <span>
-                        <%= cart_item.item_count %>
-                      </span>
 
-                      <%= form_for [current_user, cart_item] do |f| %>
-                        <%= f.number_field :item_count, class: "col-2 mx-2 form-control form-control-sm" %>
+                        <%= f.number_field :item_count, class: "col-3 mx-2 form-control form-control-sm" %>
 
                         <%= f.submit "変更", class: "btn btn-secondary btn-sm" %>
 
-                      <% end %>
+                      </span>
 
                     </div>
-                  </form>
+                  <% end %>
                 </td>
 
                 <td class="text-center">
                   <%= number_to_currency cart_item.item.price_without_tax * cart_item.item_count, :unit => "￥", :precision => 0 %>
+                  <% total = total + cart_item.item.price_without_tax * cart_item.item_count %>
                 </td>
 
                 <td>
-                  <%= link_to "削除", user_cart_item_path(id: cart_item.id), method: :delete, class: "btn btn-danger btn-sm" %>
+                  <%= link_to "削除", user_cart_item_path(id: cart_item.id), method: :delete, "data-confirm" => "#{cart_item.item.title}をカートから削除しますか？", class: "btn btn-danger btn-sm" %>
                 </td>
               </tr><!-- ここでcart_itemsのeach終了 -->
 
@@ -88,7 +102,7 @@
           <div class="list-group-item">
             <p class="text-center">合計価格</p>
             <p class="h3 text-center">
-
+              <%= number_to_currency total, :unit => "￥", :precision => 0 %>
             </p>
           </div>
 
