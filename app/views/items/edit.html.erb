@@ -1,13 +1,13 @@
 <div class="container-fluid">
   <div class="row">
 
-  	<!-- サイドバー -->
-		<%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
 
     <!-- 商品情報 -->
     <div class="col-9">
       <div class="row">
-        <div class="container col-12">
+        <div class="container">
           <div class="row">
             <div class="container">
               <span class="font-weight-bold h2">商品詳細</span>
@@ -21,6 +21,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-2">
                       <label class="control-label font-weight-bold">商品タイプ</label>
+                      <%= form_for (@item) do |item| %>
                       <div class="radio">
                         <label><input type="radio" name="radio">シングルCD</label>
                         <label><input type="radio" name="radio">アルバムCD</label>
@@ -29,7 +30,7 @@
                     </div>
                     <div class="form-group col-md-4">
                       <label class="font-weight-bold">タイトル</label>
-                      <input class="form-control" type="text" placeholder="The Long Road[Bonus Tracks]">
+                      <%= item.text_field :title, class:"form-control" %>
                     </div>
                     <div class="form-group col-md-3">
                       <label class="font-weight-bold">レーベル名</label>
@@ -43,17 +44,17 @@
 
                   <div class="form-group">
                     <label class="font-weight-bold">商品紹介</label>
-                    <textarea class="form-control" type="text" placeholder="Nickelbackのマスターピース"></textarea>
+                    <%= item.text_area :item_introduction, class:"form-control" %>
                   </div>
 
                   <div class="form-row">
                     <div class="form-group col-md-2">
                       <label class="font-weight-bold">商品単価</label>
-                      <input class="form-control" type="text" placeholder="2,100">
+                      <%= item.text_field :price_without_tax, class:"form-control" %>
                     </div>
                     <div class="form-group col-md-2">
                       <label class="font-weight-bold">在庫数</label>
-                      <input class="form-control" type="text" placeholder="10">
+                      <%= item.text_field :stock, class:"form-control" %>
                     </div>
                     <div class="col-md-2">
                       <label class="font-weight-bold">ステータス</label>
@@ -66,7 +67,7 @@
                       </select>
                     </div>
                   </div>
-
+<% end %>
                   <a href="#" class="col-md-3 form-control-file ">ジャケットを変更</a>
                   <table class="table table-sm">
                     <thead>
@@ -79,27 +80,14 @@
                     </thead>
 
                     <tbody>
-                      <td><input class="form-control col-sm-3 mx-auto" type="text" placeholder="1"></td>
-                      <td><input class="form-control" type="text" placeholder="Nickelback"></td>
-                      <td><input class="form-control" type="text"　placeholder="ニッケルバック"></td>
-                      <td><input class="form-control col-sm-3 mx-auto" type="text" placeholder="1"></td>
-                      <td><input class="form-control" type="text" placeholder="Flat On The Floor"></td>
-                    </tbody>
-
-                    <tbody>
-                      <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
-                      <td><input class="form-control" type="text"></td>
-                      <td><input class="form-control" type="text"></td>
-                      <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
-                      <td><input class="form-control" type="text"></td>
-                    </tbody>
-
-                    <tbody>
-                      <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
-                      <td><input class="form-control" type="text"></td>
-                      <td><input class="form-control" type="text"></td>
-                      <td><input class="form-control col-sm-3 mx-auto" type="text"></td>
-                      <td><input class="form-control" type="text"></td>
+                      <%= fields_for :tracks do |track| %>
+                      <td><%= track.text_field :disc_number, class:"form-control  mx-auto" %></td>
+                      <td><%= track.text_field :track_number, class:"form-control  mx-auto" %></td>
+                      <td><%= track.text_field :name, class:"form-control" %></td>
+                      <td><%= track.text_field :length_hour, class:"form-control col-sm3 mx-auto" %>
+                      <td><%= track.text_field :length_minute, class:"form-control col-sm3 mx-auto" %>
+                      <td><%= tarck.text_field :length_second, class:"form-control col-sm3 mx-auto" %>
+                      <% end %>
                     </tbody>
 
                     <tbody>
