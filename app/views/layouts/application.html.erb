@@ -87,7 +87,7 @@
               <li class="nav-item">
                 <% if CartItem.exists? %>
 
-                  <%= link_to user_cart_items_path(user), class: 'nav-link text-white text-center' do %>
+                  <%= link_to user_cart_items_path(current_user), class: 'nav-link text-white text-center' do %>
                     <%= fa_icon("shopping-cart 2x", text: "アイテム数") %>
                   <% end %>
 

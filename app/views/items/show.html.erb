@@ -57,18 +57,82 @@
 
         </div>
         <!-- カート追加関連 -->
-        <div class="col-3 align-self-end">
-          <!-- カートに入れる数量 -->
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item form-group">
-                <input class="form-control form-control-sm" type="text" placeholder="数量を入力">
-                </input>
-            </li>
-            <!-- カートか欲しいものリストに追加 -->
-            <li class="list-group-item"><a href="#" class="btn btn-primary btn-sm">カートに追加</a></li>
-            <!--<li class="list-group-item"><a href="#" class="btn btn-primary btn-sm">リストに追加</a></li>-->
-          </ul>
-        </div>
+        <% if user_signed_in? %>
+
+          <% if @item.is_deleted == false && @item.stock == 0  %>
+
+            <div class="col-3 align-self-end">
+              <ul class="list-group list-group-flush">
+
+                <li class="list-group-item form-group">
+                  <p class="text-center">【在庫切れ】再入荷中</p>
+                </li>
+
+                <li class="list-group-item">
+                  <!--
+                  <a href="#" class="btn btn-primary btn-sm">リストに追加</a>
+                  -->
+                </li>
+
+              </ul>
+            </div>
+
+          <% elsif @item.is_deleted == true %>
+
+            <div class="col-3 align-self-center">
+              <ul class="list-group list-group-flush">
+
+                <li class="list-group-item form-group">
+                  <p class="text-center">取扱終了</p>
+                </li>
+
+              </ul>
+            </div>
+
+          <% else %>
+
+            <div class="col-3 align-self-end">
+              <ul class="list-group list-group-flush">
+
+              <%= form_for [@item,@cart_item] do |f| %>
+
+                <li class="list-group-item form-group">
+                  <%= f.number_field :item_count, class: "form-control form-control-sm", placeholder: "数量を入力" %>
+                </li>
+                <!-- カートに追加 -->
+                <li class="list-group-item">
+                  <%= f.submit "カートに追加", class: "btn btn-primary btn-sm" %>
+                </li>
+
+              <% end %>
+                <!--
+                <li class="list-group-item"><a href="#" class="btn btn-primary btn-sm">リストに追加</a></li>
+                -->
+
+              </ul>
+            </div>
+
+          <% end %>
+
+        <% else %>
+
+          <div class="col-3 align-self-end">
+            <ul class="list-group list-group-flush">
+
+              <li class="list-group-item">
+                <%= link_to new_user_registration_path do %>
+                  <span class="btn btn-primary btn-sm">会員登録</span>
+                <% end %>
+              </li>
+              <li class="list-group-item">
+                <%= link_to new_user_session_path do %>
+                  <span class="btn btn-primary btn-sm">ログイン</span>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+
+        <% end %>
 
       </div>
       <!-- YouTube -->
