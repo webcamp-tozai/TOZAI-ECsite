@@ -30,6 +30,7 @@ class ItemsController < ApplicationController
     @item.tracks.each do |t|
       t.artist_id = artist.id
     end
+    binding pry
     @item.save
     redirect_to root_path
   end
