@@ -115,7 +115,7 @@
           <!-- 検索機能（仮 -->
           <form class="form-inline my-2 my-lg-0">
             <%= search_form_for @search do |f| %>
-              <%= f.text_field :title_cont, class: "form-control mr-sm-1 ml-sm-4", style: "width: 750px", placeholder: '商品名で検索' %>
+              <%= f.text_field :title_or_artist_name_or_artist_name_kana_cont, class: "form-control mr-sm-1 ml-sm-4", style: "width: 750px", placeholder: '商品名、アーティスト名で検索' %>
               <%= f.submit ("検索") , class: 'btn btn-default'%>
             <% end %>
           </form>
