@@ -61,9 +61,12 @@
             <%= image_tag "logo.png", class: "mr-6", :size =>'60x60' %>
           <% end %>
           <!-- 検索フォーム -->
-          <input type="text" class="form-control pl" id="formGroupExampleInput2" placeholder="曲名、CDタイトル、アーティスト名、ジャンルで検索"></input>
-          <!-- 検索アイコン -->
-          <a class="nav-link fa fa-search text-white fa-lg text-right" href="#"></a>
+          <form class="form-inline my-2 my-lg-0">
+            <%= search_form_for @search do |f| %>
+              <%= f.text_field :title_or_artist_name_or_artist_name_kana_cont, class: "form-control mr-sm-1 ml-sm-4", style: "width: 700px", placeholder: '商品名、アーティスト名で検索' %>
+              <%= f.submit ("検索") , class: 'btn btn-default'%>
+            <% end %>
+          </form>
 
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
@@ -112,7 +115,7 @@
           <%= link_to root_path do  %>
             <%= image_tag "logo.png", class: "mr-1", :size =>'60x60' %>
           <% end %>
-          <!-- 検索機能（仮 -->
+          <!-- 検索機能 -->
           <form class="form-inline my-2 my-lg-0">
             <%= search_form_for @search do |f| %>
               <%= f.text_field :title_or_artist_name_or_artist_name_kana_cont, class: "form-control mr-sm-1 ml-sm-4", style: "width: 750px", placeholder: '商品名、アーティスト名で検索' %>
