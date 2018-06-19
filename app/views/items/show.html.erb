@@ -97,7 +97,12 @@
               <tr>
                 <th class="bg-secondary text-white">ディスク枚数</th>
                 <td>
-                  <%= Track.count('DISTINCT disc_number') %>
+                  <%# Track.count('DISTINCT disc_number') %>
+                  <%# @item.tracks.disc_number %>
+                  <%# @item.tracks.each do |f| %>
+                    <%# f.disc_number %>
+                  <%# end %>
+                  <%= @max_disc_number %>
                 </td>
                 <th class="bg-secondary text-white">収録曲数</th>
                 <td><%= @item.tracks.count %></td>
