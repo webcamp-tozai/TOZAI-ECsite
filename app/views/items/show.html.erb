@@ -100,8 +100,7 @@
                   <%= Track.count('DISTINCT disc_number') %>
                 </td>
                 <th class="bg-secondary text-white">収録曲数</th>
-                <td><%= Item.joins(:tracks).group('tracks.item_id').count %>
-                  <%= Track.count('name') %></td>
+                <td><%= @item.tracks.count %></td>
               </tr>
             </tbody>
           </table>
