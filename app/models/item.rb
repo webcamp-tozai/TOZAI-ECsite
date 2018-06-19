@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   validates :genre_id,          presence: true
   validates :artist_id,         presence: true
   validates :title,             presence: true
-  validates :image_id,          presence: true
+  #validates :image_id,          presence: true
   
   validates :stock,             presence: true,
     numericality: { greater_than_or_equal_to: 0 }, #0以上

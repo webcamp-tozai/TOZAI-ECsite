@@ -18,9 +18,9 @@ class ItemsController < ApplicationController
     else
       genre = Genre.create(genre_english: params[:genre][:genre_english],genre_kana: params[:genre][:genre_kana])
     end
-    @item.genre_id = genre.id
+      @item.genre_id = genre.id
 
-    if artist = Artist.find_by(name: params[:artist][:name])
+    if artist = Artist.find_by(name: params[:artist][:name],name_kana: params[:artist][:name_kana])
       # return artist
     else
       artist = Artist.create(name: params[:artist][:name],name_kana: params[:artist][:name_kana])
@@ -30,8 +30,9 @@ class ItemsController < ApplicationController
     @item.tracks.each do |t|
       t.artist_id = artist.id
     end
-    binding pry
+
     @item.save
+    binding pry
     redirect_to root_path
   end
 
