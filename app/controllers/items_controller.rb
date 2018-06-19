@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
     end
 
     @item.save
-    binding pry
+    #binding pry
     redirect_to root_path
   end
 
