@@ -17,14 +17,14 @@
 
               <div class="container">
                 <div class="jumbotron">
-<%= form_for (@item) do |item| %>
-  <%= item.submit "情報更新", class:"btn btn-outline-warning btn-sm float-right"%>
+                <%= form_for @item do |item| %>
+                  <%= item.submit "情報更新", class:"btn btn-outline-warning btn-sm float-right"%>
                   <div class="form-row">
                     <div class="form-group col-md-2">
                       <label class="control-label font-weight-bold">商品タイプ</label>
                       <div class="radio">
-                        <label><%= item.radio_button :content_type,"シングルCD" %>シングル</label>
-                        <label><%= item.radio_button :content_type,"アルバムCD" %>アルバム</label>
+                        <label><%= item.radio_button :content_type,"シングル" %>シングル</label>
+                        <label><%= item.radio_button :content_type,"アルバム" %>アルバム</label>
                         <label><%= item.radio_button :content_type,"レコード" %>レコード</label>
                       </div>
                     </div>
@@ -81,18 +81,13 @@
                     </div>
                     <div class="col-md-2">
                       <label class="font-weight-bold">ステータス</label>
-                      <p>$$$</p>
+                      <p><%= item.is_deleted %></p>
                     </div>
-                    <div class="col-md-2">
-                      <select class="form-control">
-                        <option>販売中</option>
-                        <option>取扱中止</option>
-                      </select>
-                    </div>
+                        <%= item.select(:is_deleted, [['販売中', false], ['取扱中止',true]]) %>
                   </div>
 
                   <a href="#" class="col-md-3 form-control-file ">ジャケットを変更</a>
-                  <table class="table table-sm">
+                  <table class="table table-responsive">
                     <thead>
                       <th class="text-center small font-weight-bold">ディスク<br>番号</th>
                       <th class="text-center small font-weight-bold">トラック<br>番号</th>

@@ -49,7 +49,6 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    @item.tracks.build
     @track = Track.find(params[:id])
     @label = @item.label
     @label_name = Label.all
@@ -58,7 +57,6 @@ class ItemsController < ApplicationController
     @artist = @item.artist
     @artist_name = Artist.all
     @max_disc_number = Track.where(item_id: params[:id]).pluck(:disc_number).max
-
   end
 
   def show
@@ -70,20 +68,19 @@ class ItemsController < ApplicationController
       # ディスク枚数の取得
       @max_disc_number = Track.where(item_id: params[:id]).pluck(:disc_number).max
     else
-      redirect_to root_path
+      redirect_to _path
     end
   end
 
   def update
     item= Item.find(params[:id])
-
     item.update(item_params)
-    #binding pry
-    redirect_to root_path
+    redirect_to item_path(item.id)
+    flash[:item_updated] = "商品情報を更新しました"
   end
 
   private
-  
+
   def set_genre
     @genres = Genre.all
   end
