@@ -5,7 +5,7 @@
     <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
 
     <!-- 商品情報 -->
-    <div class="col-9">
+    <div class="col-10">
       <div class="row">
         <div class="container">
           <div class="row">
@@ -18,7 +18,7 @@
               <div class="container">
                 <div class="jumbotron">
 <%= form_for (@item) do |item| %>
-                  <%= f.submit "商品情報更新"  class:"btn btn-outline-warning btn-sm float-right">
+  <%= item.submit "情報更新", class:"btn btn-outline-warning btn-sm float-right"%>
                   <div class="form-row">
                     <div class="form-group col-md-2">
                       <label class="control-label font-weight-bold">商品タイプ</label>
@@ -34,11 +34,34 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label class="font-weight-bold">レーベル名</label>
-                      <input class="form-control" type="text" placeholder="東西レコード">
+                      <%= fields_for @label do |label| %>
+                        <%= label.text_field :name, class:"form-control", :list=>"label_list", :autocomplete => "off" %>
+                      <% end %>
+                      <datalist id="label_list">
+                        <% @label_name.each do |label| %>
+                      <option value="<%= label.name %>"><%= label.name %></option>
+                      <% end %>
+                      </datalist>
                     </div>
                     <div class="form-group col-md-3">
                       <label class="font-weight-bold">ジャンル</label>
-                      <input class="form-control" type="text" placeholder="ROCK">
+                        <%= fields_for @genre do |genre| %>
+                        <%= genre.text_field :genre_english,class:"form-control",:list=>"genre_english_list",:autocomplete => "off" %>
+                      <% end %>
+                      <datalist id="genre_english_list">
+                        <%= @genre_name.each do |genre| %>
+                        <option value="<%= genre.genre_english %>"><%= genre.genre_english %></option>
+                        <% end %>
+                      </datalist>
+                      <label class="font-weight-bold">ジャンル(カナ)</label>
+                      <%= fields_for @genre do |genre| %>
+                        <%= genre.text_field :genre_kana,class:"form-control",:list=>"genre_kana_list",:autocomplete => "off" %>
+                      <% end %>
+                      <datalist id="genre_kana_list">
+                        <%= @genre_name.each do |genre| %>
+                        <option value="<%= genre.genre_kana %>"><%= genre.genre_kana %></option>
+                        <% end %>
+                      </datalist>
                     </div>
                   </div>
 
@@ -58,7 +81,7 @@
                     </div>
                     <div class="col-md-2">
                       <label class="font-weight-bold">ステータス</label>
-                      <p>販売中</p>
+                      <p>$$$</p>
                     </div>
                     <div class="col-md-2">
                       <select class="form-control">
@@ -67,16 +90,18 @@
                       </select>
                     </div>
                   </div>
-<% end %>
+
                   <a href="#" class="col-md-3 form-control-file ">ジャケットを変更</a>
                   <table class="table table-sm">
                     <thead>
-                      <th class="text-center">ディスク番号</th>
-                      <th class="text-center">アーティスト名</th>
-                      <th class="text-center">アーティスト名<br>(カナ)</th>
-                      <th class="text-center">トラック番号</th>
-                      <th class="text-center">曲名</th>
-                      <th></th>
+                      <th class="text-center small font-weight-bold">ディスク<br>番号</th>
+                      <th class="text-center small font-weight-bold">トラック<br>番号</th>
+                      <th class="text-center small font-weight-bold">曲名</th>
+                      <th class="text-center small font-weight-bold">時間(h)</th>
+                      <th class="text-center small font-weight-bold">時間(m)</th>
+                      <th class="text-center small font-weight-bold">時間(s)</th>
+                      <th class="text-center small font-weight-bold">アーティスト名</th>
+                      <th class="text-center small font-weight-bold">アーティスト名<br>(カナ)</th>
                     </thead>
 
                     <tbody>
@@ -85,16 +110,35 @@
                         <td><%= track.text_field :disc_number, class:"form-control  mx-auto" %></td>
                         <td><%= track.text_field :track_number, class:"form-control  mx-auto" %></td>
                         <td><%= track.text_field :name, class:"form-control" %></td>
-                        <td><%= track.text_field :length_hour, class:"form-control col-sm3 mx-auto" %>
-                        <td><%= track.text_field :length_minute, class:"form-control col-sm3 mx-auto" %>
-                        <td><%= track.text_field :length_second, class:"form-control col-sm3 mx-auto" %>
+                        <td><%= track.text_field :length_hour, class:"form-control col-sm3 mx-auto" %></td>
+                        <td><%= track.text_field :length_minute, class:"form-control col-sm3 mx-auto" %></td>
+                        <td><%= track.text_field :length_second, class:"form-control col-sm3 mx-auto" %></td>
                       <% end %>
+                        <td><%= fields_for @artist do |artist| %>
+                          <%= artist.text_field :name, class:"form-control", :list=>"artist_list", :autocomplete => "off" %>
+                        <% end %>
+                        <datalist id="artist_list">
+                          <% @artist_name.each do |artist| %>
+                        <option value="<%= artist.name %>"><%= artist.name %></option>
+                          <% end %>
+                        </datalist>
+                      </td>
+                      <td>
+                        <%= fields_for @artist do |artist| %>
+                          <%= artist.text_field :name_kana, class:"form-control", :list=>"artist_name_kana_list", :autocomplete => "off" %>
+                        <% end %>
+                          <datalist id="artist_name_kana_list">
+                            <% @artist_name.each do |artist| %>
+                          <option value="<%= artist.name_kana %>"><%= artist.name_kana %></option>
+                            <% end %>
+                          </datalist>
+                      </td>
 
                     </tbody>
                   </table>
                   <a href="#" class="btn btn-outline-danger btn-sm">delete</a>
                   <button class="btn btn-outline-success float-right">入力フォーム追加</button>
-
+<% end %>
                 </div>
               </div>
             </div>
@@ -188,10 +232,9 @@
               </tr>
               <tr>
                 <th class="bg-secondary text-white">ディスク枚数</th>
-                <td><%= Track.count('DISTINCT disc_number') %></td>
+                <td><%= @max_disc_number %></td>
                 <th class="bg-secondary text-white">収録曲数</th>
-                <td><%= Item.joins(:tracks).group('tracks.item_id').count %>
-                  <%= Track.count('name') %></td>
+                <td><%= @item.tracks.count %></td>
               </tr>
             </tbody>
           </table>
