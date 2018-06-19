@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
 	# ransack用
 	def set_search
-		# @items = Item.all
+		@items = Item.all
 		@search = Item.ransack(params[:q])
 		@items = @search.result.page(params[:page]).reverse_order
 	end
