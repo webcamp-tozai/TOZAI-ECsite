@@ -13,6 +13,8 @@
           <div class="box" style="height:10px;background-color:#005684;">
           </div>
 
+           <p>TOZAI Records</p>
+
           <div class="container">
             <div class="jumbotron">
                 <%= form_for @item do |f| %>
@@ -91,8 +93,27 @@
                   </div>
                   </div>
 
+<%= fields_for @artist do |artist| %>
+<%= artist.text_field :name, class:"form-control", :list=>"artist_list", :autocomplete => "off" %>
+<% end %>
+<datalist id="artist_list">
+<% @artist_name.each do |artist| %>
+<option value="<%= artist.name %>"><%= artist.name %></option>
+<% end %>
+</datalist>
 
-                  <table class="table table-responsive">
+
+<%= fields_for @artist do |artist| %>
+<%= artist.text_field :name_kana, class:"form-control", :list=>"artist_name_kana_list", :autocomplete => "off" %>
+<% end %>
+<datalist id="artist_name_kana_list">
+<% @artist_name.each do |artist| %>
+<option value="<%= artist.name_kana %>"><%= artist.name_kana %></option>
+<% end %>
+</datalist>
+
+
+                  <table class="table table-xs">
                     <thead>
                       <th class="text-center small font-weight-bold">ディスク<br>番号</th>
                       <th class="text-center small font-weight-bold">トラック<br>番号</th>
@@ -100,39 +121,24 @@
                       <th class="text-center small font-weight-bold">時間(h)</th>
                       <th class="text-center small font-weight-bold">時間(m)</th>
                       <th class="text-center small font-weight-bold">時間(s)</th>
+                      <th class="text-center small font-weight-bold"></th>
                       <th class="text-center small font-weight-bold">アーティスト名</th>
                       <th class="text-center small font-weight-bold">アーティスト名<br>(カナ)</th>
+
                     </thead>
                     <tbody>
-                    <%= f.fields_for :tracks do |t| %>
-                      <td><%= t.text_field :disc_number, class:"form-control  mx-auto" %></td>
-                      <td><%= t.text_field :track_number, class:"form-control  mx-auto" %></td>
-                      <td><%= t.text_field :name, class:"form-control" %></td>
-                      <td><%= t.text_field :length_hour, class:"form-control col-sm3 mx-auto" %>
-                      <td><%= t.text_field :length_minute, class:"form-control col-sm3 mx-auto" %>
-                      <td><%= t.text_field :length_second, class:"form-control col-sm3 mx-auto" %>
+                      <%= f.nested_fields_for :tracks, wrapper_tag: :tr do |q| %>
+                      <%= f.add_nested_fields_link :tracks, 'Add new', class: 'btn btn-primary', role: 'button' %>
+                      <td><%= q.text_field   :disc_number,     class: 'form-control' %></td>
+                      <td><%= q.text_field   :track_number,     class: 'form-control' %></td>
+                      <td><%= q.text_field   :name,     class: 'form-control' %></td>
+                      <td><%= q.text_field   :length_hour,     class: 'form-control' %></td>
+                      <td><%= q.text_field   :length_minute, class: 'form-control' %></td>
+                      <td><%= q.text_field   :length_second,     class: 'form-control' %></td>
+                      <td><%= q.collection_select :artist_id, Artist.all, :id, :name %></td>
+                      <td><%= q.collection_select :artist_id, Artist.all, :id, :name_kana %></td>
+                      <td><%= q.remove_nested_fields_link 'Delete', class: 'btn btn-danger', role: 'button' %></td>
                       <% end %>
-                      <td>
-                        <%= fields_for @artist do |artist| %>
-                          <%= artist.text_field :name, class:"form-control", :list=>"artist_list", :autocomplete => "off" %>
-                        <% end %>
-                        <datalist id="artist_list">
-                          <% @artist_name.each do |artist| %>
-                        <option value="<%= artist.name %>"><%= artist.name %></option>
-                          <% end %>
-                        </datalist>
-                      </td>
-                      <td>
-                        <%= fields_for @artist do |artist| %>
-                          <%= artist.text_field :name_kana, class:"form-control", :list=>"artist_name_kana_list", :autocomplete => "off" %>
-                        <% end %>
-                          <datalist id="artist_name_kana_list">
-                            <% @artist_name.each do |artist| %>
-                          <option value="<%= artist.name_kana %>"><%= artist.name_kana %></option>
-                            <% end %>
-                          </datalist>
-                      </td>
-                      <td><a href="#" class="btn btn-outline-danger btn-sm">delete</></td>
                     </tbody>
 
                   </table>

@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
       genre = Genre.create(genre_english: params[:genre][:genre_english],genre_kana: params[:genre][:genre_kana])
     end
       @item.genre_id = genre.id
+      binding.pry
 
     if artist = Artist.find_by(name: params[:artist][:name],name_kana: params[:artist][:name_kana])
       # return artist
@@ -29,13 +30,22 @@ class ItemsController < ApplicationController
     end
       @item.artist_id = artist.id
 
-    @item.tracks.each do |t|
-      t.artist_id = artist.id
-    end
+    #@item.tracks.each do |t|
+      #t.artist_id = artist.id
+    #end
 
-    @item.save
-    #binding pry
-    redirect_to root_path
+    if @item.save
+      redirect_to item_path(@item.id)
+      flash[:item_created] = "商品を登録しました"
+    else
+      @label_name = Label.all
+      @label = Label.new
+      @genre_name = Genre.all
+      @genre = Genre.new
+      @artist_name = Artist.all
+      @artist = Artist.new
+      render :new
+    end
   end
 
   def new
@@ -74,10 +84,26 @@ class ItemsController < ApplicationController
   end
 
   def update
+    item= Item.find(params[:id])
+    if item.update(item_params)
+      redirect_to item_path(item.id)
+      flash[:item_updated] = "商品情報を更新しました"
+    else
+      @item = Item.find(params[:id])
+      @track = Track.find(params[:id])
+      @label = @item.label
+      @label_name = Label.all
+      @genre = @item.genre
+      @genre_name = Genre.all
+      @artist = @item.artist
+      @artist_name = Artist.all
+      @max_disc_number = Track.where(item_id: params[:id]).pluck(:disc_number).max
+      render :edit
+    end
   end
 
   private
-  
+
   def set_genre
     @genres = Genre.all
   end
@@ -89,12 +115,15 @@ class ItemsController < ApplicationController
                                  :stock,
                                  :price_without_tax,
                                  :content_type,
+                                 :is_deleted,
+                                 :artist_id,
                                   tracks_attributes: [:disc_number,
                                                       :track_number,
                                                       :name,
                                                       :length_hour,
                                                       :length_minute,
-                                                      :length_second
+                                                      :length_second,
+                                                      :artist_id
                                                     ]
                                 )
   end

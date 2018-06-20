@@ -13,11 +13,12 @@
           <div class="box" style="height:10px;background-color:#005684;"></div>
           <p>TOZAI Records -No music No life-</p>
 
+
           <div clas="col-8 ">
             <span class="font-weight-bold">
               <%= @item.count %>件の商品
             </span>
-            <form class="form-inline float-right">
+            <div class="form-inline float-right">
               <div class="input-group">
                 <%= search_form_for @search do |f| %>
                   <%= f.text_field :title_or_artist_name_or_artist_name_kana_cont, class:"form-control  ml-sm-2", style: "width: 250px", placeholder: '商品名、アーティスト名で検索' %>
@@ -25,15 +26,11 @@
                     <%= f.button fa_icon("search"), class:'btn btn-primary'%>
                   </span>
                 <% end %>
-                <select class="form-control">
-                  <option>アルバム</option>
-                  <option>シングル</option>
-                  <option>レコード</option>
-                </select>
-                <a href="#" class="ml-3 btn btn-secondary btn-sm">絞り込み</a>
+                  <%= select_tag :content_type, options_from_collection_for_select(@item, :id, :content_type), include_blank: true, multiple: false, class: "searchable" %>
+                <%= @submits_searched %>
               </div>
-            </form>
-          </div><br>
+            </div>
+          </div>
 
           <table class="table table-sm">
             <thead>
@@ -85,17 +82,6 @@
 
             </tbody>
           </table>
-          <div class="row">
-          <div class="col-12">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-center">
-                <li class="page-item">
-                  <%= paginate @items %>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
 
         </div><!--メインページのcontainer-->
       </div> <!--メインページのrow-->
