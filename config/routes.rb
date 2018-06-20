@@ -43,6 +43,8 @@ Rails.application.routes.draw do
 
   get '/users/:id/edit_password' => 'users#edit_password', as: 'user_edit_password'
   #post '/users/:id' => 'users#update_status', as: 'update_status_user'
+  get '/users/:id/confirm' => 'users#confirm', as: 'confirm'
+  post '/users/:id/confirm' => 'users#unsubscribe', as: 'unsubscribe'
 
   delete '/users/:id/cart_items' => 'cart_items#all_destroy', as: 'all_destroy_cart_items'
 
