@@ -51,8 +51,11 @@
     </div>
 
     <div class="col-12 text-center text-white mt-4">
+      <p class="flash-message text-danger text-center">
+        <%= flash[:unsubscribe_faled] %>
+      </p>
 
-      <%= form_for(@user, :url => {:controller => :users, :action => :unsubscribe}) do |f| %>
+      <%= form_for(@user, :url => {:controller => :users, :action => :unsubscribe}, :method => "post") do |f| %>
         <p class="text-dark">
           上記の内容を理解しました。
         </p>

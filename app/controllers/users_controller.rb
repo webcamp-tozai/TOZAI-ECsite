@@ -33,12 +33,13 @@ class UsersController < ApplicationController
   end
 
   def unsubscribe
-    if params[:user][:member_status] == 0
-      redirect_to confirm_path
+    status = params[:user][:member_status].to_i
+    if status == 0
+      redirect_to confirm_path(current_user)
       flash[:unsubscribe_faled] = "チェックを入れてください"
     else
-      @user.update(params[:user][:member_status])
-      redirect_to destroy_user_session_path
+      @user.update(member_status: params[:user][:member_status])
+      redirect_to items_path
       flash[:unsubscribed] = "退会処理が完了しました。ご利用ありがとうございました。"
     end
   end
