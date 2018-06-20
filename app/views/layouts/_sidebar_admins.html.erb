@@ -8,12 +8,17 @@
   </li>
 
   <ul id="collapse-A" class="collapse" style="list-style-type:none;">
-    <li>
-      <%= link_to new_admin_registration_path do %>
-        <i class="fa fa-minus-square fa-fw text-white"></i>
-        <span class="text-white">管理者登録</span>
-      <% end %>
-    </li>
+
+    <% if current_admin.is_main_administer == true %>
+
+      <li>
+        <%= link_to new_admin_registration_path do %>
+          <i class="fa fa-minus-square fa-fw text-white"></i>
+          <span class="text-white">管理者登録</span>
+        <% end %>
+      </li>
+
+    <% end %>
 
     <li>
       <%= link_to admins_path do %>

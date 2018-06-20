@@ -33,6 +33,9 @@ Rails.application.routes.draw do
 
   resources :admins, except: [:destroy]
 
+  get '/admins/:id/edit_password' => 'admins#edit_password', as: 'admin_edit_password'
+  post '/admins/:id' => 'admins#update_status', as: 'update_status_admin'
+
   resources :users, except: [:destroy] do
     resources :item_reviews, only: [:index, :destroy]
     resources :cart_items, only: [:index, :destroy, :all_destroy, :create, :update]

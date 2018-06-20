@@ -1,6 +1,21 @@
 # frozen_string_literal: true
 
 class Admins::SessionsController < Devise::SessionsController
+
+  def create
+    if admin = Admin.find_by(email: params[:admin][:email])
+      if admin.is_deleted == true
+        redirect_to new_admin_session_path
+        flash[:sign_in_failed] = "停止中の管理者アカウントです。アカウントを復旧するにはメイン管理者に連絡を取ってください。"
+      else
+        super
+      end
+    else
+      redirect_to new_admin_session_path
+      flash[:admin_create_faled] = "入力内容を確認してください"
+    end
+  end
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
