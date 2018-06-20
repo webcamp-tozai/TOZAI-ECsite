@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_genre, only: [:index, :show]
   
   def index
+    @item = Item.all
   end
 
   def create
@@ -51,6 +52,13 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     @track = Track.find(params[:id])
+    @label = @item.label
+    @label_name = Label.all
+    @genre = @item.genre
+    @genre_name = Genre.all
+    @artist = @item.artist
+    @artist_name = Artist.all
+    @max_disc_number = Track.where(item_id: params[:id]).pluck(:disc_number).max
   end
 
   def show

@@ -11,7 +11,7 @@
         <div class="container">
           <span class="font-weight-bold h3">商品一覧</span>
           <div class="box" style="height:10px;background-color:#005684;"></div>
-          <p>The .table-striped class adds zebra-stripes to a table:</p>
+          <p>TOZAI Records -No music No life-</p>
 
           <div clas="col-8 ">
             <span class="font-weight-bold">5件</span><span>の注文</span>
@@ -42,46 +42,41 @@
             </thead>
 
             <tbody>
+            <% @item.each do |item| %>
               <tr>
-                <td><a href="#" >Perseverrance</a></td>
-                <td><a href="#" >HATE BREED</a></td>
-                <td>¥2,100</td>
-                <td><a href="#" >12件</a></td>
-                <td class="text-success">210枚</td>
-                <td>アルバム</td>
+                <td><%= link_to item.title, edit_item_path(item.id) %></td>
+                <td><%= link_to item.artist.name, "#" %></td>
+                <td class="text-right">
+                  <%= number_to_currency item.price_without_tax,:unit => "￥", :precision => 0 %>
+                </td>
+                <td class="text-center"><%= item.item_reviews.count %>件</td>
+                <td class="text-right">
+                  <!-- 在庫が20以下の場合 -->
+                  <% if item.stock <= 20 && item.stock >= 1 %>
+                    <span class="text-danger">
+                      <%= item.stock %>点
+                    </span>
+                  <!-- 在庫切れの場合 -->
+                  <% elsif item.stock == 0 && item.is_deleted == false %>
+                    <span class="text-secondary">
+                      在庫切れ
+                    </span>
+                  <!-- 削除フラグtrueの場合 -->
+                  <% elsif item.is_deleted == true %>
+                    <span class="text-secondary">
+                      取扱中止
+                    </span>
+                  <!-- 在庫が21以上の場合 -->
+                  <% else %>
+                    <span class="text-success">
+                      <%= item.stock %>点
+                    </span>
+                  <% end %>
+                </td>
+                <td><%= item.content_type %></td>
               </tr>
-              <tr>
-                <td><a href="#" >Bluetality</a></td>
-                <td><a href="#" >Merauder</a></td>
-                <td>¥3,580</td>
-                <td><a href="#" >20件</a></td>
-                <td class="text-warning">50枚</td>
-                <td>アルバム</td>
-              </tr>
-              <tr>
-                <td><a href="#" >Complete Disorder</a></td>
-                <td><a href="#" >Disorder</a></td>
-                <td>¥2,980</td>
-                <td><a href="#" >20件</a></td>
-                <td class="text-danger">20枚</td>
-                <td>レコード</td>
-              </tr>
-              <tr>
-                <td><a href="#" >Total Chaos</a></td>
-                <td><a href="#" >Chaos UK</a></td>
-                <td>¥1,980</td>
-                <td><a href="#" >6件</a></td>
-                <td class="text-success">320枚</td>
-                <td>レコード</td>
-              </tr>
-              <tr>
-                <td><a href="#" >Vulgar Display of Power</a></td>
-                <td><a href="#" >Pantera</a></td>
-                <td>¥1,980</td>
-                <td><a href="#" >6件</a></td>
-                <td class="text-success">320枚</td>
-                <td>アルバム</td>
-              </tr>
+            <% end %>
+
             </tbody>
           </table>
 
