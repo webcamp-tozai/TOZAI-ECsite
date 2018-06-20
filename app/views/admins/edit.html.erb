@@ -11,28 +11,55 @@
       <div class="row">
         <div class="container">
           <span class="font-weight-bold h2">
-            <%= current_admin.family_name_kanji %>
-            <%= current_admin.given_name_kanji %>
+            <%= @admin.family_name_kanji %>
+            <%= @admin.given_name_kanji %>
             の情報</span>
 
           <div class="box" style="height:10px;background-color:#005684;">
           </div>
-          <p>変更箇所を入力し、Updateを押して下さい。</p>
+
+          <p class="flash-message text-danger">
+            <%= flash[:admin_update_faled] %>
+          </p>
+
+          <p class="flash-message text-primary">
+            <%= flash[:admin_updated] %>
+          </p>
+
           <div class="row">
             <div class="col-6">
-              <div class="jumbotron" style="height:33em;">
+              <div class="jumbotron" style="height:35em;">
                 <b>詳細</b>
-                <p>Name: 
-                  <%= current_admin.family_name_kanji %>
-                  <%= current_admin.given_name_kanji %>
+                <p>名前: 
+                  <%= @admin.family_name_kanji %>
+                  <%= @admin.given_name_kanji %>
                 </p>
-                <p>Name(カナ): 
-                  <%= current_admin.family_name_kana %>
-                  <%= current_admin.given_name_kana %>
+                <p>名前(カナ): 
+                  <%= @admin.family_name_kana %>
+                  <%= @admin.given_name_kana %>
                 </p>
-                <p>Email: 
-                  <%= current_admin.email %>
+                <p>メールアドレス: 
+                  <%= @admin.email %>
                 </p>
+                <p>権限: 
+                  <%if @admin.is_main_administer == false %>
+                    <span>サブ管理者</span>
+                  <%elsif @admin.is_main_administer == true %>
+                    <span>メイン管理者</span>
+                  <% end %>
+                </p>
+
+                <%if @admin.is_main_administer == false %>
+
+                  <p>アカウントステータス: 
+                    <%if @admin.is_deleted == false %>
+                      <span>運用中</span>
+                    <%elsif @admin.is_deleted == true %>
+                      <span>停止中</span>
+                    <% end %>
+                  </p>
+
+                <% end %>
 
                 <%= link_to admins_path do %>
                   <button type="button" class="btn btn-info col-sm-offset-3 col-sm-6" style="margin:10px auto;">管理者一覧へ</button>
@@ -41,46 +68,71 @@
             </div>
 
             <div class="col-6">
-              <div class="jumbotron"style="height:33em;">
-                <b>編集</b>
-                <%= form_for(@admin) do |f| %>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <%= f.label :姓 %>
-                      <%= f.text_field :family_name_kanji, class: "form-control", id: "InputName" %>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <%= f.label :名 %>
-                      <%= f.text_field :given_name_kanji, class: "form-control", id: "InputName" %>
-                    </div>
-                  </div>
+              <div class="jumbotron"style="height:35em;">
 
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <%= f.label :セイ %>
-                      <%= f.text_field :family_name_kana, class: "form-control", id: "InputName" %>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <%= f.label :メイ %>
-                      <%= f.text_field :given_name_kana, class: "form-control", id: "InputName" %>
-                    </div>
-                  </div>
+                <%if current_admin.is_main_administer == true || @admin == current_admin %>
 
-                  <div class="form-row">
-                    <div class="form-group col-12">
-                      <%= f.label :メールアドレス %>
-                      <%= f.email_field :email, class: "form-control", id: "InputEmail" %>
+                  <b>編集</b>
+                  <%= form_for(@admin) do |f| %>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <%= f.label :姓 %>
+                        <%= f.text_field :family_name_kanji, class: "form-control", id: "InputName" %>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <%= f.label :名 %>
+                        <%= f.text_field :given_name_kanji, class: "form-control", id: "InputName" %>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="form-row">
-                    <div class="form-group col-12">
-                      <%= f.label :現在のパスワード %>
-                      <%= f.password_field :password, class: "form-control", id: "InputPassword"  %>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <%= f.label :セイ %>
+                        <%= f.text_field :family_name_kana, class: "form-control", id: "InputName" %>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <%= f.label :メイ %>
+                        <%= f.text_field :given_name_kana, class: "form-control", id: "InputName" %>
+                      </div>
                     </div>
-                  </div>
 
-                  <%= f.submit "-変更-", class:"btn btn-success col-sm-offset-3 col-sm-6", style:"margin:15px auto;" %>
+                    <div class="form-row">
+                      <div class="form-group col-12">
+                        <%= f.label :メールアドレス %>
+                        <%= f.email_field :email, class: "form-control", id: "InputEmail" %>
+                      </div>
+                    </div>
+
+                    <%if current_admin.is_main_administer == true && @admin != current_admin %>
+
+                      <div class="form-row">
+                        <div class="form-group col-12">
+                          <%= f.label :アカウントステータス %>
+                          <div>
+                            <label>
+                              <%= f.radio_button :is_deleted, false, class: "mx-1" %>運用
+                            </label>
+
+                            <label>
+                              <%= f.radio_button :is_deleted, true, class: "mx-1" %>停止
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                    <% end %>
+
+                    <%= f.submit "-変更-", class: "btn btn-success" %>
+
+                  <% end %>
+
+                  <%= link_to "パスワード変更画面へ", admin_edit_password_path(@admin), class: "btn btn-secondary mt-4" %>
+
+                <% else %>
+
+                  <p class="text-muted">
+                   サブ管理者は自分以外の管理者の情報を変更することができません
+                  </p>
 
                 <% end %>
 
