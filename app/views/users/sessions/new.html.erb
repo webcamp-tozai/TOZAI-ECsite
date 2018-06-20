@@ -1,5 +1,12 @@
 <div class="container py-4">
+
+  <p class="flash-message text-danger text-center">
+    <%= flash[:user_sign_in_failed] %>
+    <%= flash[:user_session_create_faled] %>
+  </p>
+
   <div class="row justify-content-center">
+
     <div class="col-5">
 
       <div class="jumbotron">

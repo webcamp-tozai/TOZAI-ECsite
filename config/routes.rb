@@ -41,6 +41,9 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :destroy, :all_destroy, :create, :update]
   end
 
+  get '/users/:id/edit_password' => 'users#edit_password', as: 'user_edit_password'
+  #post '/users/:id' => 'users#update_status', as: 'update_status_user'
+
   delete '/users/:id/cart_items' => 'cart_items#all_destroy', as: 'all_destroy_cart_items'
 
   resources :addresses, except: [:index, :show]
