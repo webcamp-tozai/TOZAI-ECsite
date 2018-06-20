@@ -31,10 +31,9 @@ class ItemsController < ApplicationController
     @item.tracks.each do |t|
       t.artist_id = artist.id
     end
-
     @item.save
-    #binding pry
-    redirect_to root_path
+    redirect_to item_path(@item.id)
+    flash[:item_created] = "商品を登録しました"
   end
 
   def new
@@ -51,6 +50,13 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     @track = Track.find(params[:id])
+    @label = @item.label
+    @label_name = Label.all
+    @genre = @item.genre
+    @genre_name = Genre.all
+    @artist = @item.artist
+    @artist_name = Artist.all
+    @max_disc_number = Track.where(item_id: params[:id]).pluck(:disc_number).max
   end
 
   def show
@@ -66,10 +72,16 @@ class ItemsController < ApplicationController
   end
 
   def update
+    item= Item.find(params[:id])
+    item.update(item_params)
+   # binding pry
+
+    redirect_to item_path(item.id)
+    flash[:item_updated] = "商品情報を更新しました"
   end
 
   private
-  
+
   def set_genre
     @genres = Genre.all
   end
@@ -81,6 +93,7 @@ class ItemsController < ApplicationController
                                  :stock,
                                  :price_without_tax,
                                  :content_type,
+                                 :is_deleted,
                                   tracks_attributes: [:disc_number,
                                                       :track_number,
                                                       :name,

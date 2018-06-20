@@ -7,6 +7,12 @@
 
     <!-- 商品情報 -->
     <div class="col-9 my-4">
+      <p class="flash-message text-primary">
+        <%= flash[:item_created] %>
+      </p>
+      <p class="flash-message text-success">
+        <%= flash[:item_updated] %>
+      </p>
       <div class="row">
         <!-- ジャケット画像 -->
         <div class="col-4">

@@ -13,6 +13,8 @@
           <div class="box" style="height:10px;background-color:#005684;">
           </div>
 
+           <p>TOZAI Records</p>
+
           <div class="container">
             <div class="jumbotron">
                 <%= form_for @item do |f| %>
@@ -108,9 +110,9 @@
                       <td><%= t.text_field :disc_number, class:"form-control  mx-auto" %></td>
                       <td><%= t.text_field :track_number, class:"form-control  mx-auto" %></td>
                       <td><%= t.text_field :name, class:"form-control" %></td>
-                      <td><%= t.text_field :length_hour, class:"form-control col-sm3 mx-auto" %>
-                      <td><%= t.text_field :length_minute, class:"form-control col-sm3 mx-auto" %>
-                      <td><%= t.text_field :length_second, class:"form-control col-sm3 mx-auto" %>
+                      <td><%= t.text_field :length_hour, class:"form-control col-sm3 mx-auto" %></td>
+                      <td><%= t.text_field :length_minute, class:"form-control col-sm3 mx-auto" %></td>
+                      <td><%= t.text_field :length_second, class:"form-control col-sm3 mx-auto" %></td>
                       <% end %>
                       <td>
                         <%= fields_for @artist do |artist| %>
