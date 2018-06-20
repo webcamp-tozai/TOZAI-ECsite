@@ -14,11 +14,17 @@
           <p>TOZAI Records -No music No life-</p>
 
           <div clas="col-8 ">
-            <span class="font-weight-bold">5件</span><span>の注文</span>
+            <span class="font-weight-bold">
+              <%= @item.count %>件の商品
+            </span>
             <form class="form-inline float-right">
-              <div class="form-group">
-                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="タイトル アーティスト名で検索"></input>
-                <a class="mx-3 fa fa-search text-secondary fa-lg text-right" href="#"></a>
+              <div class="input-group">
+                <%= search_form_for @search do |f| %>
+                  <%= f.text_field :title_or_artist_name_or_artist_name_kana_cont, class:"form-control  ml-sm-2", style: "width: 250px", placeholder: '商品名、アーティスト名で検索' %>
+                  <span class="input-group-btn">
+                    <%= f.button fa_icon("search"), class:'btn btn-primary'%>
+                  </span>
+                <% end %>
                 <select class="form-control">
                   <option>アルバム</option>
                   <option>シングル</option>
@@ -29,14 +35,14 @@
             </form>
           </div><br>
 
-          <table class="table table-hover">
+          <table class="table table-sm">
             <thead>
               <tr class="table-light">
                 <th>タイトル</th>
                 <th>アーティスト</th>
-                <th>価格</th>
+                <th class="text-right">価格</th>
                 <th>レビュー</th>
-                <th>在庫数</th>
+                <th class="text-right">在庫数</th>
                 <th>商品タイプ</th>
               </tr>
             </thead>
@@ -79,6 +85,17 @@
 
             </tbody>
           </table>
+          <div class="row">
+          <div class="col-12">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <%= paginate @items %>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
 
         </div><!--メインページのcontainer-->
       </div> <!--メインページのrow-->
