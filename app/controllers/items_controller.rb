@@ -64,11 +64,10 @@ class ItemsController < ApplicationController
       @item = Item.find(params[:id])
       @item_review = ItemReview.new
       @cart_item = CartItem.new
-      #@user = User.find(current_user.id)
       # ディスク枚数の取得
       @max_disc_number = Track.where(item_id: params[:id]).pluck(:disc_number).max
     else
-      redirect_to _path
+      redirect_to root_path
     end
   end
 
