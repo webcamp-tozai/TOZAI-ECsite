@@ -79,11 +79,16 @@
                       <label class="font-weight-bold">在庫数</label>
                       <%= item.text_field :stock, class:"form-control" %>
                     </div>
-                    <div class="col-md-2">
-                      <label class="font-weight-bold">ステータス</label>
-                      <p><%= item.is_deleted %></p>
-                    </div>
+                    <div class="form-group col-md-2">
+                      <label class="font-weight-bold ">ステータス</label>
+                      <% if @item.is_deleted  == false %>
+                            <p class="text-success">販売中</p>
+                      <% else %>
+                            <p class="text-danger">販売中止</p>
+                      <% end %>
                         <%= item.select(:is_deleted, [['販売中', false], ['取扱中止',true]]) %>
+                    </div>
+
                   </div>
 
                   <a href="#" class="col-md-3 form-control-file ">ジャケットを変更</a>

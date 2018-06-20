@@ -75,6 +75,8 @@ class ItemsController < ApplicationController
   def update
     item= Item.find(params[:id])
     item.update(item_params)
+   # binding pry
+
     redirect_to item_path(item.id)
     flash[:item_updated] = "商品情報を更新しました"
   end
@@ -92,6 +94,7 @@ class ItemsController < ApplicationController
                                  :stock,
                                  :price_without_tax,
                                  :content_type,
+                                 :is_deleted,
                                   tracks_attributes: [:disc_number,
                                                       :track_number,
                                                       :name,
