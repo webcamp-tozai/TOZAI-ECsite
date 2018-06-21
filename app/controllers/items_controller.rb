@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_genre, only: [:index, :show]
   
   def index
+    @item = Item.all
   end
 
   def create
@@ -79,7 +80,11 @@ class ItemsController < ApplicationController
     redirect_to item_path(item.id)
     flash[:item_updated] = "商品情報を更新しました"
   end
-
+def set_search
+    @items = Item.all
+    @search = Item.ransack(params[:q])
+    @items = @search.result.page(params[:page]).reverse_order
+  end
   private
 
   def set_genre
