@@ -18,14 +18,11 @@
 @import "bootstrap";
 @import "font-awesome";
 
-body {
-  margin-top: 100px;
-}
-
 // footer
 footer {
   height: 100px;
   line-height: 100px;
+  margin-top: -50px;
 }
 
 @mixin box_sizing {

@@ -8,25 +8,27 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <header>
-    <% if admin_signed_in? %>
-      <%= render 'layouts/header_admins' %>    
-    <% elsif  user_signed_in? %>
-      <%= render 'layouts/header_user_signin' %>
-    <% else %>
-      <%= render 'layouts/header_user' %>
-    <% end %>
-  </header>
-
   <body>
-    <%= yield %>
-  </body>
-
-  <footer class="bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; 2018 WebCampPro TOZAI Records</p>
+    <header class="sticky-top">
+      <% if admin_signed_in? %>
+        <%= render 'layouts/header_admins' %>    
+      <% elsif  user_signed_in? %>
+        <%= render 'layouts/header_user_signin' %>
+      <% else %>
+        <%= render 'layouts/header_user' %>
+      <% end %>
+    </header>
+    
+    <div class="content">
+      <%= yield %>
     </div>
-  </footer>
+    
+    <footer class="bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; 2018 WebCampPro TOZAI Records</p>
+      </div>
+    </footer>
+  </body>
   
   <%= debug(params) if Rails.env.development? %>
 
