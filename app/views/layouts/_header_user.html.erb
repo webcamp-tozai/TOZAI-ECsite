@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="height: 100px;">
+  <div class="container">
+    <!-- 東西チームロゴ -->
+    <%= link_to root_path do  %>
+      <%= image_tag "logo.png", class: "mr-1", :size =>'60x60' %>
+    <% end %>
+    
+    <!-- 検索機能 -->
+    <div class="input-group form-inline">
+      <%= search_form_for @search do |f| %>
+        <%= f.text_field :title_or_artist_name_or_artist_name_kana_cont, class: "form-control ml-sm-5", style: "width: 750px", placeholder: '商品名、アーティスト名で検索' %>
+        <span class="input-group-btn">
+          <%= f.button fa_icon("search"), class: 'btn btn-primary'%>
+        </span>
+      <% end %>
+    </div>
+    
+    <!--ログイン情報-->
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <!-- 新規登録 -->
+        <li class="nav-item">
+          <%= link_to new_user_registration_path, class: 'nav-link text-white text-center' do %>
+            <%= fa_icon("user-plus 2x", text: "SignUp") %>
+          <% end %>
+        </li>
+        <!-- ログイン -->
+        <li class="nav-item">
+          <%= link_to new_user_session_path, class: 'nav-link text-white text-center' do %>
+            <%= fa_icon("sign-in 2x", text: "SignIn") %>
+          <% end %>
+        </li>
+      </ul>
+    </div>  <!-- ログイン情報閉じタグ -->
+    
+  </div>  <!-- cinteiner閉じタグ -->
+</nav>

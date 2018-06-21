@@ -1,31 +1,37 @@
   <!-- ユーザー側サイドバー -->
 <div class="col-3">
 
+  <%# スタッフおすすめ未使用
   <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">スタッフオススメ</p>
   <div class="list-group">
     <a href="#" class="list-group-item">特集1</a>
     <a href="#" class="list-group-item">特集2</a>
     <a href="#" class="list-group-item">特集3</a>
   </div>
+  %>
 
   <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">ジャンル</p>
   <div class="list-group">
     <!--#TODO: ジャンルボタン押したらそのジャンルの検索が出来るようにする-->
     <% @genres.each do |genre| %>
-      <%= link_to genre.genre_english, '#', class: 'list-group-item' %>
+      <%= link_to genre.genre_english, genre_path(genre), class: 'list-group-item' %>
     <% end %>
   </div>
 
+  <%# 売上ランキング未使用
   <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">売上ランキング</p>
   <div class="list-group">
     <p class="list-group-item">1位<a class="ml-4" href="#">CDタイトル</a></p>
     <p class="list-group-item">2位<a class="ml-4" href="#">CDタイトル</a></p>
     <p class="list-group-item">3位<a class="ml-4" href="#">CDタイトル</a></p>
   </div>
+  %>
 
+  <%# Twitter未使用
   <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">Tweets</p>
   <div>
     アカウントを作ってここに最新ツイートを表示
   </div>
+  %>
 
 </div>
