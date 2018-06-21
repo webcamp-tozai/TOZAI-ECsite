@@ -31,6 +31,19 @@ class UsersController < ApplicationController
       flash[:user_update_faled] = "変更できませんでした。入力内容を確認してください。"
     end
   end
+
+  def unsubscribe
+    status = params[:user][:member_status].to_i
+    if status == 0
+      redirect_to confirm_path(current_user)
+      flash[:unsubscribe_faled] = "チェックを入れてください"
+    else
+      @user.update(member_status: params[:user][:member_status])
+      redirect_to items_path
+      flash[:unsubscribed] = "退会処理が完了しました。ご利用ありがとうございました。"
+    end
+  end
+
 =begin
 余裕あれば実装
   def update_status
