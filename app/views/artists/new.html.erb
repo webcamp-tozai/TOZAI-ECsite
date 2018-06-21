@@ -1,0 +1,98 @@
+<div class="container-fluid"><!-- 全体container-->
+  <div class="row"><!-- 全体row -->
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-10">
+      <div class="row">
+        <div class="container">
+
+          <span class="font-weight-bold h2">商品追加</span>
+          <div class="box" style="height:10px;background-color:#005684;">
+          </div>
+
+           <p>TOZAI Records</p>
+
+          <div class="container">
+            <div class="jumbotron">
+                
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label class="font-weight-bold">タイトル</label>
+                      
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label class="control-label font-weight-bold">商品タイプ</label>
+                      <%= @artist.item.title %>
+
+                    </div>
+
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label class="font-weight-bold">レーベル名</label>
+                      
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label class="font-weight-bold">ジャンル</label>
+                      
+
+                    </div>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label class="font-weight-bold">商品紹介</label>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label class="font-weight-bold">アーティスト名</label>
+                  </div>
+
+
+
+
+                  <table class="table table-xs">
+                    <thead>
+                      <th class="text-center small font-weight-bold">ディスク<br>番号</th>
+                      <th class="text-center small font-weight-bold">トラック<br>番号</th>
+                      <th class="text-center small font-weight-bold">曲名</th>
+                      <th class="text-center small font-weight-bold">時間(h)</th>
+                      <th class="text-center small font-weight-bold">時間(m)</th>
+                      <th class="text-center small font-weight-bold">時間(s)</th>
+                      <th class="text-center small font-weight-bold"></th>
+                      <th class="text-center small font-weight-bold">アーティスト名</th>
+                      <th class="text-center small font-weight-bold">アーティスト名<br>(カナ)</th>
+
+                    </thead>
+                    <tbody>
+                      <%= f.nested_fields_for :tracks, wrapper_tag: :tr do |q| %>
+                      <%= f.add_nested_fields_link :tracks, 'Add new', class: 'btn btn-primary', role: 'button' %>
+                      <td><%= q.text_field   :disc_number,     class: 'form-control' %></td>
+                      <td><%= q.text_field   :track_number,     class: 'form-control' %></td>
+                      <td><%= q.text_field   :name,     class: 'form-control' %></td>
+                      <td><%= q.text_field   :length_hour,     class: 'form-control' %></td>
+                      <td><%= q.text_field   :length_minute, class: 'form-control' %></td>
+                      <td><%= q.text_field   :length_second,     class: 'form-control' %></td>
+                      <td><%= q.collection_select :artist_id, Artist.all, :id, :name %></td>
+                      <td><%= q.collection_select :artist_id, Artist.all, :id, :name_kana %></td>
+                      <td><%= q.remove_nested_fields_link 'Delete', class: 'btn btn-danger', role: 'button' %></td>
+                      <% end %>
+                    </tbody>
+
+                  </table>
+                  <%= f.submit "-商品追加-",class:"btn btn-success" %>
+                <% end %>
+            </div>
+          </div>
+        </div>
+      </div><!-- メインページrowの閉じタグ -->
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

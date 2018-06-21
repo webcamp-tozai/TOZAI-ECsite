@@ -54,5 +54,6 @@ Rails.application.routes.draw do
   resources :contacts, except: [:edit, :update, :destroy] do
     #問い合わせ管理画面で絞り込むためにID無しとID有りのURL生成
     resources :contact_statuses, only: [:index, :show]
+
   end
 end
