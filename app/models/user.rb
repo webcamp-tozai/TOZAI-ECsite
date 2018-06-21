@@ -36,7 +36,7 @@ class User < ApplicationRecord
     }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email,               presence: true, uniqueness: true,
+  validates :email,             presence: true, uniqueness: true,
     format: { 
       with: VALID_EMAIL_REGEX, 
       message: "記入内容を確認して下さい。"
@@ -46,7 +46,8 @@ class User < ApplicationRecord
     length: {
       in: 6..20,
       message: "6〜20文字までのパスワードを入力してください"
-    }
+    },
+    on: :create
 
   validates :post_code,         presence: true,
     format: {
@@ -60,6 +61,25 @@ class User < ApplicationRecord
       with: /\A\d\z/, # 0 => 入会、1 => 退会済み、2 => 強制退会
       message: "半角数字で入力して下さい。"
     }
+
+  # Validation on update
+  validates :password,
+    length: { in: 6..20,
+              message: "6〜20文字までのパスワードを入力してください" },
+                                on: :update,
+                                allow_blank: true
+
+  def update_without_current_password(params, *options)
+    params.delete(:current_password)
+
+    if params[:password].blank?
+     params.delete(:password)
+    end
+
+    result = update_attributes(params, *options)
+    clean_up_passwords
+    result
+  end
 
   # Association
   has_many :cart_items
