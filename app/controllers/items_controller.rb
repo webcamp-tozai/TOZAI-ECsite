@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   def index
     @item = Item.all
     @search = Item.ransack(params[:q])
-		@item = @search.result.page(params[:page]).reverse_order
+    @item = @search.result.page(params[:page]).reverse_order
   end
   
   def genre_index
@@ -32,18 +32,19 @@ class ItemsController < ApplicationController
     else
       genre = Genre.create(genre_english: params[:genre][:genre_english],genre_kana: params[:genre][:genre_kana])
     end
-      @item.genre_id = genre.id
+		@item.genre_id = genre.id
 
     if artist = Artist.find_by(name: params[:artist][:name],name_kana: params[:artist][:name_kana])
       # return artist
     else
       artist = Artist.create(name: params[:artist][:name],name_kana: params[:artist][:name_kana])
     end
-      @item.artist_id = artist.id
+		@item.artist_id = artist.id
 
     @item.tracks.each do |t|
       t.artist_id = artist.id
     end
+		
     @item.save
     redirect_to item_path(@item.id)
     flash[:item_created] = "商品を登録しました"
