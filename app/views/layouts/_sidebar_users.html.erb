@@ -14,7 +14,7 @@
   <div class="list-group">
     <!--#TODO: ジャンルボタン押したらそのジャンルの検索が出来るようにする-->
     <% @genres.each do |genre| %>
-      <%= link_to genre.genre_english, '#', class: 'list-group-item' %>
+      <%= link_to genre.genre_english, genre_path(genre), class: 'list-group-item' %>
     <% end %>
   </div>
 

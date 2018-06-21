@@ -1,7 +1,12 @@
 class ItemsController < ApplicationController
-  before_action :set_genre, only: [:index, :show]
+  before_action :set_genre, only: [:index, :show, :genre_index]
   
   def index
+  end
+  
+  def genre_index
+    @items = Item.where(genre_id: params[:id]).page(params[:page]).reverse_order
+    render 'items/index'
   end
 
   def create

@@ -21,14 +21,10 @@
         <!-- 商品　大情報 -->
         <div class="col-5" style="word-break: break-all;">
           <div>
-            <p>
-              <%= link_to @item.genre.genre_english, '#', class: "btn btn-sm btn-secondary" %>
-            </p>
-
+            <p class="text-dark"><%= @item.genre.genre_english %></p>
             <span>
               <%= link_to @item.artist.name, '#', class: "font-weight-bold", style: "color: #0033cc; font-size: 18px;" %>
             </span><br>
-
             <span class="font-weight-bold", style="color: #1a1a1a;">
               <%= @item.title %>
             </span>

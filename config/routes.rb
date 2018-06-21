@@ -24,12 +24,10 @@ Rails.application.routes.draw do
   end
 
   resources :item_reviews, only: [:index, :destroy]
-
-  resources :genres, only: [:index]
-    resources :items, only: [:index]
+  
+  get '/genre/:id' => 'items#genre_index', as: 'genre'
 
   resources :artists, only: [:index]
-    resources :items, only: [:index]
 
   resources :admins, except: [:destroy]
 
