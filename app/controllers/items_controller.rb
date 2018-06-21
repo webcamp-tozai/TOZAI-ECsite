@@ -75,7 +75,11 @@ class ItemsController < ApplicationController
 
   def update
   end
-
+def set_search
+    @items = Item.all
+    @search = Item.ransack(params[:q])
+    @items = @search.result.page(params[:page]).reverse_order
+  end
   private
   
   def set_genre
