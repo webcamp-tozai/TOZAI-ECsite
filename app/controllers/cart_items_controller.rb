@@ -18,7 +18,6 @@ class CartItemsController < ApplicationController
     cart_item.user_id = current_user.id
     if item.stock - cart_item.item_count >= 0
       cart_item.save
-      binding.pry
       flash[:cart_item_created] = "カートに商品を追加しました"
       redirect_to user_cart_items_path(current_user)
     else
