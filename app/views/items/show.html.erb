@@ -23,7 +23,7 @@
           <div>
             <p class="text-dark"><%= @item.genre.genre_english %></p>
             <span>
-              <%= link_to @item.artist.name, '#', class: "font-weight-bold", style: "color: #0033cc; font-size: 18px;" %>
+              <%= link_to @item.artist.name, artist_path(@item.artist_id), class: "font-weight-bold", style: "color: #0033cc; font-size: 18px;" %>
             </span><br>
             <span class="font-weight-bold", style="color: #1a1a1a;">
               <%= @item.title %>
