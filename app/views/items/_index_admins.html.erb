@@ -17,20 +17,22 @@
             <span class="font-weight-bold">
               <%= @item.count %>件の商品
             </span>
-            <form class="form-inline float-right">
+            <form class="form float-right">
               <div class="input-group">
                 <%= search_form_for @search do |f| %>
-                  <%= f.text_field :title_or_artist_name_or_artist_name_kana_cont, class:"form-control  ml-sm-2", style: "width: 250px", placeholder: '商品名、アーティスト名で検索' %>
+                  <%= 
+                    f.text_field :title_or_artist_name_or_artist_name_kana_cont, class:"form-control mr-sm-2", 
+                                                                                 style: "width: 300px", 
+                                                                                 placeholder: '商品名、アーティスト名で検索'
+                  %>
+                  <span class="d-flex align-items-center">在庫数：</span>
+                  <%= f.number_field :stock_gteq, class: "form-control" %>
+                  <span class="d-flex align-items-center">～</span>
+                  <%= f.number_field :stock_lteq, class: "form-control mr-sm-2" %>
                   <span class="input-group-btn">
                     <%= f.button fa_icon("search"), class: 'btn btn-primary'%>
                   </span>
                 <% end %>
-                <select class="form-control">
-                  <option>アルバム</option>
-                  <option>シングル</option>
-                  <option>レコード</option>
-                </select>
-                <a href="#" class="ml-3 btn btn-secondary btn-sm">絞り込み</a>
               </div>
             </form>
           </div><br>
@@ -51,7 +53,7 @@
             <% @item.each do |item| %>
               <tr>
                 <td><%= link_to item.title, edit_item_path(item.id) %></td>
-                <td><%= link_to item.artist.name, "#" %></td>
+                <td><%= item.artist.name %></td>
                 <td class="text-right">
                   <%= number_to_currency item.price_without_tax,:unit => "￥", :precision => 0 %>
                 </td>
