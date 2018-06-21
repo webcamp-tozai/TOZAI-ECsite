@@ -3,6 +3,8 @@ class ItemsController < ApplicationController
   
   def index
     @item = Item.all
+    @search = Item.ransack(params[:q])
+		@item = @search.result.page(params[:page]).reverse_order
   end
   
   def genre_index
