@@ -13,6 +13,8 @@
           <div class="box" style="height:10px;background-color:#005684;">
           </div>
 
+           <p>TOZAI Records</p>
+
           <div class="container">
             <div class="jumbotron">
               <%= form_for @item do |f| %>
@@ -115,6 +117,7 @@
                     <td>
                       <%= fields_for @artist do |artist| %>
                         <%= artist.text_field :name, class:"form-control", :list=>"artist_list", :autocomplete => "off" %>
+
                       <% end %>
                       <datalist id="artist_list">
                         <% @artist_name.each do |artist| %>

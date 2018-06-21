@@ -32,10 +32,9 @@ class ItemsController < ApplicationController
     @item.tracks.each do |t|
       t.artist_id = artist.id
     end
-
     @item.save
-    #binding pry
-    redirect_to root_path
+    redirect_to item_path(@item.id)
+    flash[:item_created] = "商品を登録しました"
   end
 
   def new
@@ -74,6 +73,12 @@ class ItemsController < ApplicationController
   end
 
   def update
+    item= Item.find(params[:id])
+    item.update(item_params)
+   # binding pry
+
+    redirect_to item_path(item.id)
+    flash[:item_updated] = "商品情報を更新しました"
   end
 def set_search
     @items = Item.all
@@ -81,7 +86,7 @@ def set_search
     @items = @search.result.page(params[:page]).reverse_order
   end
   private
-  
+
   def set_genre
     @genres = Genre.all
   end
@@ -93,6 +98,7 @@ def set_search
                                  :stock,
                                  :price_without_tax,
                                  :content_type,
+                                 :is_deleted,
                                   tracks_attributes: [:disc_number,
                                                       :track_number,
                                                       :name,
