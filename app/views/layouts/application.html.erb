@@ -8,154 +8,18 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <header> <%# # TODO: ヘッダー全面的に直す%>
-  <% if admin_signed_in? %>
-  <!-- 管理者でサインインした場合 -->
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="height: 100px;">  <!--class="fixed-top"-->
-        <div class="container">
-          <!-- 東西チームロゴ -->
-          <%= link_to admins_top_path do  %>
-            <%= image_tag "logo.png", class: "mr-4", :size =>'60x60' %>
-          <% end %>
-
-          <% if current_admin.is_main_administer == true %>
-            <p class="text-white h5">
-              <%= current_admin.family_name_kanji %>
-              <%= current_admin.given_name_kanji %>
-            </p>
-            <p class="ml-4 text-light h6">権限 - メイン管理者</p>
-
-          <% else %>
-            <p class="text-white h5">
-              <%= current_admin.family_name_kanji %>
-              <%= current_admin.given_name_kanji %>
-            </p>
-            <p class="ml-4 text-light h6">権限 - サブ管理者</p>
-          <% end %>
-
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <!-- マイページ -->
-              <%= link_to edit_admin_path(current_admin.id), class: 'nav-link text-white text-center' do %>
-                <%= fa_icon("user 2x", text: "MyPage") %>
-              <% end %>
-              <!-- ログアウト -->
-              <li class="nav-item">
-                <%= link_to destroy_admin_session_path, class: 'nav-link text-white text-center', method: :delete do %>
-                  <%= fa_icon("sign-out 2x", text: "SignOut") %>
-                <% end %>
-              </li>
-            </ul>
-          </div>  <!-- ログイン閉じタグ -->
-        </div>  <!-- cinteiner閉じタグ -->
-      </nav>
-
-  <% else %>
-
-    <% if user_signed_in? %>
-    <!-- ユーザーでサインインした場合 -->
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="height: 100px;">  <!--class="fixed-top"-->
-        <div class="container">
-          <!-- 東西チームロゴ -->
-          <%= link_to root_path do  %>
-            <%= image_tag "logo.png", class: "mr-6", :size =>'60x60' %>
-          <% end %>
-          <!-- 検索フォーム -->
-          <div class="input-group form-inline">
-            <%= search_form_for @search do |f| %>
-              <%= f.text_field :title_or_artist_name_or_artist_name_kana_cont, class: "form-control ml-sm-5", style: "width: 750px", placeholder: '商品名、アーティスト名で検索' %>
-              <span class="input-group-btn">
-                <%= f.button fa_icon("search"), class: 'btn btn-primary'%>
-              </span>
-            <% end %>
-          </div>
-
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <!-- マイページ -->
-              <%= link_to user_path(current_user.id) do %>
-                <i class="fa fa-user fa-lg text-white text-center" ></i>
-                <p class="text-white small">
-                  <%= current_user.family_name_kanji %>
-                  <%= current_user.given_name_kanji %>
-                </p>
-              <% end %>
-
-              <!-- ログアウト -->
-              <li class="nav-item">
-                <%= link_to destroy_user_session_path, class: 'nav-link text-white text-center', method: :delete do %>
-                  <%= fa_icon("sign-out 2x", text: "SignOut") %>
-                <% end %>
-              </li>
-
-              <!-- カートページ用リンク -->
-              <li class="nav-item">
-                <% if CartItem.exists? %>
-
-                  <%= link_to user_cart_items_path(current_user), class: 'nav-link text-white text-center' do %>
-                    <%= fa_icon("shopping-cart 2x", text: "アイテム数") %>
-                  <% end %>
-
-                <% else %>
-
-                  <p class="nav-link text-white text-center">
-                    <%= fa_icon("shopping-cart 2x", text: "0") %></p>
-
-                <% end %>
-
-              </li>
-            </ul>
-          </div>  <!-- ログイン閉じタグ -->
-        </div>  <!-- cinteiner閉じタグ -->
-      </nav>
-
+  <header>
+    <% if admin_signed_in? %>
+      <%= render 'layouts/header_admins' %>    
+    <% elsif  user_signed_in? %>
+      <%= render 'layouts/header_user_signin' %>
     <% else %>
-      <!-- ログインしていない場合 -->
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="height: 100px;">
-        <div class="container">
-          <!-- 東西チームロゴ -->
-          <%= link_to root_path do  %>
-            <%= image_tag "logo.png", class: "mr-1", :size =>'60x60' %>
-          <% end %>
-          <!-- 検索機能 -->
-          <div class="input-group form-inline">
-            <%= search_form_for @search do |f| %>
-              <%= f.text_field :title_or_artist_name_or_artist_name_kana_cont, class: "form-control ml-sm-5", style: "width: 750px", placeholder: '商品名、アーティスト名で検索' %>
-              <span class="input-group-btn">
-                <%= f.button fa_icon("search"), class: 'btn btn-primary'%>
-              </span>
-            <% end %>
-          </div>
-
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <!-- 新規登録 -->
-              <li class="nav-item">
-                <%= link_to new_user_registration_path, class: 'nav-link text-white text-center' do %>
-                  <%= fa_icon("user-plus 2x", text: "SignUp") %>
-                <% end %>
-              </li>
-              <!-- ログイン -->
-              <li class="nav-item">
-                <%= link_to new_user_session_path, class: 'nav-link text-white text-center' do %>
-                  <%= fa_icon("sign-in 2x", text: "SignIn") %>
-                <% end %>
-              </li>
-            </ul>
-          </div>  <!-- ログイン閉じタグ -->
-        </div>  <!-- cinteiner閉じタグ -->
-      </nav>
-
+      <%= render 'layouts/header_user' %>
     <% end %>
-
-  <% end %>
-
   </header>
 
-  <body style="margin-top: 100px;">
-
+  <body>
     <%= yield %>
-
   </body>
 
   <footer class="bg-dark">

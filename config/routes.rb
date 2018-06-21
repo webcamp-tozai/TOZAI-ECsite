@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   root to: 'items#index'
   get '/admins_top' => 'admins#top', as: 'admins_top'
+  get '/genre/:id' => 'items#genre_index', as: 'genre'      # ジャンルの絞り込みページ
+  get '/artist/:id' => 'items#artist_index', as: 'artist'   # アーティストでの絞り込みページ
 
   resources :items, except: [:destroy] do
   	resources :item_reviews, only: [:create, :new, :edit, :update, :destroy, :index]
@@ -24,7 +26,7 @@ Rails.application.routes.draw do
   end
 
   resources :item_reviews, only: [:index, :destroy]
-
+  
   resources :genres, only: [:index]
     resources :items, only: [:index]
 
