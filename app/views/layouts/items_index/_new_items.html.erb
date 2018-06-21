@@ -18,7 +18,7 @@
               <td style="width:20%; overflow: hidden;">
               <div class="text-truncate">
                 <span><%= item.created_at.strftime('%Y/%m/%d')%></span><br>
-                <%= link_to item.artist.name, "#" %><br>
+                <%= link_to item.artist.name, item_path(item) %><br>
                 <%= link_to item.title, item_path(item) %>
               </div>
               </td>
