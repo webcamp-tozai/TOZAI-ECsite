@@ -1,10 +1,11 @@
 <div class="container pt-4">
   <div class="row">
-    <div class="col-2 align-self-center">
-      <span class="font-weight-bold h2">注文履歴</span>
-    </div>
 
     <% if current_user.orders.exists? %>
+
+      <div class="col-2 align-self-center">
+        <span class="font-weight-bold h2">注文履歴</span>
+      </div>
 
       <div class="col-4 align-self-center">
         <span class="font-weight-bold">
@@ -119,45 +120,41 @@
                       <table class="table">
                         <tbody>
 
+                        <% order_select = @order_item.select do |item| %>
+                          <% item.order_id == order.id %>
+                        <% end %>
 
+                        <% order_select.each do |order_item| %>
 
-
-
-                          <% order_select = @order_item.select do |item| %>
-                            <% item.order_id == order.id %>
-                          <% end %>
-
-                          <% order_select.each do |order_item| %>
-
-                            <tr><!-- ここでorder_itemsをeach -->
-                              <td>
-                                <div class="row">
-                                  <!-- ジャケット画像 -->
-                                  <div class="col-2">
-                                    <%= attachment_image_tag @item, :image, fallback: "no_image.jpg",class: "card-img" %>
-                                  </div>
-                                  <!-- アーティスト名、商品名、税込価格 -->
-                                  <div class="col-9">
-                                    <span class="font-weight-bold" style="color:#0033cc;">
-                                      <%= link_to order_item.item.artist.name, item_path(order_item.item), class: "font-weight-bold", style: "color: #0033cc;" %>
-                                    </span><br>
-                                    <span href="#" >
-                                      <%= link_to order_item.item.title, item_path(order_item.item), class: "font-weight-bold", style: "color:#1a1a1a;" %>
-                                    </span>
-                                    <p class="text-secondary mt-3">
-                                      <%= number_to_currency order_item.item.price_without_tax, :unit => "￥", :precision => 0 %>
-                                      * 数量
-                                      <%= order_item.item_count %>
-                                    </p>
-                                    <p class="text-secondary">小計価格
-                                      <%= number_to_currency order_item.item.price_without_tax * order_item.item_count, :unit => "￥", :precision => 0  %>
-                                    </p>
-                                  </div>
+                          <tr><!-- ここでorder_itemsをeach -->
+                            <td>
+                              <div class="row">
+                                <!-- ジャケット画像 -->
+                                <div class="col-2">
+                                  <%= attachment_image_tag @item, :image, fallback: "no_image.jpg",class: "card-img" %>
                                 </div>
-                              </td>
-                            </tr><!-- ここでorder_itemsのeachを終了 -->
+                                <!-- アーティスト名、商品名、税込価格 -->
+                                <div class="col-9">
+                                  <span class="font-weight-bold" style="color:#0033cc;">
+                                    <%= link_to order_item.item.artist.name, item_path(order_item.item), class: "font-weight-bold", style: "color: #0033cc;" %>
+                                  </span><br>
+                                  <span href="#" >
+                                    <%= link_to order_item.item.title, item_path(order_item.item), class: "font-weight-bold", style: "color:#1a1a1a;" %>
+                                  </span>
+                                  <p class="text-secondary mt-3">
+                                    <%= number_to_currency order_item.item.price_without_tax, :unit => "￥", :precision => 0 %>
+                                    * 数量
+                                    <%= order_item.item_count %>
+                                  </p>
+                                  <p class="text-secondary">小計価格
+                                    <%= number_to_currency order_item.item.price_without_tax * order_item.item_count, :unit => "￥", :precision => 0  %>
+                                  </p>
+                                </div>
+                              </div>
+                            </td>
+                          </tr><!-- ここでorder_itemsのeachを終了 -->
 
-                          <% end %>
+                        <% end %>
 
                         </tbody>
                       </table>
@@ -174,7 +171,13 @@
 
     <% else %>
 
+      <div class="col-2 align-self-center">
+        <span class="font-weight-bold h2">注文履歴</span>
+      </div>
 
+      <div class="col-12 text-center mb-5">
+        <p class="h2">注文がありません</p>
+      </div>
 
     <% end %>
 
