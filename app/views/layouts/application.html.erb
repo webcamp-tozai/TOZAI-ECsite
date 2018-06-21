@@ -19,17 +19,22 @@
       <% end %>
     </header>
     
-    <div class="content">
+    <div class="main-content">
       <%= yield %>
     </div>
+    
     
     <footer class="bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; 2018 WebCampPro TOZAI Records</p>
       </div>
+      <% if Rails.env.development?%>
+        <div class="debug">
+          <%= debug(params) %>
+        </div>
+      <% end %>
     </footer>
+    
   </body>
-  
-  <%= debug(params) if Rails.env.development? %>
 
 </html>
