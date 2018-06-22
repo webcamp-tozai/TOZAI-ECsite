@@ -55,6 +55,12 @@ Rails.application.routes.draw do
   resources :orders, except: [:destroy] do
     resource :order_items, only: [:create, :new]
   end
+
+  get '/orders_status1' => 'orders#orders_status1', as: 'orders_status1'
+  get '/orders_status2' => 'orders#orders_status2', as: 'orders_status2'
+  get '/orders_status3' => 'orders#orders_status3', as: 'orders_status3'
+  get '/orders_status4' => 'orders#orders_status4', as: 'orders_status4'
+
   #支払い画面で表示、選択するためにID無しとID有りのURL生成
   resources :payments, only: [:index, :show]
 

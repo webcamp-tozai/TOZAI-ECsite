@@ -1,7 +1,76 @@
 class OrdersController < ApplicationController
+	before_action :authenticate_user_or_admin, except: [:index]
+	before_action :authenticate_current_user, except: [:index]
+
 	def index
-		@order = current_user.orders.all
-		@order_item = OrderItem.where(order_id: @order)
+		if user_signed_in?
+			@order = current_user.orders.all
+			@order_item = OrderItem.where(order_id: @order)
+		elsif admin_signed_in?
+			@status_name = "全て"
+			@orders = Order.all
+			@status1 = Order.where(status: "注文受付")
+			@status2 = Order.where(status: "発送準備中")
+			@status3 = Order.where(status: "発送済")
+			@status4 = Order.where(status: "配達完了")
+			@order_items = OrderItem.all
+		end
+	end
+
+	def orders_status1
+		if admin_signed_in?
+			@status_name = "注文受付"
+			@orders = Order.where(status: "注文受付")
+			@status1 = Order.where(status: "注文受付")
+			@status2 = Order.where(status: "発送準備中")
+			@status3 = Order.where(status: "発送済")
+			@status4 = Order.where(status: "配達完了")
+			@order_items = OrderItem.where(order_id: @orders)
+		else
+			redirect_to items_path
+		end
+	end
+
+	def orders_status2
+		if admin_signed_in?
+			@status_name = "発送準備中"
+			@orders = Order.where(status: "発送準備中")
+			@status1 = Order.where(status: "注文受付")
+			@status2 = Order.where(status: "発送準備中")
+			@status3 = Order.where(status: "発送済")
+			@status4 = Order.where(status: "配達完了")
+			@order_items = OrderItem.where(order_id: @orders)
+		else
+			redirect_to items_path
+		end
+	end
+
+	def orders_status3
+		if admin_signed_in?
+			@status_name = "発送済"
+			@orders = Order.where(status: "発送済")
+			@status1 = Order.where(status: "注文受付")
+			@status2 = Order.where(status: "発送準備中")
+			@status3 = Order.where(status: "発送済")
+			@status4 = Order.where(status: "配達完了")
+			@order_items = OrderItem.where(order_id: @orders)
+		else
+			redirect_to items_path
+		end
+	end
+
+	def orders_status4
+		if admin_signed_in?
+			@status_name = "配達完了"
+			@orders = Order.where(status: "配達完了")
+			@status1 = Order.where(status: "注文受付")
+			@status2 = Order.where(status: "発送準備中")
+			@status3 = Order.where(status: "発送済")
+			@status4 = Order.where(status: "配達完了")
+			@order_items = OrderItem.where(order_id: @orders)
+		else
+			redirect_to items_path
+		end
 	end
 
 	def create
@@ -27,6 +96,21 @@ class OrdersController < ApplicationController
 	end
 
 	private
+
+  def authenticate_user_or_admin
+    if admin_signed_in? || user_signed_in?
+    else
+      redirect_to items_path
+    end
+  end
+
+  def authenticate_current_user
+    if user_signed_in?
+      if @user.id != current_user.id
+        redirect_to items_path
+      end
+    end
+  end
 
 	def order_params
 		params.require(:order).permit(:user_id, :address_id, :payment_id, :status, :total_count, :total_price_without_tax, :total_price, order_items_attributes: [:order_id, :item_id, :item_count, :total_price_without_tax])
