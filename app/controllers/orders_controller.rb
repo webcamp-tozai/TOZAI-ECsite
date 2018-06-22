@@ -85,7 +85,7 @@ class OrdersController < ApplicationController
   		# 在庫がゼロになった時の検証用
   		# item.stock = 0
   		# 販売終了になった時の検証用
-  		item.is_deleted = true
+  		# item.is_deleted = true
     	if item.stock == 0
     		cart_item.destroy
     		redirect_to new_order_path
