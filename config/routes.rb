@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   resources :items, except: [:destroy] do
   	resources :item_reviews, only: [:create, :new, :edit, :update, :destroy, :index]
-    resources :tracks, only: [:create, :new, :edit, :update]
+    resources :tracks, only: [:create, :new, :edit, :update, :destroy]
     resources :labels, only: [:create, :new, :edit, :update]
     resources :genres, only: [:create, :new, :edit, :update]
     resources :artists, only: [:create, :new, :edit, :update]
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   end
 
   resources :item_reviews, only: [:index, :destroy]
-  
+
   resources :genres, only: [:index]
     resources :items, only: [:index]
 

@@ -10,15 +10,23 @@
         <div class="container">
           <div class="row">
             <div class="container">
-              <span class="font-weight-bold h2">商品詳細</span>
+              <span class="font-weight-bold h2">商品編集</span>
               <div class="box" style="height:10px;background-color:#005684;"></div>
 
-              <p>TOZAI Records</p>
+              <p>TOZAI Records -No pain No gain-</p>
+              <p class="flash-message text-success">
+                <%= flash[:item_updated] %>
+              </p>
+              <p class="flash-message text-danger">
+                <%= flash[:item_updated_error] %>
+              </p>
+              <p class="flash-message text-primary">
+                <%= flash[:item_created] %>
+              </p>
 
               <div class="container">
                 <div class="jumbotron">
                   <%= form_for @item do |item| %>
-                    <%= item.submit "情報更新", class:"btn btn-outline-warning btn-sm float-right"%>
                     <div class="form-row">
                       <div class="form-group col-md-2">
                         <label class="control-label font-weight-bold">商品タイプ</label>
@@ -71,26 +79,6 @@
 
                     </div>
 
-                    <div class="form-row">
-                      <div class="form-group col-md-2">
-                        <label class="font-weight-bold">商品単価</label>
-                        <%= item.text_field :price_without_tax, class:"form-control" %>
-                      </div>
-                      <div class="form-group col-md-2">
-                        <label class="font-weight-bold">在庫数</label>
-                        <%= item.text_field :stock, class:"form-control" %>
-                      </div>
-                      <div class="form-group col-md-2">
-                        <label class="font-weight-bold ">ステータス</label>
-                        <% if @item.is_deleted  == false %>
-                          <p class="text-success">販売中</p>
-                        <% else %>
-                          <p class="text-danger">販売中止</p>
-                        <% end %>
-                          <%= item.select(:is_deleted, [['販売中', false], ['取扱中止',true]]) %>
-                      </div>
-
-
                   <div class="form-row">
                     <div class="form-group col-md-2">
                       <label class="font-weight-bold">商品単価</label>
@@ -112,9 +100,10 @@
 
                   </div>
 
-                  
 
-                    <a href="#" class="col-md-3 form-control-file ">ジャケットを変更</a>
+                  <div class="form-group my-auto">
+                    <%= item.attachment_field :image,class:"form-control-file-sm" %>
+                  </div>
                     <table class="table table-responsive">
                       <thead>
                         <th class="text-center small font-weight-bold">ディスク<br>番号</th>
@@ -130,7 +119,7 @@
 
                       <tbody>
 
-                        <%= fields_for @track do |track| %>
+                        <%= fields_for :track do |track| %>
                           <td><%= track.text_field :disc_number, class:"form-control  mx-auto" %></td>
                           <td><%= track.text_field :track_number, class:"form-control  mx-auto" %></td>
                           <td><%= track.text_field :name, class:"form-control" %></td>
@@ -161,8 +150,12 @@
 
                       </tbody>
                     </table>
-                    <a href="#" class="btn btn-outline-danger btn-sm">delete</a>
-                    <button class="btn btn-outline-success float-right">入力フォーム追加</button>
+                    <div class="btn-group">
+                      <%= link_to 'この商品の詳細ページへ', item_path(@item.id),class:"btn btn-outline-success btn-sm" %>
+                    </div>
+                    <div class="btn-group float-right">
+                      <%= item.submit "情報更新", class:"btn btn-outline-warning btn-sm"%>
+                    </div>
                   <% end %>
                 </div>
               </div>
@@ -180,9 +173,9 @@
         <!-- 商品　大情報 -->
         <div class="col-5" style="word-break: break-all;">
           <div>
-            <span>
-              <%= link_to @item.genre.genre_english, genres_path(@item), class: "btn btn-sm btn-secondary" %>
-            </span>
+            <div class="text-dark">
+              <%= @item.genre.genre_english %>
+            </div>
             <%= link_to @item.artist.name, artists_path(@item), class: "font-weight-bold", style: "color: #0033cc; font-size: 18px;" %><br>
             <span class="font-weight-bold", style="color: #1a1a1a;">
               <%= @item.title %>
@@ -272,7 +265,7 @@
           <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">収録曲</p>
           <table class="table table-sm table-striped small"  style="width: 100%; table-layout: fixed; overflow: hidden;">
             <tbody>
-              <% @item.tracks.each do |track| %>
+              <% @tracks.each do |track| %>
                 <tr>
                   <th scope="row" style="width: 3%;">
                     <%= track.track_number %>
@@ -282,6 +275,9 @@
                   </td>
                   <td style="width: 50%;">
                     <%= track.artist.name %>
+                  </td>
+                  <td style="float:right">
+                    <%= link_to '削除',item_track_path(@item,track), method: :delete, data:{confirm: 'Are you sure??'},class:'btn btn-danger btn-sm ml-2' %>
                   </td>
                 </tr>
               <% end %>

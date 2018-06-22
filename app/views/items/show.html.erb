@@ -6,12 +6,6 @@
 
     <!-- 商品情報 -->
     <div class="col-9 my-4">
-      <p class="flash-message text-primary">
-        <%= flash[:item_created] %>
-      </p>
-      <p class="flash-message text-success">
-        <%= flash[:item_updated] %>
-      </p>
       <div class="row">
         <!-- ジャケット画像 -->
         <div class="col-4">
@@ -57,7 +51,7 @@
             <% end %>
           </div>  <!--在庫表示閉じタグ-->
         </div>  <!-- 商品大情報閉じタグ -->
-        
+
         <!-- カート追加関連 -->
         <% if user_signed_in? %>
           <% if @item.is_deleted == false && @item.stock == 0  %>
