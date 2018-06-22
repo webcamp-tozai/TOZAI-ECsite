@@ -79,7 +79,9 @@ class ItemsController < ApplicationController
       @item_review = ItemReview.new
       @cart_item = CartItem.new
       # ディスク枚数の取得
-      @max_disc_number = Track.where(item_id: params[:id]).pluck(:disc_number).max
+      @disc_numbers = Track.where("item_id = ?", params[:id]).distinct.pluck(:disc_number)
+      # 最大ディスク
+      @max_disc_number = Track.where("item_id = ?", params[:id]).pluck(:disc_number).max
     else
       redirect_to root_path
     end
@@ -93,11 +95,13 @@ class ItemsController < ApplicationController
     redirect_to item_path(item.id)
     flash[:item_updated] = "商品情報を更新しました"
   end
-def set_search
+  
+  def set_search
     @items = Item.all
     @search = Item.ransack(params[:q])
     @items = @search.result.page(params[:page]).reverse_order
   end
+  
   private
 
   def set_genre
