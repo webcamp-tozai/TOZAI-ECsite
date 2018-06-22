@@ -187,7 +187,6 @@
                 <% current_user.cart_items.each do |cart_item| %>
                   <%= f.fields_for :order_items do |i| %>
 
-                    <%= i.hidden_field :order_id, :value => @order.id %>
                     <%= i.hidden_field :item_id, :value => cart_item.item.id %>
                     <%= i.hidden_field :item_count, :value => cart_item.item_count %>
                     <%= i.hidden_field :total_price_without_tax, :value => cart_item.item.price_without_tax %>

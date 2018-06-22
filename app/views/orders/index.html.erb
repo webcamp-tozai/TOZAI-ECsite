@@ -1,167 +1,185 @@
 <div class="container pt-4">
   <div class="row">
-    <div class="col-2 align-self-center">
-      <span class="font-weight-bold h2">注文履歴</span>
-    </div>
 
-    <div class="col-4 align-self-center">
-      <span class="font-weight-bold">2件</span><span>の注文</span>
-    </div>
+    <% if current_user.orders.exists? %>
 
-    <div clas="col-6 ">
-      <form class="form-inline">
-        <div class="form-group">
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="注文した商品名で検索"></input>
-          <a class="mx-3 fa fa-search text-secondary fa-lg text-right" href="#"></a>
-          <select class="form-control">
-            <option>商品準備中</option>
-            <option>配送中</option>
-            <option>配達完了</option>
-          </select>
-          <a href="#" class="ml-3 btn btn-secondary btn-sm">絞り込み</a>
-        </div>
-      </form>
-    </div>
+      <div class="col-2 align-self-center">
+        <span class="font-weight-bold h2">注文履歴</span>
+      </div>
 
-    <div class="col-12">
-      <table class="table table-borderless">
-        <tbody>
+      <div class="col-4 align-self-center">
+        <span class="font-weight-bold">
+          <%= current_user.orders.count %>
+        </span>
+        <span>件の注文</span>
+      </div>
 
-          <tr><!-- ここでordersをeach -->
-            <td>
-              <div class="card">
-                <div class="card-header">
-                  <div class="row">
-                    <!-- 注文日 -->
-                    <div class="col-2">
-                      <span class="small text-secondary">注文日</span><br>
-                      <span class="text-dark">2018年6月9日</span>
-                    </div>
-                    <!-- 合計金額 -->
-                    <div class="col-2">
-                      <span class="small text-secondary">合計</span><br>
-                      <span class="text-danger">¥200,000,000</span>
-                    </div>
-                    <!-- 送付先 -->
-                    <div class="col-2">
-                      <span class="small text-secondary">送付先</span><br>
-                      <span class="">住所1</span>
-                    </div>
-                    <!-- ステータス -->
-                    <div class="col-3">
-                      <span class="small text-secondary">ステータス</span><br>
-                      <span class="text-success">配達完了 - 2018/6/9</span>
-                    </div>
-                    <!-- 注文キャンセルリンク、未発送時のみ表示 -->
-                    <div class="col-3 align-self-center">
-                      <!-- <a href="#" class="btn btn-outline-secondary btn-sm">注文をキャンセルする</a> -->
-                    </div>
+      <div clas="col-6 ">
+        <form class="form-inline">
+          <div class="form-group">
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="注文した商品名で検索"></input>
+            <a class="mx-3 fa fa-search text-secondary fa-lg text-right" href="#"></a>
+            <select class="form-control">
+              <option>注文受付</option>
+              <option>発送準備中</option>
+              <option>発送済</option>
+              <option>配達完了</option>
+            </select>
+            <a href="#" class="ml-3 btn btn-secondary btn-sm">絞り込み</a>
+          </div>
+        </form>
+      </div>
 
-                  </div>
-                </div>
+      <div class="col-12">
+        <table class="table table-borderless">
+          <tbody>
 
-                <div class="card-body">
-                  <table class="table">
-                    <tbody>
-                      <tr><!-- ここでorder_itemsをeach -->
-                        <td>
-                          <div class="row">
-                            <!-- ジャケット画像 -->
-                            <div class="col-2">
-                              <a href="#"><img class="" src="http://placehold.it/100x100"></a>
-                            </div>
-                            <!-- アーティスト名、商品名、税込価格 -->
-                            <div class="col-9">
-                              <a href="#" class="font-weight-bold" style="color:#0033cc; font-size: 18px;">長文アーティスト名長文アーティスト名</a><br>
-                              <a href="#" class="font-weight-bold" style="color:#1a1a1a;">長文CDタイトル長文CDタイトル</a>
-                              <p class="text-danger mt-3">¥200,000,000</p>
-                            </div>
+            <% current_user.orders.each do |order| %>
+
+              <tr><!-- ここでordersをeach -->
+                <td>
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="row">
+                        <!-- 注文日 -->
+                        <div class="col-2">
+                          <span class="small text-secondary">注文日</span><br>
+                          <span class="text-dark">
+                            <%= order.created_at.strftime("%Y年%m月%d日") %>
+                          </span>
+                        </div>
+                        <!-- 合計金額 -->
+                        <div class="col-2">
+                          <span class="small text-secondary">合計 + 消費税</span><br>
+                          <span class="small text-secondary">
+                            <%= number_to_currency order.total_price_without_tax, :unit => "￥", :precision => 0 %>
+                            +
+                            <%= number_to_currency order.total_price - order.total_price_without_tax, :unit => "￥", :precision => 0 %>
+                          </span><br>
+                          <span class="text-danger">
+                            <%= number_to_currency order.total_price, :unit => "￥", :precision => 0 %>
+                          </span>
+                        </div>
+                        <!-- 送付先 -->
+                        <div class="col-2">
+                          <span class="small text-secondary">送付先</span><br>
+                          <span class="">
+                            <%= "なんか表示できないよ^ ^;" %>
+                          </span>
+                        </div>
+                        <!-- ステータス -->
+                        <div class="col-3">
+                          <span class="small text-secondary">
+                            ステータス
+                          </span><br>
+
+                          <% if order.status == "注文受付" %>
+
+                            <span class="text-dark">
+                              <%= order.status %> - 
+                              <%= order.updated_at.strftime("%Y年%m月%d日") %>
+                            </span>
+
+                          <% elsif order.status == "発送準備中" %>
+
+                            <span class="text-warning">
+                              <%= order.status %> - 
+                              <%= order.updated_at.strftime("%Y年%m月%d日") %>
+                            </span>
+
+                          <% elsif order.status == "発送済" %>
+
+                            <span class="text-info">
+                              <%= order.status %> - 
+                              <%= order.updated_at.strftime("%Y年%m月%d日") %>
+                            </span>
+
+                          <% elsif order.status == "配達完了" %>
+
+                            <span class="text-success">
+                              <%= order.status %> - 
+                              <%= order.updated_at.strftime("%Y年%m月%d日") %>
+                            </span>
+
+                          <% end %>
+
+                        </div>
+
+                        <% if order.status == "注文受付" %>
+
+                          <div class="col-3 align-self-center">
+                            <a href="#" class="btn btn-outline-secondary btn-sm">注文をキャンセルする</a>
                           </div>
-                        </td>
-                      </tr><!-- ここでorder_itemsのeachを終了 -->
-                    </tbody>
-                  </table>
-                </div>
-              </div><!-- cardの閉じタグ -->
-            </td>
-          </tr><!-- ここでordersのeachを終了 -->
 
-          <tr><!-- ここでordersをeach -->
-            <td>
-              <div class="card">
-                <div class="card-header">
-                  <div class="row">
-                    <!-- 注文日 -->
-                    <div class="col-2">
-                      <span class="small text-secondary">注文日</span><br>
-                      <span class="text-dark">2018年6月9日</span>
-                    </div>
-                    <!-- 合計金額 -->
-                    <div class="col-2">
-                      <span class="small text-secondary">合計</span><br>
-                      <span class="text-danger">¥4,000</span>
-                    </div>
-                    <!-- 送付先 -->
-                    <div class="col-2">
-                      <span class="small text-secondary">送付先</span><br>
-                      <span class="">住所1</span>
-                    </div>
-                    <!-- ステータス -->
-                    <div class="col-3">
-                      <span class="small text-secondary">ステータス</span><br>
-                      <span class="">商品準備中 - 2018/6/9</span>
-                    </div>
-                    <!-- 注文キャンセルリンク -->
-                    <div class="col-3 align-self-center">
-                      <a href="#" class="btn btn-outline-secondary btn-sm">注文をキャンセルする</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <table class="table">
-                    <tbody>
-                      <tr><!-- ここでorder_itemsをeach -->
-                        <td>
-                          <div class="row">
-                            <!-- ジャケット画像 -->
-                            <div class="col-2">
-                              <a href="#"><img class="" src="http://placehold.it/100x100"></a>
-                            </div>
-                            <!-- アーティスト名、商品名、税込価格 -->
-                            <div class="col-9">
-                              <a href="#" class="font-weight-bold" style="color:#0033cc; font-size: 18px;">長文アーティスト名長文アーティスト名</a><br>
-                              <a href="#" class="font-weight-bold" style="color:#1a1a1a;">長文CDタイトル長文CDタイトル</a>
-                              <p class="text-danger mt-3">¥2,000</p>
-                            </div>
+                        <% end %>
 
-                          </div>
-                        </td>
-                      </tr><!-- ここでorder_itemsのeachを終了 -->
-                      <tr><!-- ここでorder_itemsをeach -->
-                        <td>
-                          <div class="row">
-                            <!-- ジャケット画像 -->
-                            <div class="col-2">
-                              <a href="#"><img class="" src="http://placehold.it/100x100"></a>
-                            </div>
-                            <!-- アーティスト名、商品名、税込価格 -->
-                            <div class="col-9">
-                              <a href="#" class="font-weight-bold" style="color:#0033cc; font-size: 18px;">長文アーティスト名長文アーティスト名</a><br>
-                              <a href="#" class="font-weight-bold" style="color:#1a1a1a;">長文CDタイトル長文CDタイトル</a>
-                              <p class="text-danger mt-3">¥2,000</p>
-                            </div>
-                          </div>
-                        </td>
-                      </tr><!-- ここでorder_itemsのeachを終了 -->
-                    </tbody>
-                  </table>
-                </div>
-              </div><!-- cardの閉じタグ -->
-            </td>
-          </tr><!-- ここでordersのeachを終了 -->
+                      </div>
+                    </div>
 
-        </tbody>
-      </table>
-    </div>
+                    <div class="card-body">
+                      <table class="table">
+                        <tbody>
+
+                        <% order_select = @order_item.select do |item| %>
+                          <% item.order_id == order.id %>
+                        <% end %>
+
+                        <% order_select.each do |order_item| %>
+
+                          <tr><!-- ここでorder_itemsをeach -->
+                            <td>
+                              <div class="row">
+                                <!-- ジャケット画像 -->
+                                <div class="col-2">
+                                  <%= attachment_image_tag @item, :image, fallback: "no_image.jpg",class: "card-img" %>
+                                </div>
+                                <!-- アーティスト名、商品名、税込価格 -->
+                                <div class="col-9">
+                                  <span class="font-weight-bold" style="color:#0033cc;">
+                                    <%= link_to order_item.item.artist.name, item_path(order_item.item), class: "font-weight-bold", style: "color: #0033cc;" %>
+                                  </span><br>
+                                  <span href="#" >
+                                    <%= link_to order_item.item.title, item_path(order_item.item), class: "font-weight-bold", style: "color:#1a1a1a;" %>
+                                  </span>
+                                  <p class="text-secondary mt-3">
+                                    <%= number_to_currency order_item.item.price_without_tax, :unit => "￥", :precision => 0 %>
+                                    * 数量
+                                    <%= order_item.item_count %>
+                                  </p>
+                                  <p class="text-secondary">小計価格
+                                    <%= number_to_currency order_item.item.price_without_tax * order_item.item_count, :unit => "￥", :precision => 0  %>
+                                  </p>
+                                </div>
+                              </div>
+                            </td>
+                          </tr><!-- ここでorder_itemsのeachを終了 -->
+
+                        <% end %>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div><!-- cardの閉じタグ -->
+                </td>
+              </tr><!-- ここでordersのeachを終了 -->
+
+            <% end %>
+
+          </tbody>
+        </table>
+      </div>
+
+    <% else %>
+
+      <div class="col-2 align-self-center">
+        <span class="font-weight-bold h2">注文履歴</span>
+      </div>
+
+      <div class="col-12 text-center mb-5">
+        <p class="h2">注文がありません</p>
+      </div>
+
+    <% end %>
+
   </div>
 </div><!-- 全体containerの閉じタグ -->
