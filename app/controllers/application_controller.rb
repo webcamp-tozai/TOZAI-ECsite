@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sing_out_path_for(resource)
-  		root_path
-	end
+  	root_path
+  end
 
 	# ransack用
 	def set_search

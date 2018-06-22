@@ -7,7 +7,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     unless user_signed_in? 
-      super
+      @resource = User.new
+      @resource.addresses.build
+      # super
     else
       redirect_to root_path
     end
@@ -15,7 +17,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    resource = User.save
+    resource.save
+    # super
   end
 
   # GET /resource/edit
@@ -42,7 +46,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+  
+  def user_params
+    params.require(:user).permit(:family_name_kanji, :given_name_kanji, :family_name_kana, :given_name_kana, :email, :phone_number, :post_code, :address)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
