@@ -18,15 +18,33 @@
 @import "bootstrap";
 @import "font-awesome";
 
-body {
-  margin-top: 100px;
+
+html {
+  position: relative;
+  min-height: 100%;
 }
 
-// footer
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.main-content {
+  margin-bottom: 100px;
+}
+
 footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
   height: 100px;
   line-height: 100px;
+  .debug {
+    line-height: 20px;
+  }
 }
+
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
