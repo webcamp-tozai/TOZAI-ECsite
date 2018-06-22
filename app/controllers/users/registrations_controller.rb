@@ -5,22 +5,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  def new
-    unless user_signed_in? 
-      @resource = User.new
-      @resource.addresses.build
-      # super
-    else
-      redirect_to root_path
-    end
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource
-  def create
-    resource = User.save
-    resource.save
-    # super
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit
@@ -46,11 +38,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  protected
+  # protected
   
-  def user_params
-    params.require(:user).permit(:family_name_kanji, :given_name_kanji, :family_name_kana, :given_name_kana, :email, :phone_number, :post_code, :address)
-  end
+  # def user_params
+  #   params.require(:user).permit(:family_name_kanji, :given_name_kanji, :family_name_kana, :given_name_kana, :email, :phone_number, :post_code, :address)
+  # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
