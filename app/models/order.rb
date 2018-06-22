@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   # Validations
-  validates :order_item_id,            presence: true
+
   validates :user_id,                 presence: true
   validates :address_id,              presence: true
   validates :payment_id,              presence: true
@@ -27,4 +27,5 @@ class Order < ApplicationRecord
   belongs_to :user # user has_many orders
   has_many :order_items
   has_many :items, through: :order_items
+  accepts_nested_attributes_for :order_items
 end
