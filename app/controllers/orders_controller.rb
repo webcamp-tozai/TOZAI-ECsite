@@ -1,3 +1,4 @@
+
 class OrdersController < ApplicationController
 	before_action :authenticate_user_or_admin, except: [:index]
 	before_action :authenticate_current_user, except: [:index]
@@ -8,6 +9,7 @@ class OrdersController < ApplicationController
 			@order_item = OrderItem.where(order_id: @order)
 		elsif admin_signed_in?
 			@status_name = "全て"
+			@order_all = Order.all
 			@orders = Order.all
 			@status1 = Order.where(status: "注文受付")
 			@status2 = Order.where(status: "発送準備中")
@@ -20,6 +22,7 @@ class OrdersController < ApplicationController
 	def orders_status1
 		if admin_signed_in?
 			@status_name = "注文受付"
+			@order_all = Order.all
 			@orders = Order.where(status: "注文受付")
 			@status1 = Order.where(status: "注文受付")
 			@status2 = Order.where(status: "発送準備中")
@@ -34,6 +37,7 @@ class OrdersController < ApplicationController
 	def orders_status2
 		if admin_signed_in?
 			@status_name = "発送準備中"
+			@order_all = Order.all
 			@orders = Order.where(status: "発送準備中")
 			@status1 = Order.where(status: "注文受付")
 			@status2 = Order.where(status: "発送準備中")
@@ -48,6 +52,7 @@ class OrdersController < ApplicationController
 	def orders_status3
 		if admin_signed_in?
 			@status_name = "発送済"
+			@order_all = Order.all
 			@orders = Order.where(status: "発送済")
 			@status1 = Order.where(status: "注文受付")
 			@status2 = Order.where(status: "発送準備中")
@@ -62,6 +67,7 @@ class OrdersController < ApplicationController
 	def orders_status4
 		if admin_signed_in?
 			@status_name = "配達完了"
+			@order_all = Order.all
 			@orders = Order.where(status: "配達完了")
 			@status1 = Order.where(status: "注文受付")
 			@status2 = Order.where(status: "発送準備中")
@@ -93,6 +99,10 @@ class OrdersController < ApplicationController
 	end
 
 	def update
+    order = Order.find(params[:id])
+    order.update(order_params)
+    redirect_to orders_path(order_params)
+    flash[:order_updated] = "変更を保存しました"
 	end
 
 	private
@@ -111,6 +121,58 @@ class OrdersController < ApplicationController
       end
     end
   end
+
+	def order_params
+		params.require(:order).permit(:user_id, :address_id, :payment_id, :status, :total_count, :total_price_without_tax, :total_price, order_items_attributes: [:order_id, :item_id, :item_count, :total_price_without_tax])
+	end
+
+	private
+
+  def authenticate_user_or_admin
+    if admin_signed_in? || user_signed_in?
+    else
+      redirect_to items_path
+    end
+  end
+
+  def authenticate_current_user
+    if user_signed_in?
+      if @user.id != current_user.id
+        redirect_to items_path
+      end
+    end
+  end
+
+=begin
+
+ステータス絞り込みのコーディングがダサいのであとで簡略化したい
+  def find_orders
+  	if admin_signed_in?
+  		if action_name = "index"
+  			@status_name = "全て"
+  			@orders = Order.all
+  		elsif action_name = "orders_status1"
+				@status_name = "注文受付"
+				@orders = Order.where(status: "注文受付")
+			elsif action_name = "orders_status2"
+				@status_name = "発送準備中"
+				@orders = Order.where(status: "発送準備中")
+			elsif action_name = "orders_status3"
+				@status_name = "発送済"
+				@orders = Order.where(status: "発送済")
+			elsif action_name = "orders_status4"
+				@status_name = "配達完了"
+				@orders = Order.where(status: "配達完了")
+			end
+			@status1 = Order.where(status: "注文受付")
+			@status2 = Order.where(status: "発送準備中")
+			@status3 = Order.where(status: "発送済")
+			@status4 = Order.where(status: "配達完了")
+			@order_items = OrderItem.where(order_id: @orders)
+		end
+  end
+
+=end
 
 	def order_params
 		params.require(:order).permit(:user_id, :address_id, :payment_id, :status, :total_count, :total_price_without_tax, :total_price, order_items_attributes: [:order_id, :item_id, :item_count, :total_price_without_tax])
