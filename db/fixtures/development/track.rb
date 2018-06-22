@@ -17,7 +17,7 @@ Track.seed(:id,
   { id: 11, item_id: 2, artist_id: 2, disc_number: 2, track_number: 2, name: "k", length_hour: 0, length_minute: 0, length_second: 3 },
   { id: 12, item_id: 2, artist_id: 2, disc_number: 2, track_number: 3, name: "l", length_hour: 0, length_minute: 0, length_second: 23 },
   { id: 13, item_id: 2, artist_id: 2, disc_number: 2, track_number: 4, name: "m", length_hour: 0, length_minute: 2, length_second: 2 },
-  { id: 14, item_id: 2, artist_id: 2, disc_number: 3, track_number: 5, name: "n", length_hour: 1, length_minute: 1, length_second: 59 }
+  { id: 14, item_id: 2, artist_id: 2, disc_number: 3, track_number: 1, name: "n", length_hour: 1, length_minute: 1, length_second: 59 }
 )
 
 #秦基博の4曲入りレコード
