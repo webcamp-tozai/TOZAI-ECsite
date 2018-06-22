@@ -13,8 +13,10 @@
           <div class="box" style="height:10px;background-color:#005684;">
           </div>
 
-           <p>TOZAI Records</p>
-
+          <p>TOZAI Records -Eveything is Plactice-</p>
+          <p class="flash-message text-danger">
+            <%= flash[:item_created_error] %>
+          </p>
           <div class="container">
             <div class="jumbotron">
               <%= form_for @item do |f| %>
@@ -88,44 +90,28 @@
                     <label class="font-weight-bold">商品単価</label>
                     <%= f.text_field :price_without_tax, class:"form-control" %>
                   </div>
+
                   <div class="form-group my-auto">
                     <%= f.attachment_field :image,class:"form-control-file" %>
                   </div>
                 </div>
 
 
-                <table class="table table-responsive">
-                  <thead>
-                    <th class="text-center small font-weight-bold">ディスク<br>番号</th>
-                    <th class="text-center small font-weight-bold">トラック<br>番号</th>
-                    <th class="text-center small font-weight-bold">曲名</th>
-                    <th class="text-center small font-weight-bold">時間(h)</th>
-                    <th class="text-center small font-weight-bold">時間(m)</th>
-                    <th class="text-center small font-weight-bold">時間(s)</th>
-                    <th class="text-center small font-weight-bold">アーティスト名</th>
-                    <th class="text-center small font-weight-bold">アーティスト名<br>(カナ)</th>
-                  </thead>
-                  <tbody>
-                    <%= f.fields_for :tracks do |t| %>
-                      <td><%= t.text_field :disc_number, class:"form-control  mx-auto" %></td>
-                      <td><%= t.text_field :track_number, class:"form-control  mx-auto" %></td>
-                      <td><%= t.text_field :name, class:"form-control" %></td>
-                      <td><%= t.text_field :length_hour, class:"form-control col-sm3 mx-auto" %>
-                      <td><%= t.text_field :length_minute, class:"form-control col-sm3 mx-auto" %>
-                      <td><%= t.text_field :length_second, class:"form-control col-sm3 mx-auto" %>
-                    <% end %>
-                    <td>
+                    <div class="form-group">
+                      <label class="font-weight-bold">
+                        アーティスト名
+                      </label>
                       <%= fields_for @artist do |artist| %>
                         <%= artist.text_field :name, class:"form-control", :list=>"artist_list", :autocomplete => "off" %>
-
                       <% end %>
                       <datalist id="artist_list">
                         <% @artist_name.each do |artist| %>
                       <option value="<%= artist.name %>"><%= artist.name %></option>
                         <% end %>
                       </datalist>
-                    </td>
-                    <td>
+                      <label class="font-weight-bold">
+                        アーティスト名(カナ)
+                      </label>
                       <%= fields_for @artist do |artist| %>
                         <%= artist.text_field :name_kana, class:"form-control", :list=>"artist_name_kana_list", :autocomplete => "off" %>
                       <% end %>
@@ -134,11 +120,7 @@
                       <option value="<%= artist.name_kana %>"><%= artist.name_kana %></option>
                         <% end %>
                       </datalist>
-                    </td>
-                    <td><a href="#" class="btn btn-outline-danger btn-sm">delete</></td>
-                  </tbody>
-
-                </table>
+                    </div>
                   <%= f.submit "-商品追加-",class:"btn btn-success" %>
               <% end %>
             </div>
