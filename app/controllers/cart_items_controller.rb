@@ -7,10 +7,6 @@ class CartItemsController < ApplicationController
     @cart_item = current_user.cart_items
     @cart_item.each do |cart_item|
       item = Item.find(cart_item.item_id)
-      # 在庫がゼロになった時の検証用
-      # item.stock = 0
-      # 販売終了になった時の検証用
-      # item.is_deleted = true
       if item.stock == 0
         cart_item.destroy
         redirect_to user_cart_items_path(current_user)
@@ -40,36 +36,48 @@ class CartItemsController < ApplicationController
   end
 
   def create
+    count = params[:cart_item][:item_count].to_i
     item = Item.find(params[:item_id])
-    cart_item = item.cart_items.new(cart_item_params)
-    cart_item.user_id = current_user.id
-    if cart_items = CartItem.find_by(item_id: item.id, user_id: current_user.id)
-      count_sum = cart_items.item_count + params[:cart_item][:item_count].to_i
-      if item.id == params[:item_id].to_i && item.stock - count_sum >= 0
-        cart_items.update_attributes(item_count: count_sum)
+    if count > 0
+      cart_item = item.cart_items.new(cart_item_params)
+      cart_item.user_id = current_user.id
+      if cart_items = CartItem.find_by(item_id: item.id, user_id: current_user.id)
+        count_sum = cart_items.item_count + params[:cart_item][:item_count].to_i
+        if item.id == params[:item_id].to_i && item.stock - count_sum >= 0
+          cart_items.update_attributes(item_count: count_sum)
+          redirect_to user_cart_items_path(current_user)
+          flash[:cart_item_updated] = "#{item.title}の数量を#{cart_items.item_count}個に変更しました。"
+        elsif item.stock - params[:cart_item][:item_count].to_i < 0
+          redirect_to item_path(item)
+          flash[:cart_item_create_faled] = "入力した数量が在庫数を上回っています。こちらの商品は最大で#{cart_items.item_count}個購入できます。"
+        elsif item.stock - count_sum < 0
+          redirect_to user_cart_items_path(current_user)
+          flash[:cart_item_update_faled] = "#{item.title}の合計数量が在庫数を上回っています。こちらの商品は最大で#{cart_items.item_count}個購入できます。"
+        end
+      elsif item.stock - params[:cart_item][:item_count].to_i >= 0
+        cart_item.save
         redirect_to user_cart_items_path(current_user)
-        flash[:cart_item_updated] = "#{item.title}の数量を#{cart_items.item_count}個に変更しました。"
-      elsif item.stock - params[:cart_item][:item_count].to_i < 0
-        redirect_to item_path(item)
-        flash[:cart_item_create_faled] = "入力した数量が在庫数を上回っています。こちらの商品は最大で#{cart_items.item_count}個購入できます。"
-      elsif item.stock - count_sum < 0
-        redirect_to user_cart_items_path(current_user)
-        flash[:cart_item_update_faled] = "#{item.title}の合計数量が在庫数を上回っています。こちらの商品は最大で#{cart_items.item_count}個購入できます。"
+        flash[:cart_item_created]  = "#{item.title}を#{cart_item.item_count}個カートに追加しました。"
       end
-    elsif item.stock - params[:cart_item][:item_count].to_i >= 0
-      cart_item.save
-      redirect_to user_cart_items_path(current_user)
-      flash[:cart_item_created]  = "#{item.title}を#{cart_item.item_count}個カートに追加しました。"
+    else
+      redirect_to item_path(item.id)
+      flash[:count_false]  = "不正な数値です。1以上の数値を入力してください。"
     end
   end
 
 
   def update
-    cart_item = CartItem.find(params[:id])
-    item = Item.find(cart_item.item_id)
-    cart_item.update(cart_item_params)
-    redirect_to user_cart_items_path(cart_item)
-    flash[:cart_item_updated] = "#{item.title}の数量を#{cart_item.item_count}個に変更しました。"
+    count = params[:cart_item][:item_count].to_i
+    if count > 0
+      cart_item = CartItem.find(params[:id])
+      item = Item.find(cart_item.item_id)
+      cart_item.update(cart_item_params)
+      redirect_to user_cart_items_path(cart_item)
+      flash[:cart_item_updated] = "#{item.title}の数量を#{cart_item.item_count}個に変更しました。"
+    else
+      redirect_to user_cart_items_path(current_user)
+      flash[:count_false]  = "不正な数値です。1以上の数値を入力してください。"
+    end
   end
 
   def destroy
