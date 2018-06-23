@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   registrations: 'users/registrations'
   }
 
+  devise_scope :user do
+    get '/logout', to: 'devise/sessions#destroy', as: 'logout'
+  end
+
   root to: 'items#index'
   get '/admins_top' => 'admins#top', as: 'admins_top'
   get '/genre/:id' => 'items#genre_index', as: 'genre'      # ジャンルの絞り込みページ
