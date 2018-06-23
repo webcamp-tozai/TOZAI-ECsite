@@ -75,6 +75,7 @@ class ItemsController < ApplicationController
     @label_name = Label.all
     @genre = @item.genre
     @genre_name = Genre.all
+    @disc_numbers = Track.where("item_id = ?", params[:id]).distinct.pluck(:disc_number)
     @artist = Artist.new
     @artist_name = Artist.all
     @max_disc_number = Track.where(item_id: params[:id]).pluck(:disc_number).max
