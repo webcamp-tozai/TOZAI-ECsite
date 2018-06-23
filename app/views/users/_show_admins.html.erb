@@ -41,7 +41,7 @@
             </th>
             <th><%= @user.last_sign_in_at %></th>
             <th>
-              <%= link_to "注文履歴", orders_path,class: "btn btn-secondary btn-sm float-right" %>
+              <%= link_to "注文履歴", order_history_path(@user),class: "btn btn-secondary btn-sm float-right" %>
             </th>
             <th>
               <%= link_to "編集", edit_user_path(@user),class: "btn btn-secondary btn-sm float-right" %>

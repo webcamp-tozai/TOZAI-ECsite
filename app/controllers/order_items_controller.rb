@@ -3,9 +3,6 @@ class OrderItemsController < ApplicationController
 	end
 
 	def create
-		order_item = OrderItem.new(oreder_item_params)
-		order_item.save
-    redirect_to orders_path
 	end
 
 	private
