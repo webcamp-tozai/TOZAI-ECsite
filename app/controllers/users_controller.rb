@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @address = Address.where(user_id: params[:id])
+    @address = Address.find_by(user_id: params[:id])
   end
 
   def update
