@@ -45,61 +45,57 @@
                         <div class="col-8">
                           <div class="tab-content" id="nav-tabContent">
 
-                            <%= form_for(@order) do |f| %>
+                            <% @address.first(1).each do |address| %>
 
-                              <% @address.first(1).each do |address| %>
+                              <div class="tab-pane fade show active" id="list-<%= address.id %>" role="tabpanel" aria-labelledby="list-<%= address.id %>-list">
+                                <ul class="list-group list-group-flush text-dark">
+                                  <li class="list-group-item">
+                                    <p class="small text-secondary">名前</p>
+                                    <%= address.name %>
+                                  </li>
+                                  <li class="list-group-item">
+                                    <p class="small text-secondary">住所</p>
+                                    〒<%= address.post_code %><br>
+                                      <%= address.address %>
+                                  </li>
+                                  <label class="mt-2">
+                                    <%= f.radio_button :address_id, address.id, :checked => true, class: "mx-1" %>
+                                    ここに送る
+                                  </label>
 
-                                <div class="tab-pane fade show active" id="list-<%= address.id %>" role="tabpanel" aria-labelledby="list-<%= address.id %>-list">
-                                  <ul class="list-group list-group-flush text-dark">
-                                    <li class="list-group-item">
-                                      <p class="small text-secondary">名前</p>
-                                      <%= address.name %>
-                                    </li>
-                                    <li class="list-group-item">
-                                      <p class="small text-secondary">住所</p>
-                                      〒<%= address.post_code %><br>
-                                        <%= address.address %>
-                                    </li>
-                                    <label class="mt-2">
-                                      <%= f.radio_button :address_id, address.id, :checked => true, class: "mx-1" %>
-                                      ここに送る
-                                    </label>
+                                  <p class="text-center">
+                                    <%= link_to "送付先住所の登録・変更", edit_address_path(address), class: "btn btn-secondary btn-sm mt-3" %>
+                                  </p>
 
-                                    <p class="text-center">
-                                      <%= link_to "送付先住所の登録・変更", edit_address_path(address), class: "btn btn-secondary btn-sm mt-3" %>
-                                    </p>
+                                </ul>
+                              </div>
 
-                                  </ul>
-                                </div>
+                            <% end %>
 
-                              <% end %>
+                            <% @address[1..-1].each do |address| %>
 
-                              <% @address[1..-1].each do |address| %>
+                              <div class="tab-pane fade" id="list-<%= address.id %>" role="tabpanel" aria-labelledby="list-<%= address.id %>-list">
+                                <ul class="list-group list-group-flush text-dark">
+                                  <li class="list-group-item">
+                                    <p class="small text-secondary">名前</p>
+                                    <%= address.name %>
+                                  </li>
+                                  <li class="list-group-item">
+                                    <p class="small text-secondary">住所</p>
+                                    〒<%= address.post_code %><br>
+                                      <%= address.address %>
+                                  </li>
+                                  <label class="mt-2">
+                                    <%= f.radio_button :address_id, address.id, class: "mx-1" %>
+                                    ここに送る
+                                  </label>
 
-                                <div class="tab-pane fade" id="list-<%= address.id %>" role="tabpanel" aria-labelledby="list-<%= address.id %>-list">
-                                  <ul class="list-group list-group-flush text-dark">
-                                    <li class="list-group-item">
-                                      <p class="small text-secondary">名前</p>
-                                      <%= address.name %>
-                                    </li>
-                                    <li class="list-group-item">
-                                      <p class="small text-secondary">住所</p>
-                                      〒<%= address.post_code %><br>
-                                        <%= address.address %>
-                                    </li>
-                                    <label class="mt-2">
-                                      <%= f.radio_button :address_id, address.id, class: "mx-1" %>
-                                      ここに送る
-                                    </label>
+                                  <p class="text-center">
+                                    <%= link_to "送付先住所の登録・変更", edit_address_path(address), class: "btn btn-secondary btn-sm mt-3" %>
+                                  </p>
 
-                                    <p class="text-center">
-                                      <%= link_to "送付先住所の登録・変更", edit_address_path(address), class: "btn btn-secondary btn-sm mt-3" %>
-                                    </p>
-
-                                  </ul>
-                                </div>
-
-                              <% end %>
+                                </ul>
+                              </div>
 
                             <% end %>
 
@@ -137,7 +133,7 @@
                             <div class="form-check">
 
                               <label class="form-check-label" for="exampleRadios1">
-                                <%= f.radio_button :payment_id, payment.id, :checked => true, class: "mx-1" %>
+                                <%= f.radio_button :payment_id, payment.id.to_i, :checked => true, class: "mx-1" %>
                                 <%= payment.payment_method %>
                               </label>
 
@@ -153,7 +149,7 @@
                               <div class="form-check">
 
                                 <label class="form-check-label" for="exampleRadios2">
-                                  <%= f.radio_button :payment_id, payment.id, class: "mx-1" %>
+                                  <%= f.radio_button :payment_id, payment.id.to_i, class: "mx-1" %>
                                   <%= payment.payment_method %>
                                 </label>
 
