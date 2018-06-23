@@ -19,85 +19,153 @@
           <div class="col-12">
             <div class="card border-secondary">
               <div class="row">
-                <div class="col-6">
-                  <div class="card-header bg-white font-weight-bold">
-                    送付先住所<%= @address.name %>
+                <div class="col-8">
+                  <div class="card-header bg-white font-weight-bold text-center">
+                    送付先住所
                   </div>
 
                   <div class="card-body">
 
                     <% if Address.exists?(user_id: current_user.id) %>
 
-                      <ul class="list-group list-group-flush text-dark">
-                        <li class="list-group-item">
-                          <p class="small text-secondary">名前</p>
-                          <%= @address.name %>
-                        </li>
-                        <li class="list-group-item">
-                          <p class="small text-secondary">住所</p>
-                          〒<%= @address.name %><br>
-                        </li>
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="list-group text-center" id="list-tab" role="tablist">
 
-                        <%= f.radio_button :address_id, 1, :checked => true, class: "mx-1" %>
-                        テスト
+                            <% @address.first(1).each do |address| %>
+                              <a class="list-group-item list-group-item-action active small" id="list-<%= address.id %>-list" data-toggle="list" href="#list-<%= address.id %>" role="tab" aria-controls="home"><%= address.name %></a>
+                            <% end %>
 
-                      </ul>
+                            <% @address[1..-1].each do |address| %>
+                              <a class="list-group-item list-group-item-action small" id="list-<%= address.id %>-list" data-toggle="list" href="#list-<%= address.id %>" role="tab" aria-controls="home"><%= address.name %></a>
+                            <% end %>
 
-                      <p class="text-center">
-                        <%= link_to "登録・変更", edit_address_path(@address), class: "btn btn-secondary btn-sm" %>
-                      </p>
+                          </div>
+                        </div>
+                        <div class="col-8">
+                          <div class="tab-content" id="nav-tabContent">
+
+                            <%= form_for(@order) do |f| %>
+
+                              <% @address.first(1).each do |address| %>
+
+                                <div class="tab-pane fade show active" id="list-<%= address.id %>" role="tabpanel" aria-labelledby="list-<%= address.id %>-list">
+                                  <ul class="list-group list-group-flush text-dark">
+                                    <li class="list-group-item">
+                                      <p class="small text-secondary">名前</p>
+                                      <%= address.name %>
+                                    </li>
+                                    <li class="list-group-item">
+                                      <p class="small text-secondary">住所</p>
+                                      〒<%= address.post_code %><br>
+                                        <%= address.address %>
+                                    </li>
+                                    <label class="mt-2">
+                                      <%= f.radio_button :address_id, address.id, :checked => true, class: "mx-1" %>
+                                      ここに送る
+                                    </label>
+
+                                    <p class="text-center">
+                                      <%= link_to "送付先住所の登録・変更", edit_address_path(address), class: "btn btn-secondary btn-sm mt-3" %>
+                                    </p>
+
+                                  </ul>
+                                </div>
+
+                              <% end %>
+
+                              <% @address[1..-1].each do |address| %>
+
+                                <div class="tab-pane fade" id="list-<%= address.id %>" role="tabpanel" aria-labelledby="list-<%= address.id %>-list">
+                                  <ul class="list-group list-group-flush text-dark">
+                                    <li class="list-group-item">
+                                      <p class="small text-secondary">名前</p>
+                                      <%= address.name %>
+                                    </li>
+                                    <li class="list-group-item">
+                                      <p class="small text-secondary">住所</p>
+                                      〒<%= address.post_code %><br>
+                                        <%= address.address %>
+                                    </li>
+                                    <label class="mt-2">
+                                      <%= f.radio_button :address_id, address.id, class: "mx-1" %>
+                                      ここに送る
+                                    </label>
+
+                                    <p class="text-center">
+                                      <%= link_to "送付先住所の登録・変更", edit_address_path(address), class: "btn btn-secondary btn-sm mt-3" %>
+                                    </p>
+
+                                  </ul>
+                                </div>
+
+                              <% end %>
+
+                            <% end %>
+
+                          </div>
+                        </div>
+                      </div>
 
                     <% else %>
 
                       <p class="text-dark my-4 text-center">
-                        送付先住所が登録されていません
+                        送付先住所が登録されていません。購入前に必ず登録してください。
                       </p>
 
                       <p class="text-center">
-                        <%= link_to "登録・変更", edit_address_path(@address), class: "btn btn-secondary btn-sm" %>
+                        <%= link_to "登録", edit_address_path(@address), class: "btn btn-secondary btn-sm" %>
                       </p>
-
-                      <label class="form-check-label" for="exampleRadios1">
-                        <%= f.radio_button :address_id, 1, :checked => true, class: "mx-1" %>
-                        テスト
-                      </label>
 
                     <% end %>
 
                   </div>
                 </div>
 
-                <div class="col-6">
-                    <div class="card-header bg-white font-weight-bold">
-                      <%= f.label :支払い方法 %>
-                    </div>
-                    <div class="card-body text-dark">
-                      <ul class="list-group list-group-flush text-dark">
-                        <li class="list-group-item">
-                          <div class="form-check">
+                <div class="col-4">
+                  <div class="card-header bg-white font-weight-bold text-center">
+                    <%= f.label :支払い方法 %>
+                  </div>
+                  <div class="card-body text-dark">
+                    <ul class="list-group list-group-flush text-dark">
 
-                            <label class="form-check-label" for="exampleRadios1">
-                              <%= f.radio_button :payment_id, 1, :checked => true, class: "mx-1" %>
-                              代金引換
-                            </label>
+                      <%= form_for @order do |f| %>
 
-                          </div>
-                        </li>
+                        <% @payments.first(1).each do |payment| %>
 
-                        <li class="list-group-item">
-                          <div class="form-check">
+                          <li class="list-group-item">
+                            <div class="form-check">
 
-                            <label class="form-check-label" for="exampleRadios2">
-                              <%= f.radio_button :payment_id, 2, class: "mx-1" %>
-                              クレジットカード
-                            </label>
+                              <label class="form-check-label" for="exampleRadios1">
+                                <%= f.radio_button :payment_id, payment.id, :checked => true, class: "mx-1" %>
+                                <%= payment.payment_method %>
+                              </label>
 
-                          </div>
-                        </li>
+                            </div>
+                          </li>
 
-                      </ul>
+                        <% end %>
 
-                    </div>
+                        <% @payments.each do |payment| %>
+                          <% next if payment.id == 1 %>
+
+                            <li class="list-group-item">
+                              <div class="form-check">
+
+                                <label class="form-check-label" for="exampleRadios2">
+                                  <%= f.radio_button :payment_id, payment.id, class: "mx-1" %>
+                                  <%= payment.payment_method %>
+                                </label>
+
+                              </div>
+                            </li>
+
+                        <% end %>
+
+                      <% end %>
+
+                    </ul>
+                  </div>
                 </div>
 
               </div>
@@ -205,7 +273,22 @@
                   <% end %>
                 <% end %>
 
-                <%= f.submit '注文を確定する', class: "btn btn-primary" %>
+                <% if Address.exists?(user_id: current_user.id) %>
+
+                  <%= f.submit '注文を確定する', class: "btn btn-primary" %>
+
+                <% else %>
+
+                  <p class="text-dark my-4 text-center">
+                    送付先住所が登録されていません。購入前に必ず登録してください。
+                  </p>
+
+                  <p class="text-center">
+                    <%= link_to "登録", edit_address_path(@address), class: "btn btn-secondary btn-sm" %>
+                  </p>
+
+                <% end %>
+
               </p>
             </div>
           </div>

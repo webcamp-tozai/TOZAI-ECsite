@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   end
 
   resources :item_reviews, only: [:index, :destroy]
-  
+
   resources :genres, only: [:index]
     resources :items, only: [:index]
 

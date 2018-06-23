@@ -1,83 +1,42 @@
 class OrdersController < ApplicationController
 	before_action :authenticate_user_or_admin, except: [:index]
+	before_action :authenticate_admin, except: [:index, :create, :new]
+	before_action :find_orders, only: [:index, :orders_status1, :orders_status2, :orders_status3, :order_status4]
 
 	def index
 		if user_signed_in?
-			@order = current_user.orders.all
+			@order = current_user.orders.all.page(params[:page]).reverse_order
 			@order_item = OrderItem.where(order_id: @order)
 		elsif admin_signed_in?
 			@status_name = "全て"
 			@order_all = Order.all
 			@orders = Order.all
-			@status1 = Order.where(status: "注文受付")
-			@status2 = Order.where(status: "発送準備中")
-			@status3 = Order.where(status: "発送済")
-			@status4 = Order.where(status: "配達完了")
 			@order_items = OrderItem.all
 		end
 	end
 
 	def orders_status1
-		if admin_signed_in?
 			@status_name = "注文受付"
-			@order_all = Order.all
 			@orders = Order.where(status: "注文受付")
-			@status1 = Order.where(status: "注文受付")
-			@status2 = Order.where(status: "発送準備中")
-			@status3 = Order.where(status: "発送済")
-			@status4 = Order.where(status: "配達完了")
-			@order_items = OrderItem.where(order_id: @orders)
-		else
-			redirect_to items_path
-		end
 	end
 
 	def orders_status2
-		if admin_signed_in?
 			@status_name = "発送準備中"
-			@order_all = Order.all
 			@orders = Order.where(status: "発送準備中")
-			@status1 = Order.where(status: "注文受付")
-			@status2 = Order.where(status: "発送準備中")
-			@status3 = Order.where(status: "発送済")
-			@status4 = Order.where(status: "配達完了")
-			@order_items = OrderItem.where(order_id: @orders)
-		else
-			redirect_to items_path
-		end
 	end
 
 	def orders_status3
-		if admin_signed_in?
 			@status_name = "発送済"
-			@order_all = Order.all
 			@orders = Order.where(status: "発送済")
-			@status1 = Order.where(status: "注文受付")
-			@status2 = Order.where(status: "発送準備中")
-			@status3 = Order.where(status: "発送済")
-			@status4 = Order.where(status: "配達完了")
-			@order_items = OrderItem.where(order_id: @orders)
-		else
-			redirect_to items_path
-		end
 	end
 
 	def orders_status4
-		if admin_signed_in?
 			@status_name = "配達完了"
-			@order_all = Order.all
 			@orders = Order.where(status: "配達完了")
-			@status1 = Order.where(status: "注文受付")
-			@status2 = Order.where(status: "発送準備中")
-			@status3 = Order.where(status: "発送済")
-			@status4 = Order.where(status: "配達完了")
-			@order_items = OrderItem.where(order_id: @orders)
-		else
-			redirect_to items_path
-		end
 	end
 
 	def create
+		find_cart_items
   	order = Order.new(order_params)
   	cart_items = current_user.cart_items
   	cart_items.each do |cart_item|
@@ -107,17 +66,22 @@ class OrdersController < ApplicationController
     		return
     	end
     end
-	  order.save
-	  cart_items.each do |cart_item|
-			item = Item.find(cart_item.item_id)
-	  	stock = item.stock - cart_item.item_count
-	  	item.update(stock: stock)
-  	end
-		cart_items.destroy_all
- 		redirect_to orders_path
+	  if order.save
+		  cart_items.each do |cart_item|
+				item = Item.find(cart_item.item_id)
+		  	stock = item.stock - cart_item.item_count
+		  	item.update(stock: stock)
+	  	end
+			cart_items.destroy_all
+	 		redirect_to orders_path
+	 	else
+	 		redirect_to new_order_path
+	 	end
 	end
 
 	def new
+		find_cart_items
+		@payments = Payment.all
 		@order = Order.new
 		@order.order_items.build
 		@cart_items = current_user.cart_items.all
@@ -144,6 +108,29 @@ class OrdersController < ApplicationController
     else
       redirect_to items_path
     end
+  end
+
+  def authenticate_admin
+  	if admin_signed_in?
+	  else
+	  	redirect_to items_path
+	  end
+  end
+
+  def find_orders
+		@order_all = Order.all
+		@status1 = Order.where(status: "注文受付")
+		@status2 = Order.where(status: "発送準備中")
+		@status3 = Order.where(status: "発送済")
+		@status4 = Order.where(status: "配達完了")
+		@order_items = OrderItem.where(order_id: @orders)
+  end
+
+  def find_cart_items
+  	if CartItem.find_by(user_id: current_user.id)
+		else
+			redirect_to items_path
+		end
   end
 
 	def order_params

@@ -9,17 +9,19 @@
 
       <% if current_user.orders.exists? %>
 
-        <div class="col-2 align-self-center">
+        <div class="col-3 align-self-center">
           <span class="font-weight-bold h2">注文履歴</span>
-        </div>
-
-        <div class="col-4 align-self-center">
-          <span class="font-weight-bold">
+          <span class="font-weight-bold ml-3">
             <%= current_user.orders.count %>
           </span>
           <span>件の注文</span>
         </div>
 
+        <div class="col-3 text-right">
+          <%= link_to "マイページへ", user_path(current_user), class: "btn btn-outline-secondary btn-sm" %>
+          <%= link_to "買い物を続ける", items_path, class: "btn btn-outline-secondary btn-sm" %>
+        </div>
+<!--
         <div clas="col-6 ">
           <form class="form-inline">
             <div class="form-group">
@@ -35,12 +37,12 @@
             </div>
           </form>
         </div>
-
+-->
         <div class="col-12">
           <table class="table table-borderless">
             <tbody>
 
-              <% current_user.orders.each do |order| %>
+              <% @order.each do |order| %>
 
                 <tr><!-- ここでordersをeach -->
                   <td>
@@ -70,7 +72,7 @@
                           <div class="col-2">
                             <span class="small text-secondary">送付先</span><br>
                             <span class="">
-                              <%= "なんか表示できないよ^ ^;" %>
+                              <%= order.address.name %>
                             </span>
                           </div>
                           <!-- ステータス -->
@@ -110,7 +112,9 @@
                             <% end %>
 
                           </div>
-
+<%
+=begin
+%>
                           <% if order.status == "注文受付" %>
 
                             <div class="col-3 align-self-center">
@@ -118,7 +122,9 @@
                             </div>
 
                           <% end %>
-
+<%
+=end
+%>
                         </div>
                       </div>
 
