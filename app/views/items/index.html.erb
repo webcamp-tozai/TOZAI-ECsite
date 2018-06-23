@@ -16,7 +16,7 @@
         <%#= render 'layouts/items_index/carouse' %>
 
         <%# 新入荷商品一覧 %>
-        <%= render 'layouts/items_index/new_items' if current_page?(root_path) %>
+        <%= render 'layouts/items_index/new_items' if current_page?(root_path) || current_page?(items_path) %>
 
         <!-- 商品一覧 -->
         <div class="row">
