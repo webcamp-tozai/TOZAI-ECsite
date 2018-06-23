@@ -1,0 +1,198 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-10 py-4">
+
+      <span class="font-weight-bold h3"><%= @user.family_name_kanji %><%= @user.given_name_kanji %>の注文履歴</span>
+      <div class="box" style="height:10px;background-color:#005684;">
+      </div>
+
+      <div class="col-4 align-self-center mt-4">
+        <span class="font-weight-bold h3">
+          <%= @user.family_name_kanji %><%= @user.given_name_kanji %>
+        </span>
+
+        <span class="font-weight-bold">
+          <%= @order.count %>件の注文
+        </span>
+      </div>
+
+      <% if Order.exists?(user_id: @user) %>
+<!--
+検索機能保留
+        <div clas="col-6 ">
+          <form class="form-inline">
+            <div class="form-group">
+              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="注文した商品名で検索"></input>
+              <a class="mx-3 fa fa-search text-secondary fa-lg text-right" href="#"></a>
+              <select class="form-control">
+                <option>商品準備中</option>
+                <option>配送中</option>
+                <option>配達完了</option>
+              </select>
+              <a href="#" class="ml-3 btn btn-secondary btn-sm">絞り込み</a>
+            </div>
+          </form>
+        </div>
+-->
+        <div class="col-12">
+          <table class="table table-borderless">
+            <tbody>
+
+              <% @order.each do |order| %>
+
+                <tr><!-- ここでordersをeach -->
+                  <td>
+                    <div class="card">
+                      <div class="card-header">
+                        <div class="row">
+                          <!-- 注文日 -->
+                          <div class="col-2">
+                            <span class="small text-secondary">注文日</span><br>
+                            <span class="text-dark">
+                              <%= order.created_at.strftime("%Y年%m月%d日") %>
+                            </span>
+                          </div>
+                          <!-- 合計金額 -->
+                          <div class="col-2">
+                            <span class="small text-secondary">合計 + 消費税</span><br>
+                            <span class="small text-secondary">
+                              <%= number_to_currency order.total_price_without_tax, :unit => "￥", :precision => 0 %>
+                              +
+                              <%= number_to_currency order.total_price - order.total_price_without_tax, :unit => "￥", :precision => 0 %>
+                            </span><br>
+                            <span class="text-danger">
+                              <%= number_to_currency order.total_price, :unit => "￥", :precision => 0 %>
+                            </span>
+                          </div>
+                          <!-- 送付先 -->
+                          <div class="col-2">
+                            <span class="small text-secondary">送付先</span><br>
+                            <span class="">
+                              <%= order.address.family_name_kanji %><%= order.address.given_name_kanji %>
+                            </span>
+                          </div>
+                          <!-- ステータス -->
+                          <div class="col-6">
+                            <span class="small text-secondary">
+                              ステータス
+                            </span><br>
+
+                            <% if order.status == "注文受付" %>
+
+                              <span class="text-dark">
+                                <%= order.status %> - 
+                                <%= order.updated_at.strftime("%Y年%m月%d日") %>
+                              </span>
+
+                            <% elsif order.status == "発送準備中" %>
+
+                              <span class="text-warning">
+                                <%= order.status %> - 
+                                <%= order.updated_at.strftime("%Y年%m月%d日") %>
+                              </span>
+
+                            <% elsif order.status == "発送済" %>
+
+                              <span class="text-info">
+                                <%= order.status %> - 
+                                <%= order.updated_at.strftime("%Y年%m月%d日") %>
+                              </span>
+
+                            <% elsif order.status == "配達完了" %>
+
+                              <span class="text-success">
+                                <%= order.status %> - 
+                                <%= order.updated_at.strftime("%Y年%m月%d日") %>
+                              </span>
+
+                            <% end %>
+
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div class="card-body">
+                        <table class="table">
+                          <tbody>
+
+                          <% order_select = @order_item.select do |item| %>
+                            <% item.order_id == order.id %>
+                          <% end %>
+
+                          <% order_select.each do |order_item| %>
+
+                            <tr><!-- ここでorder_itemsをeach -->
+                              <td>
+                                <div class="row">
+                                  <!-- ジャケット画像 -->
+                                  <div class="col-2">
+                                    <%= attachment_image_tag @item, :image, fallback: "no_image.jpg",class: "card-img" %>
+                                  </div>
+                                  <!-- アーティスト名、商品名、税込価格 -->
+                                  <div class="col-9">
+                                    <span class="font-weight-bold" style="color:#0033cc;">
+                                      <%= link_to order_item.item.artist.name, item_path(order_item.item), class: "font-weight-bold", style: "color: #0033cc;" %>
+                                    </span><br>
+                                    <span href="#" >
+                                      <%= link_to order_item.item.title, item_path(order_item.item), class: "font-weight-bold", style: "color:#1a1a1a;" %>
+                                    </span>
+                                    <p class="text-secondary mt-3">
+                                      <%= number_to_currency order_item.item.price_without_tax, :unit => "￥", :precision => 0 %>
+                                      * 数量
+                                      <%= order_item.item_count %>
+                                    </p>
+                                    <p class="text-secondary">小計価格
+                                      <%= number_to_currency order_item.item.price_without_tax * order_item.item_count, :unit => "￥", :precision => 0  %>
+                                    </p>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr><!-- ここでorder_itemsのeachを終了 -->
+
+                          <% end %>
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div><!-- cardの閉じタグ -->
+                  </td>
+                </tr><!-- ここでordersのeachを終了 -->
+
+              <% end %>
+
+            </tbody>
+          </table>
+
+          <div class="row"><!-- ページネーション --><!--
+            <div class="col-12">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+              </nav>
+            </div>-->
+          </div><!-- ページネーション閉じタグ -->
+
+        </div>
+
+      <% else %>
+
+        <div class="col-12 text-center mb-5">
+          <p class="h2">注文がありません</p>
+        </div>
+
+      <% end %>
+
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

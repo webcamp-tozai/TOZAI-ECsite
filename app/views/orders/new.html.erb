@@ -1,8 +1,8 @@
-<div class="container" style="min-height: 100%; margin-bottom: -120px;">
+<div class="container py-4">
 
   <%= form_for(@order) do |f| %>
 
-    <div class="row" style="margin-top: 120px;">
+    <div class="row">
       <div class="col-9">
 
         <p class="flash-message text-danger">
@@ -33,11 +33,16 @@
                           <div class="list-group text-center" id="list-tab" role="tablist">
 
                             <% @address.first(1).each do |address| %>
-                              <a class="list-group-item list-group-item-action active small" id="list-<%= address.id %>-list" data-toggle="list" href="#list-<%= address.id %>" role="tab" aria-controls="home"><%= address.name %></a>
+                              <a class="list-group-item list-group-item-action active small" id="list-<%= address.id %>-list" data-toggle="list" href="#list-<%= address.id %>" role="tab" aria-controls="home">
+                              <%= address.family_name_kanji %>
+                              <%= address.given_name_kanji %>
+                              </a>
                             <% end %>
 
                             <% @address[1..-1].each do |address| %>
-                              <a class="list-group-item list-group-item-action small" id="list-<%= address.id %>-list" data-toggle="list" href="#list-<%= address.id %>" role="tab" aria-controls="home"><%= address.name %></a>
+                              <a class="list-group-item list-group-item-action small" id="list-<%= address.id %>-list" data-toggle="list" href="#list-<%= address.id %>" role="tab" aria-controls="home">
+                                <%= address.family_name_kanji %> <%= address.given_name_kanji %>
+                              </a>
                             <% end %>
 
                           </div>
@@ -51,7 +56,7 @@
                                 <ul class="list-group list-group-flush text-dark">
                                   <li class="list-group-item">
                                     <p class="small text-secondary">名前</p>
-                                    <%= address.name %>
+                                    <%= address.family_name_kanji %> <%= address.given_name_kanji %>
                                   </li>
                                   <li class="list-group-item">
                                     <p class="small text-secondary">住所</p>
@@ -78,7 +83,7 @@
                                 <ul class="list-group list-group-flush text-dark">
                                   <li class="list-group-item">
                                     <p class="small text-secondary">名前</p>
-                                    <%= address.name %>
+                                    <%= address.family_name_kanji %> <%= address.given_name_kanji %>
                                   </li>
                                   <li class="list-group-item">
                                     <p class="small text-secondary">住所</p>
@@ -294,8 +299,5 @@
     </div><!-- 全体rowの閉じタグ -->
 
   <% end %>
-
-  <!-- footerを下にするための空要素 -->
-  <div style="height: 120px;"></div>
 
 </div><!-- 全体containerの閉じタグ -->

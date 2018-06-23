@@ -56,7 +56,7 @@
               </div>
               <div class="card-body">
                 <p class="small text-secondary">配送状況の確認・注文のキャンセル</p>
-                <%= link_to orders_path(@user.id) do %>
+                <%= link_to order_history_path(current_user) do %>
                 <i class="btn btn-secondary btn-sm">一覧へ</i>
                 <% end %>
               </div>
@@ -72,18 +72,23 @@
               <div class="card-body">
 
                 <% if Address.exists?(user_id: @user.id) %>
-                  <ul class="list-group list-group-flush text-dark">
-                    <li class="list-group-item">
-                      <p class="small text-secondary">名前</p>
-                      <%= @address.family_name_kanji %> <%= @address.given_name_kanji %>
-                    </li>
-                    <li class="list-group-item">
-                      <p class="small text-secondary">住所</p>
-                      〒<%= @address.post_code %><br>
-                    </li>
-                  </ul>
-                  <!--<p class="small text-secondary mt-2">・<br>その他1件</p>-->
-                  <%#= link_to "登録・変更", edit_address_path(@address), class: "btn btn-secondary btn-sm" %>
+
+                  <% @address.each do |address| %>
+
+                    <ul class="list-group list-group-flush text-dark">
+                      <li class="list-group-item">
+                        <p class="small text-secondary">名前</p>
+                        <%= address.family_name_kanji %> <%= address.given_name_kanji %>
+                      </li>
+                      <li class="list-group-item">
+                        <p class="small text-secondary">住所</p>
+                        〒<%= address.post_code %><br>
+                      </li>
+                    </ul>
+
+                  <% end %>
+                    <!--<p class="small text-secondary mt-2">・<br>その他1件</p>-->
+                    <%#= link_to "登録・変更", edit_address_path(@address), class: "btn btn-secondary btn-sm" %>
 
                 <% else %>
 

@@ -96,7 +96,7 @@ class OrdersController < ApplicationController
 		  	item.update(stock: stock)
 	  	end
 			cart_items.destroy_all
-	 		redirect_to orders_path
+	 		redirect_to order_history_path(current_user)
 	 	else
 	 		redirect_to new_order_path
 	 	end
