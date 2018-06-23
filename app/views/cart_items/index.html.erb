@@ -40,7 +40,7 @@
             <% current_user.cart_items.each do |cart_item| %>
               <tr style="line-height: 80px;"><!-- ここからcart_itemsのeach開始 -->
                 <td>
-                  <%= attachment_image_tag @item, :image, fallback: "no_image.jpg",class: "card-img" %>
+                  <%= attachment_image_tag cart_item.item, :image, fallback: "no_image.jpg",class: "card-img" %>
                 </td>
 
                 <td style="line-height: 20px; overflow: hidden;">
