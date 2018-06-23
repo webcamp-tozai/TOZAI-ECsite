@@ -168,7 +168,8 @@
                 <tbody>
                   <% track_infos = Track.where("item_id = ?", params[:id])
                                         .where("disc_number = ?", disc_number)
-                                        .select(:track_number, :name)  %>
+                                        .select(:track_number, :name)
+                                        .order(track_number: :asc)  %>
                   <% track_infos.each do |track_info| %>
                     <tr>
                       <th scope="row" style="width: 50px;">
