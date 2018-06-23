@@ -47,6 +47,8 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :destroy, :all_destroy, :create, :update]
   end
 
+  get '/users/:id/order_history' => 'users#order_history', as: 'order_history'
+
   get '/users/:id/edit_password' => 'users#edit_password', as: 'user_edit_password'
   #post '/users/:id' => 'users#update_status', as: 'update_status_user'
   get '/users/:id/confirm' => 'users#confirm', as: 'confirm'
@@ -56,8 +58,8 @@ Rails.application.routes.draw do
 
   resources :addresses, except: [:index, :show]
 
-  resources :orders, except: [:destroy] do
-    resource :order_items, only: [:create, :new]
+  resources :orders, except: [:show, :edit, :destroy] do
+    resource :order_items, only: [:create]
   end
 
   get '/orders_status1' => 'orders#orders_status1', as: 'orders_status1'

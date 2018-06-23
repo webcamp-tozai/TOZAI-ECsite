@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
 	before_action :authenticate_user_or_admin, except: [:index]
 	before_action :authenticate_admin, except: [:index, :create, :new]
-	before_action :find_orders, only: [:index, :orders_status1, :orders_status2, :orders_status3, :order_status4]
 
 	def index
 		if user_signed_in?
@@ -9,8 +8,12 @@ class OrdersController < ApplicationController
 			@order_item = OrderItem.where(order_id: @order)
 		elsif admin_signed_in?
 			@status_name = "全て"
+			@orders = Order.all.page(params[:page]).reverse_order
 			@order_all = Order.all
-			@orders = Order.all
+			@status1 = Order.where(status: "注文受付")
+			@status2 = Order.where(status: "発送準備中")
+			@status3 = Order.where(status: "発送済")
+			@status4 = Order.where(status: "配達完了")
 			@order_items = OrderItem.all
 		end
 	end
@@ -18,21 +21,45 @@ class OrdersController < ApplicationController
 	def orders_status1
 			@status_name = "注文受付"
 			@orders = Order.where(status: "注文受付")
+			@order_all = Order.all
+			@status1 = Order.where(status: "注文受付")
+			@status2 = Order.where(status: "発送準備中")
+			@status3 = Order.where(status: "発送済")
+			@status4 = Order.where(status: "配達完了")
+			@order_items = OrderItem.where(order_id: @orders)
 	end
 
 	def orders_status2
 			@status_name = "発送準備中"
 			@orders = Order.where(status: "発送準備中")
+			@order_all = Order.all
+			@status1 = Order.where(status: "注文受付")
+			@status2 = Order.where(status: "発送準備中")
+			@status3 = Order.where(status: "発送済")
+			@status4 = Order.where(status: "配達完了")
+			@order_items = OrderItem.where(order_id: @orders)
 	end
 
 	def orders_status3
 			@status_name = "発送済"
 			@orders = Order.where(status: "発送済")
+			@order_all = Order.all
+			@status1 = Order.where(status: "注文受付")
+			@status2 = Order.where(status: "発送準備中")
+			@status3 = Order.where(status: "発送済")
+			@status4 = Order.where(status: "配達完了")
+			@order_items = OrderItem.where(order_id: @orders)
 	end
 
 	def orders_status4
 			@status_name = "配達完了"
 			@orders = Order.where(status: "配達完了")
+			@order_all = Order.all
+			@status1 = Order.where(status: "注文受付")
+			@status2 = Order.where(status: "発送準備中")
+			@status3 = Order.where(status: "発送済")
+			@status4 = Order.where(status: "配達完了")
+			@order_items = OrderItem.where(order_id: @orders)
 	end
 
 	def create
@@ -41,10 +68,6 @@ class OrdersController < ApplicationController
   	cart_items = current_user.cart_items
   	cart_items.each do |cart_item|
   		item = Item.find(cart_item.item_id)
-  		# 在庫がゼロになった時の検証用
-  		# item.stock = 0
-  		# 販売終了になった時の検証用
-  		# item.is_deleted = true
     	if item.stock == 0
     		cart_item.destroy
     		redirect_to new_order_path
@@ -88,12 +111,6 @@ class OrdersController < ApplicationController
 		@address = Address.where(user_id: current_user.id)
 	end
 
-	def edit
-	end
-
-	def show
-	end
-
 	def update
     order = Order.find(params[:id])
     order.update(order_params)
@@ -115,15 +132,6 @@ class OrdersController < ApplicationController
 	  else
 	  	redirect_to items_path
 	  end
-  end
-
-  def find_orders
-		@order_all = Order.all
-		@status1 = Order.where(status: "注文受付")
-		@status2 = Order.where(status: "発送準備中")
-		@status3 = Order.where(status: "発送済")
-		@status4 = Order.where(status: "配達完了")
-		@order_items = OrderItem.where(order_id: @orders)
   end
 
   def find_cart_items
