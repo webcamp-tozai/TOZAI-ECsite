@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180615094725) do
+ActiveRecord::Schema.define(version: 20180622070606) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "name", null: false
+    t.string "family_name_kanji", null: false
     t.string "post_code", null: false
     t.string "address", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "given_name_kanji"
     t.index ["address"], name: "index_addresses_on_address"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
@@ -145,11 +146,11 @@ ActiveRecord::Schema.define(version: 20180615094725) do
     t.integer "total_price_without_tax", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order_id"
     t.index ["item_id"], name: "index_order_items_on_item_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "order_item_id", null: false
     t.integer "user_id", null: false
     t.integer "address_id", null: false
     t.integer "payment_id", null: false
@@ -159,7 +160,6 @@ ActiveRecord::Schema.define(version: 20180615094725) do
     t.integer "total_price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_item_id"], name: "index_orders_on_order_item_id"
     t.index ["status"], name: "index_orders_on_status"
   end
 

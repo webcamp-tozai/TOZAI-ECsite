@@ -1,0 +1,303 @@
+<div class="container py-4">
+
+  <%= form_for(@order) do |f| %>
+
+    <div class="row">
+      <div class="col-9">
+
+        <p class="flash-message text-danger">
+          <%= flash[:cart_item_force_destroyed] %>
+          <%= flash[:order_created_faled] %>
+          <%= flash[:item_is_deleted] %>
+        </p>
+
+        <p class="flash-message text-primary">
+          <%= flash[:cart_item_updated] %>
+        </p>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card border-secondary">
+              <div class="row">
+                <div class="col-8">
+                  <div class="card-header bg-white font-weight-bold text-center">
+                    送付先住所
+                  </div>
+
+                  <div class="card-body">
+
+                    <% if Address.exists?(user_id: current_user.id) %>
+
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="list-group text-center" id="list-tab" role="tablist">
+
+                            <% @address.first(1).each do |address| %>
+                              <a class="list-group-item list-group-item-action active small" id="list-<%= address.id %>-list" data-toggle="list" href="#list-<%= address.id %>" role="tab" aria-controls="home">
+                              <%= address.family_name_kanji %>
+                              <%= address.given_name_kanji %>
+                              </a>
+                            <% end %>
+
+                            <% @address[1..-1].each do |address| %>
+                              <a class="list-group-item list-group-item-action small" id="list-<%= address.id %>-list" data-toggle="list" href="#list-<%= address.id %>" role="tab" aria-controls="home">
+                                <%= address.family_name_kanji %> <%= address.given_name_kanji %>
+                              </a>
+                            <% end %>
+
+                          </div>
+                        </div>
+                        <div class="col-8">
+                          <div class="tab-content" id="nav-tabContent">
+
+                            <% @address.first(1).each do |address| %>
+
+                              <div class="tab-pane fade show active" id="list-<%= address.id %>" role="tabpanel" aria-labelledby="list-<%= address.id %>-list">
+                                <ul class="list-group list-group-flush text-dark">
+                                  <li class="list-group-item">
+                                    <p class="small text-secondary">名前</p>
+                                    <%= address.family_name_kanji %> <%= address.given_name_kanji %>
+                                  </li>
+                                  <li class="list-group-item">
+                                    <p class="small text-secondary">住所</p>
+                                    〒<%= address.post_code %><br>
+                                      <%= address.address %>
+                                  </li>
+                                  <label class="mt-2">
+                                    <%= f.radio_button :address_id, address.id, :checked => true, class: "mx-1" %>
+                                    ここに送る
+                                  </label>
+
+                                  <p class="text-center">
+                                    <%= link_to "送付先住所の登録・変更", edit_address_path(address), class: "btn btn-secondary btn-sm mt-3" %>
+                                  </p>
+
+                                </ul>
+                              </div>
+
+                            <% end %>
+
+                            <% @address[1..-1].each do |address| %>
+
+                              <div class="tab-pane fade" id="list-<%= address.id %>" role="tabpanel" aria-labelledby="list-<%= address.id %>-list">
+                                <ul class="list-group list-group-flush text-dark">
+                                  <li class="list-group-item">
+                                    <p class="small text-secondary">名前</p>
+                                    <%= address.family_name_kanji %> <%= address.given_name_kanji %>
+                                  </li>
+                                  <li class="list-group-item">
+                                    <p class="small text-secondary">住所</p>
+                                    〒<%= address.post_code %><br>
+                                      <%= address.address %>
+                                  </li>
+                                  <label class="mt-2">
+                                    <%= f.radio_button :address_id, address.id, class: "mx-1" %>
+                                    ここに送る
+                                  </label>
+
+                                  <p class="text-center">
+                                    <%= link_to "送付先住所の登録・変更", edit_address_path(address), class: "btn btn-secondary btn-sm mt-3" %>
+                                  </p>
+
+                                </ul>
+                              </div>
+
+                            <% end %>
+
+                          </div>
+                        </div>
+                      </div>
+
+                    <% else %>
+
+                      <p class="text-dark my-4 text-center">
+                        送付先住所が登録されていません。購入前に必ず登録してください。
+                      </p>
+
+                      <p class="text-center">
+                        <%= link_to "登録", edit_address_path(@address), class: "btn btn-secondary btn-sm" %>
+                      </p>
+
+                    <% end %>
+
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="card-header bg-white font-weight-bold text-center">
+                    <%= f.label :支払い方法 %>
+                  </div>
+                  <div class="card-body text-dark">
+                    <ul class="list-group list-group-flush text-dark">
+
+                      <%= form_for @order do |f| %>
+
+                        <% @payments.first(1).each do |payment| %>
+
+                          <li class="list-group-item">
+                            <div class="form-check">
+
+                              <label class="form-check-label" for="exampleRadios1">
+                                <%= f.radio_button :payment_id, payment.id.to_i, :checked => true, class: "mx-1" %>
+                                <%= payment.payment_method %>
+                              </label>
+
+                            </div>
+                          </li>
+
+                        <% end %>
+
+                        <% @payments.each do |payment| %>
+                          <% next if payment.id == 1 %>
+
+                            <li class="list-group-item">
+                              <div class="form-check">
+
+                                <label class="form-check-label" for="exampleRadios2">
+                                  <%= f.radio_button :payment_id, payment.id.to_i, class: "mx-1" %>
+                                  <%= payment.payment_method %>
+                                </label>
+
+                              </div>
+                            </li>
+
+                        <% end %>
+
+                      <% end %>
+
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <table class="table table-striped small mt-3" style="width: 100%; table-layout: fixed;">
+            <thead>
+              <tr class="text-center">
+                <th scope="col" style="width: 15%;"></th>
+                <th scope="col" style="width: 30%;">商品名</th>
+                <th scope="col" style="width: 12%;">単価</th>
+                <th scope="col" style="width: 19%;">数量</th>
+                <th scope="col" style="width: 14%;">小計価格</th>
+                <th scope="col" style="width: 10%;"></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% total_price_without_tax = 0 %>
+              <% total_count = 0 %>
+
+              <% current_user.cart_items.each do |cart_item| %>
+                <tr style="line-height: 80px;"><!-- ここからcart_itemsのeach開始 -->
+                  <td>
+                    <%= attachment_image_tag @item, :image, fallback: "no_image.jpg",class: "card-img" %>
+                  </td>
+
+                  <td style="line-height: 20px; overflow: hidden;">
+                    <div class="text-truncate">
+                      <span class="font-weight-bold" style="color:#0033cc;">
+                        <%= link_to cart_item.item.artist.name, artists_path(cart_item), class: "font-weight-bold", style: "color: #0033cc;" %>
+                      </span><br>
+                      <span>
+                        <%= link_to cart_item.item.title, item_path(cart_item.item), class: "font-weight-bold", style: "color:#1a1a1a;" %>
+                      </span>
+                    </div>
+                  </td>
+
+                  <td class="text-center">
+                    <%= number_to_currency cart_item.item.price_without_tax, :unit => "￥", :precision => 0 %>
+                  </td>
+
+                  <td class="text-center">
+                      <%= cart_item.item_count %>
+                      <% total_count = total_count + cart_item.item_count %>
+                  </td>
+
+                  <td class="text-center">
+                    <%= number_to_currency cart_item.item.price_without_tax * cart_item.item_count, :unit => "￥", :precision => 0 %>
+                    <% total_price_without_tax = total_price_without_tax + cart_item.item.price_without_tax * cart_item.item_count %>
+                  </td>
+
+                  <td>
+
+                  </td>
+
+                </tr><!-- ここでcart_itemsのeach終了 -->
+
+              <% end %>
+
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+      <!-- サイドバー -->
+      <div class="col-3">
+        <p class="text-center h5 text-white" style="background-color:#B40404;">注文</p>
+        <div class="list-group">
+          <div class="list-group-item">
+
+            <% total_price = total_price_without_tax * 1.08 %>
+            <% tax = total_price - total_price_without_tax %>
+
+            <p class="text-center">
+              <%= total_count %>点の商品
+            </p>
+
+            <p class="text-center">合計価格</p>
+            <div class="text-center">
+              <%= number_to_currency total_price_without_tax, :unit => "￥", :precision => 0 %>
+              <br> + <br>
+              消費税<%= number_to_currency tax, :unit => "￥", :precision => 0 %>
+              <p class="h3 my-4 text-center">
+                <%= number_to_currency total_price, :unit => "￥", :precision => 0 %>
+              </p>
+
+              <p class="text-center">
+
+                <%= f.hidden_field :user_id, :value => current_user.id %>
+                <%= f.hidden_field :status, :value => "注文受付" %>
+                <%= f.hidden_field :total_count, :value => total_count %>
+                <%= f.hidden_field :total_price_without_tax, :value => total_price_without_tax %>
+                <%= f.hidden_field :total_price, :value => total_price %>
+
+                <% current_user.cart_items.each do |cart_item| %>
+                  <%= f.fields_for :order_items do |i| %>
+
+                    <%= i.hidden_field :item_id, :value => cart_item.item.id %>
+                    <%= i.hidden_field :item_count, :value => cart_item.item_count %>
+                    <%= i.hidden_field :total_price_without_tax, :value => cart_item.item.price_without_tax %>
+
+                  <% end %>
+                <% end %>
+
+                <% if Address.exists?(user_id: current_user.id) %>
+
+                  <%= f.submit '注文を確定する', class: "btn btn-primary" %>
+
+                <% else %>
+
+                  <p class="text-dark my-4 text-center">
+                    送付先住所が登録されていません。購入前に必ず登録してください。
+                  </p>
+
+                  <p class="text-center">
+                    <%= link_to "登録", edit_address_path(@address), class: "btn btn-secondary btn-sm" %>
+                  </p>
+
+                <% end %>
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- 全体rowの閉じタグ -->
+
+  <% end %>
+
+</div><!-- 全体containerの閉じタグ -->

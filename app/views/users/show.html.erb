@@ -5,30 +5,44 @@
 <% else %>
 
   <!-- メインページ -->
-  <div class="container">
+  <div class="container py-4">
     <div class="row text-center">
       <div class="col-12 font-weight-bold h3">
-        <p>田中 太郎さんのマイページ</p>
+        <p>
+          <%= @user.family_name_kanji %>
+          <%= @user.given_name_kanji %>
+          さんのマイページ
+        </p>
       </div>
     </div>
 
     <div class="row justify-content-center">
       <div class="col-4">
-        <div class="card border-secondary text-white text-center">
+        <div class="card border-secondary text-white text-center" style="height: 36em;">
           <div class="card-header font-weight-bold" style="background-color:#00008b;">
             ユーザー情報
           </div>
           <div class="card-body">
             <ul class="list-group list-group-flush text-dark">
-              <li class="list-group-item"><p class="small text-secondary">名前</p><%= @user.family_name_kanji %><%= @user.given_name_kanji %></li>
-              <li class="list-group-item"><p class="small text-secondary">メールアドレス</p><%= @user.email %></li>
-              <li class="list-group-item"><p class="small text-secondary">住所</p>〒<%= current_user.post_code %><br><%= @user.address %></li>
-              <li class="list-group-item"><p class="small text-secondary">電話番号</p><%= @user.phone_number %></li>
+              <li class="list-group-item">
+                <p class="small text-secondary">名前</p>
+                <%= @user.family_name_kanji %><%= @user.given_name_kanji %>
+              </li>
+              <li class="list-group-item">
+                <p class="small text-secondary">メールアドレス</p>
+                <%= @user.email %>
+              </li>
+              <li class="list-group-item">
+                <p class="small text-secondary">住所</p>
+                〒<%= current_user.post_code %><br>
+                <%= @user.address %>
+              </li>
+              <li class="list-group-item">
+                <p class="small text-secondary">電話番号</p>
+                <%= @user.phone_number %>
+              </li>
             </ul>
-            <%= link_to edit_user_path(@user.id) do%>
-            <i class="btn btn-secondary btn-sm mt-4">
-              <span class="small">編集</span></i>
-            <% end %>
+            <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-secondary btn-sm mt-4"%>
           </div>
         </div>
       </div>
@@ -36,37 +50,57 @@
       <div class="col-4">
         <div class="row">
           <div class="col-12">
-            <div class="card border-secondary text-white text-center">
+            <div class="card border-secondary text-white text-center" style="height: 10em;">
               <div class="card-header font-weight-bold" style="background-color:#00008b;">
                 注文履歴
               </div>
               <div class="card-body">
                 <p class="small text-secondary">配送状況の確認・注文のキャンセル</p>
-                <%= link_to orders_path(@user.id) do %>
+                <%= link_to order_history_path(current_user) do %>
                 <i class="btn btn-secondary btn-sm">一覧へ</i>
                 <% end %>
               </div>
             </div>
           </div>
 
-          <div class="col-12 mt-4">
-            <div class="card border-secondary text-white text-center">
+          <!--送付先住所表示-->
+          <div class="col-12" style="margin-top: 1.5em;">
+            <div class="card border-secondary text-white text-center" style="height: 24.5em;">
               <div class="card-header font-weight-bold" style="background-color:#00008b">
                 送付先住所
               </div>
               <div class="card-body">
-                <ul class="list-group list-group-flush text-dark">
-                  <li class="list-group-item"><p class="small text-secondary">名前</p><%=  %><%= %></li>
-                  <li class="list-group-item"><p class="small text-secondary">住所</p>〒<%=  %><br>東京都渋谷区神南１丁目１９−１０</li>
-                </ul>
-                <p class="small text-secondary mt-2">・<br>その他1件</p>
-                <%= link_to do%>
-                <a href="#" class="btn btn-secondary btn-sm">登録・変更</a>
+
+                <% if Address.exists?(user_id: @user.id) %>
+
+                  <% @address.each do |address| %>
+
+                    <ul class="list-group list-group-flush text-dark">
+                      <li class="list-group-item">
+                        <p class="small text-secondary">名前</p>
+                        <%= address.family_name_kanji %> <%= address.given_name_kanji %>
+                      </li>
+                      <li class="list-group-item">
+                        <p class="small text-secondary">住所</p>
+                        〒<%= address.post_code %><br>
+                      </li>
+                    </ul>
+
+                  <% end %>
+                    <!--<p class="small text-secondary mt-2">・<br>その他1件</p>-->
+                    <%#= link_to "登録・変更", edit_address_path(@address), class: "btn btn-secondary btn-sm" %>
+
+                <% else %>
+
+                  <div class="row" style="line-height: 17em;">
+                    <div class="col-12 text-dark">送付先住所が登録されていません</div>
+                  </div>
+                  <%= link_to "登録・変更", edit_address_path(@address), class: "btn btn-secondary btn-sm" %>
+
                 <% end %>
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -74,11 +108,11 @@
       </div>
 
       <div class="col-12 text-center text-white mt-4">
-        <a href="#" class="btn btn-dark">買い物へ戻る</a>
+        <%= link_to "買い物へ戻る", items_path, class: "btn btn-dark" %>
       </div>
 
       <div class="col-12 text-center mt-5">
-        <a href="#" class="text-secondary">退会する</a>
+        <%= link_to "退会する", confirm_path(@user), class: "text-secondary" %>
       </div>
 
     </div>
