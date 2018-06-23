@@ -39,7 +39,7 @@ class UsersController < ApplicationController
       flash[:unsubscribe_faled] = "チェックを入れてください"
     else
       @user.update(member_status: params[:user][:member_status])
-      redirect_to items_path
+      redirect_to logout_path
       flash[:unsubscribed] = "退会処理が完了しました。ご利用ありがとうございました。"
     end
   end
