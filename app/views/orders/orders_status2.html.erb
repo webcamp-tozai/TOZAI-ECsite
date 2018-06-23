@@ -5,7 +5,7 @@
     <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
 
     <!-- メインページ -->
-    <div class="col-10">
+    <div class="col-10 py-4">
       <div class="row">
 
         <div class="col-12">
@@ -15,7 +15,7 @@
           <div class="box" style="height:10px;background-color:#005684;">
           </div>
         </div>
-
+<!--検索機能保留
         <div class="col-12">
           <form class="form-inline float-right" style="margin-bottom:10px;">
             <div class="form-group">
@@ -30,7 +30,7 @@
             </div>
           </form>
         </div>
-
+-->
         <div class="col-12">
           <div class="card">
             <div class="card-body">
@@ -45,7 +45,7 @@
                 <tbody>
                   <tr>
                     <td>全ての注文</td>
-                    <td><%= @orders.count %>件</td>
+                    <td><%= @order_all.count %>件</td>
                     <td>
                       <%= link_to "表示", orders_path, class: "btn btn-outline-success" %>
                     </td>
@@ -137,19 +137,14 @@
 
                                 <!-- ステータス -->
                                 <div class="col-2">
-                                  <select class="form-control" style="margin-top:5px;">
-                                    <option>注文受付</option>
-                                    <option>発送準備中</option>
-                                    <option>発送済</option>
-                                    <option>配達完了</option>
-                                  </select>
+                                  <%= f.select :status, [["注文受付", "注文受付"], ["発送準備中", "発送準備中"], ["発送済", "発送済"], ["配達完了", "配達完了"]] %>
+                                </div>
+
+                                <div class="col-2">
+                                  <%= f.submit "更新", class: "btn btn-success btn-sm mt-1" %>
                                 </div>
 
                               <% end %>
-
-                              <div class="col-2" style="margin-top:7px;">
-                                <a href="#" class="ml-3 btn btn-success btn-sm">更新</a>
-                              </div>
                             </div>
                           </div>
 
