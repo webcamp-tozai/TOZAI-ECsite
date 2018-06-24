@@ -18,20 +18,10 @@
           <%= attachment_image_tag @item, :image, fallback: "no_image.jpg", class: "card-img" %>
         </div>
         <!-- YouTube -->
-        <% if @item.movie == nil %>
-        <% else %>
-        <div class="col-12 mt-4">
-          <% iframe = content_tag(
-          :iframe,
-          '', # empty body
-          width: 360,
-          height: 215,
-          src: "https://www.youtube.com/embed/#{@item.movie}",
-          frameborder: 0,
-          allowfullscreen: true
-          ) %>
-          <%= content_tag(:div, iframe, class: 'youtube-container') %>
-        </div>
+        <% if @item.movie != nil %>
+          <div class="col-12 mt-4">
+            <%= movie(movie_id: @item.movie) %>
+          </div>
         <% end %>
 
         <!-- 商品大情報 -->
