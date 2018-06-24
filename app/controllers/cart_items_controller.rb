@@ -58,6 +58,9 @@ class CartItemsController < ApplicationController
         cart_item.save
         redirect_to user_cart_items_path(current_user)
         flash[:cart_item_created]  = "#{item.title}を#{cart_item.item_count}個カートに追加しました。"
+      elsif item.stock - params[:cart_item][:item_count].to_i < 0
+        redirect_to item_path(item)
+        flash[:cart_item_create_faled] = "入力した数量が在庫数を上回っています。こちらの商品は最大で#{item.stock}個購入できます。"
       end
     else
       redirect_to item_path(item.id)

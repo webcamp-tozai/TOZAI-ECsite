@@ -7,12 +7,12 @@
     <!-- メインページ -->
     <div class="col-10 py-4">
 
-      <span class="font-weight-bold h2">User一覧</span>
+      <span class="font-weight-bold h2">ユーザー 一覧</span>
       <div class="box" style="height:10px;background-color:#005684;"></div>
 
         <table class="table table-striped">
           <thead>
-            <tr>
+            <tr class="text-center">
               <th>名前</th>
               <th>メールアドレス</th>
               <th>購入回数</th>
@@ -25,7 +25,7 @@
 
           	<% @users.each do |user| %>
 
-              <tr>
+              <tr class="text-center">
                 <td>
                 	<%= user.family_name_kanji %>
                 	<%= user.given_name_kanji %>
@@ -34,19 +34,19 @@
                 	<%= user.email %>
                	</td>
                 <td>
-
+                  <%= user.orders.count %>
               	</td>
                 <td>
-                	<%= user.last_sign_in_at %>
+                	<%= truncate("#{user.last_sign_in_at}", length:16, :omission => "") %>
               	</td>
-                <td>
-                	<% if user.member_status == 0 %>
-                		<span>通常会員</span>
-                	<% elsif user.member_status == 1 %>
-                		<span>退会</span>
-                	<% elsif user.member_status == 2 %>
-                		<span>強制退会</span>
-                	<% end %>
+                <td class="font-weight-bold">
+                  <% if user.member_status == 0 %>
+                    <span class="text-success border border-success">通常会員</span>
+                  <% elsif user.member_status == 1 %>
+                    <span class="text-secondary border border-secondary">退会</span>
+                  <% elsif user.member_status == 2 %>
+                    <span class="text-danger border border-danger">強制退会</span>
+                  <% end %>
                 </td>
                 <td>
                 	<%= link_to "詳細", user_path(user),class: "btn btn-success btn-sm" %>

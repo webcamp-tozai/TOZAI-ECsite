@@ -1,111 +1,133 @@
 <!-- 管理者側サイドバー -->
-<div class="col-2" style="background-color:#005684;">
-  <p class="text-center my-4 h5 text-white">Dashboard</p>
+<div class="col-2" style="background-color:#005684; position: absolute; bottom: 100px; top: 100px; font-size: 15px;">
 
-  <li data-toggle="collapse" href="#collapse-A" style="list-style-type:none; cursor : pointer;">
-    <i class="text-white fa fa-users"></i>
-    <span class="text-white">ユーザ管理</span>
-  </li>
+  <div class="text-left" style=" z-index: 1; position: fixed; line-height: 27px;">
 
-  <ul id="collapse-A" class="collapse" style="list-style-type:none;">
+    <p class="text-center my-4 h5 text-white" style="position: fixed;">Dashboard</p>
 
-    <% if current_admin.is_main_administer == true %>
+    <li data-toggle="collapse" href="#collapse-A" style="margin-top: 70px; list-style-type: none; cursor: pointer;">
+      <i class="text-white fa fa-users"></i>
+      <span class="text-white">ユーザー管理</span>
+    </li>
+
+    <ul id="collapse-A" class="collapse" style="list-style-type: none;">
+
+      <% if current_admin.is_main_administer == true %>
+
+        <li>
+          <%= link_to new_admin_registration_path do %>
+            <i class="fa fa-minus-square fa-fw text-white"></i>
+            <span class="text-white">管理者登録</span>
+          <% end %>
+        </li>
+
+      <% end %>
 
       <li>
-        <%= link_to new_admin_registration_path do %>
+        <%= link_to admins_path do %>
           <i class="fa fa-minus-square fa-fw text-white"></i>
-          <span class="text-white">管理者登録</span>
+          <span class="text-white">管理者一覧</span>
         <% end %>
       </li>
 
+      <li>
+        <%= link_to users_path do %>
+          <i class="fa fa-minus-square fa-fw text-white"></i>
+          <span class="text-white">ユーザー一覧</span>
+        <% end %>
+      </li>
+    </ul>
+
+    <li data-toggle="collapse" href="#collapse-B" style="list-style-type: none; cursor: pointer;">
+      <i class="fa fa-music text-white"></i>
+      <span class="text-white">商品管理</span>
+    </li>
+
+    <ul id="collapse-B" class="collapse" style="list-style-type:none;">
+      <li>
+        <%= link_to new_item_path do %>
+          <i class="fa fa-minus-square fa-fw text-white"></i>
+          <span class="text-white">新規登録</span>
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to items_path do %>
+          <i class="fa fa-minus-square fa-fw text-white"></i>
+          <span class="text-white">商品一覧</span>
+        <% end %>
+      </li>
+    </ul>
+
+    <li data-toggle="collapse" href="#collapse-C" style="list-style-type: none; cursor: pointer;">
+      <i class="fa fa-shopping-bag text-white"></i>
+      <span class="text-white">注文管理</span>
+    </li>
+
+    <ul id="collapse-C" class="collapse" style="list-style-type:none;">
+      <li>
+        <%= link_to orders_path do %>
+          <i class="fa fa-minus-square fa-fw text-white"></i>
+          <span class="text-white">注文一覧</span>
+        <% end %>
+      </li>
+    </ul>
+
+    <li data-toggle="collapse" href="#collapse-D" style="list-style-type: none; cursor: pointer;">
+      <i class="fa fa-comments text-white"></i>
+      <span class="text-white">レビュー管理</span>
+    </li>
+
+    <ul id="collapse-D" class="collapse" style="list-style-type:none;">
+      <li>
+        <% if ItemReview.exists? %>
+
+          <%= link_to item_item_reviews_path do %>
+            <i class="fa fa-minus-square fa-fw text-white"></i>
+            <span class="text-white">レビュー一覧</span>
+          <% end %>
+
+        <% else %>
+
+            <i class="fa fa-minus-square fa-fw text-secondary"></i>
+            <span class="text-secondary">レビュー一覧</span><br>
+            <span class="small text-white">※レビューがありません</span>
+
+        <% end %>
+      </li>
+    </ul>
+
+    <li data-toggle="collapse" href="#collapse-E" style="list-style-type: none; cursor: pointer;">
+      <i class="fa fa-envelope-open text-white"></i>
+      <span class="text-white">問合せ管理</span>
+    </li>
+
+    <% if Contact.exists? %>
+
+      <ul id="collapse-E" class="collapse" style="list-style-type:none;">
+        <li>
+          <%= link_to contacts_path do %>
+            <i class="fa fa-minus-square fa-fw text-white"></i>
+            <span class="text-white">問合せ一覧</span>
+          <% end %>
+        </li>
+      </ul>
+
+    <% else %>
+
+      <ul id="collapse-E" class="collapse" style="list-style-type:none;">
+        <li>
+
+            <i class="fa fa-minus-square fa-fw text-secondary"></i>
+            <span class="text-white">問合せ一覧</span>
+            <span class="small text-secondary">※レビューがありません</span>
+        </li>
+      </ul>
+
     <% end %>
 
-    <li>
-      <%= link_to admins_path do %>
-        <i class="fa fa-minus-square fa-fw text-white"></i>
-        <span class="text-white">管理者一覧</span>
-      <% end %>
-    </li>
-
-    <li>
-      <%= link_to users_path do %>
-        <i class="fa fa-minus-square fa-fw text-white"></i>
-        <span class="text-white">ユーザー一覧</span>
-      <% end %>
-    </li>
-  </ul>
-
-  <li data-toggle="collapse" href="#collapse-B" style="list-style-type:none; cursor : pointer;">
-    <i class="fa fa-music text-white"></i>
-    <span class="text-white">商品管理</span>
-  </li>
-
-  <ul id="collapse-B" class="collapse" style="list-style-type:none;">
-    <li>
-      <%= link_to new_item_path do %>
-        <i class="fa fa-minus-square fa-fw text-white"></i>
-        <span class="text-white">新規登録</span>
-      <% end %>
-    </li>
-
-    <li>
-      <%= link_to items_path do %>
-        <i class="fa fa-minus-square fa-fw text-white"></i>
-        <span class="text-white">商品一覧</span>
-      <% end %>
-    </li>
-  </ul>
-
-  <li data-toggle="collapse" href="#collapse-C" style="list-style-type:none; cursor : pointer;">
-    <i class="fa fa-shopping-bag text-white"></i>
-    <span class="text-white">注文管理</span>
-  </li>
-
-  <ul id="collapse-C" class="collapse" style="list-style-type:none;">
-    <li>
-      <%= link_to orders_path do %>
-        <i class="fa fa-minus-square fa-fw text-white"></i>
-        <span class="text-white">注文一覧</span>
-      <% end %>
-    </li>
-  </ul>
-
-  <li data-toggle="collapse" href="#collapse-D" style="list-style-type:none; cursor : pointer;">
-    <i class="fa fa-comments text-white"></i>
-    <span class="text-white">レビュー管理</span>
-  </li>
-
-  <ul id="collapse-D" class="collapse" style="list-style-type:none;">
-    <li>
-      <% if ItemReview.exists? %>
-
-        <%= link_to item_item_reviews_path do %>
-          <i class="fa fa-minus-square fa-fw text-white"></i>
-          <span class="text-white">レビュー一覧</span>
-        <% end %>
-
-      <% else %>
-
-          <i class="fa fa-minus-square fa-fw text-secondary"></i>
-          <span class="text-secondary">レビュー一覧</span><br>
-          <span class="small text-white">※レビューが1件もありません</span>
-
-      <% end %>
-    </li>
-  </ul>
-
-  <li data-toggle="collapse" href="#collapse-E" style="list-style-type:none; cursor : pointer;">
-    <i class="fa fa-envelope-open text-white"></i>
-    <span class="text-white">問合せ管理</span>
-  </li>
-
-  <ul id="collapse-E" class="collapse" style="list-style-type:none;">
-    <li>
-      <%= link_to contacts_path do %>
-        <i class="fa fa-minus-square fa-fw text-white"></i>
-        <span class="text-white">問合せ一覧</span>
-      <% end %>
-    </li>
-  </ul>
+  </div>
 
 </div>
+
+<div class="col-2" style=""></div>
