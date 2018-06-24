@@ -19,23 +19,22 @@ Rails.application.routes.draw do
   get '/admins_top' => 'admins#top', as: 'admins_top'
   get '/genre/:id' => 'items#genre_index', as: 'genre'      # ジャンルの絞り込みページ
   get '/artist/:id' => 'items#artist_index', as: 'artist'   # アーティストでの絞り込みページ
-
+  #get '/genre/' => 'genres#index', as: 'genres_index'
+  # get '/genres/:id/edit' => 'genres#edit', as: 'genres_edit'
   resources :items, except: [:destroy] do
   	resources :item_reviews, only: [:create, :new, :edit, :update, :destroy, :index]
     resources :tracks, only: [:create, :new, :edit, :update, :destroy]
     resources :labels, only: [:create, :new, :edit, :update]
-    resources :genres, only: [:create, :new, :edit, :update]
+    resources :genres, only: [:create, :new]
     resources :artists, only: [:create, :new, :edit, :update]
     resources :cart_items, only: [:index, :destroy, :all_destroy, :create, :update]
   end
 
   resources :item_reviews, only: [:index, :destroy]
 
-  resources :genres, only: [:index]
-    resources :items, only: [:index]
+  resources :genres, only: [:index, :edit,:update]
 
   resources :artists, only: [:index]
-    resources :items, only: [:index]
 
   resources :admins, except: [:destroy]
 
