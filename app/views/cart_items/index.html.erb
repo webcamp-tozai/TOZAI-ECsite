@@ -46,7 +46,7 @@
                 <td style="line-height: 20px; overflow: hidden;">
                   <div class="text-truncate">
                     <span class="font-weight-bold" style="color:#0033cc;">
-                      <%= link_to cart_item.item.artist.name, artists_path(cart_item), class: "font-weight-bold", style: "color: #0033cc;" %>
+                      <%= link_to cart_item.item.artist.name, artist_path(cart_item.item.artist_id), class: "font-weight-bold", style: "color: #0033cc;" %>
                     </span><br>
                     <span href="#" >
                       <%= link_to cart_item.item.title, item_path(cart_item.item), class: "font-weight-bold", style: "color:#1a1a1a;" %>
