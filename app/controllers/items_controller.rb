@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
-  before_action :set_genre, only: [:index, :show, :genre_index, :artist_index]
 
-  PER_ITEM = 12
+  # PER_ITEM = 12
 
   def index
-    @items = Item.page(params[:page]).reverse_order.per(PER_ITEM)
+    # application_controllersのset_searchで設定している
+    # @items = Item.page(params[:page]).reverse_order.per(PER_ITEM)
   end
 
   def create
@@ -128,10 +128,6 @@ class ItemsController < ApplicationController
   end
 
   private
-
-  def set_genre
-    @genres = Genre.all
-  end
 
   def item_params
     params.require(:item).permit(:item_introduction,
