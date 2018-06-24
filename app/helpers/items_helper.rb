@@ -3,7 +3,7 @@ module ItemsHelper
     iframe = content_tag(
       :iframe,
       '', # empty body
-      width: 460,
+      width: 360,
       height: 215,
       src: "https://www.youtube.com/embed/#{opts[:movie.id]}",
       frameborder: 0,

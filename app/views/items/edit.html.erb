@@ -101,7 +101,8 @@
                     </div>
 
                     <div class="form-group col-md-4">
-                      <label class="font-weight-bold">Youtube</label>
+                      <label class="font-weight-bold">
+                      Youtube("https://www.youtube.com/embed/〇〇")</label>
                       <%= item.text_field :movie, class:"form-control" %>
                     </div>
 
@@ -232,12 +233,13 @@
         </div>
 
         <!-- YouTube -->
-
+        <% if @item.movie == nil %>
+        <% else %>
         <div class="col-12 mt-4">
           <% iframe = content_tag(
           :iframe,
           '', # empty body
-          width: 460,
+          width: 360,
           height: 215,
           src: "https://www.youtube.com/embed/#{@item.movie}",
           frameborder: 0,
@@ -245,6 +247,7 @@
           ) %>
           <%= content_tag(:div, iframe, class: 'youtube-container') %>
         </div>
+        <% end %>
 
       </div>
 

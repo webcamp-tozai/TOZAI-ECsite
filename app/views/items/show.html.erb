@@ -17,6 +17,23 @@
         <div class="col-4">
           <%= attachment_image_tag @item, :image, fallback: "no_image.jpg", class: "card-img" %>
         </div>
+        <!-- YouTube -->
+        <% if @item.movie == nil %>
+        <% else %>
+        <div class="col-12 mt-4">
+          <% iframe = content_tag(
+          :iframe,
+          '', # empty body
+          width: 360,
+          height: 215,
+          src: "https://www.youtube.com/embed/#{@item.movie}",
+          frameborder: 0,
+          allowfullscreen: true
+          ) %>
+          <%= content_tag(:div, iframe, class: 'youtube-container') %>
+        </div>
+        <% end %>
+
         <!-- 商品大情報 -->
         <div class="col-5" style="word-break: break-all;">
           <div>
