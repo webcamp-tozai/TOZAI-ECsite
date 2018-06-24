@@ -15,7 +15,7 @@
 
           <div clas="col-8 ">
             <span class="font-weight-bold">
-              <%= @item.count %>件の商品
+              <%= @items.count %>件の商品
             </span>
             <form class="form float-right">
               <div class="input-group">
@@ -48,7 +48,7 @@
             </thead>
 
             <tbody>
-            <% @item.each do |item| %>
+            <% @items.each do |item| %>
               <tr>
                 <td><%= link_to item.title, edit_item_path(item.id) %></td>
                 <td><%= item.artist.name %></td>

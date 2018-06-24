@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_genre, only: [:index, :show, :genre_index, :artist_index]
 
   PER_ITEM = 12
-  
+
   def index
     @items = Item.page(params[:page]).reverse_order.per(PER_ITEM)
   end
