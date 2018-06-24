@@ -40,6 +40,7 @@
                         <label class="font-weight-bold">タイトル</label>
                         <%= item.text_field :title, class:"form-control" %>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label class="font-weight-bold">レーベル名</label>
                         <%= fields_for @label do |label| %>
@@ -76,7 +77,6 @@
                     <div class="form-group">
                       <label class="font-weight-bold">商品紹介</label>
                       <%= item.text_area :item_introduction, class:"form-control" %>
-
                     </div>
 
                   <div class="form-row">
@@ -84,10 +84,12 @@
                       <label class="font-weight-bold">商品単価</label>
                       <%= item.text_field :price_without_tax, class:"form-control" %>
                     </div>
+
                     <div class="form-group col-md-2">
                       <label class="font-weight-bold">在庫数</label>
                       <%= item.text_field :stock, class:"form-control" %>
                     </div>
+
                     <div class="form-group col-md-2">
                       <label class="font-weight-bold ">ステータス</label>
                       <% if @item.is_deleted  == false %>
@@ -96,6 +98,11 @@
                             <p class="text-danger">販売中止</p>
                       <% end %>
                         <%= item.select(:is_deleted, [['販売中', false], ['取扱中止',true]]) %>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label class="font-weight-bold">Youtube</label>
+                      <%= item.text_field :movie, class:"form-control" %>
                     </div>
 
                   </div>
@@ -227,7 +234,16 @@
         <!-- YouTube -->
 
         <div class="col-12 mt-4">
-          <iframe class="" src="https://www.youtube.com/embed/exlGc8eFXI0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <% iframe = content_tag(
+          :iframe,
+          '', # empty body
+          width: 460,
+          height: 215,
+          src: "https://www.youtube.com/embed/#{@item.movie}",
+          frameborder: 0,
+          allowfullscreen: true
+          ) %>
+          <%= content_tag(:div, iframe, class: 'youtube-container') %>
         </div>
 
       </div>

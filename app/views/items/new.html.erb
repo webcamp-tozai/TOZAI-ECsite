@@ -48,8 +48,12 @@
                     <datalist id="label_list">
                       <% @label_name.each do |label| %>
                     <option value="<%= label.name %>"><%= label.name %></option>
-                    <% end %>
+                      <% end %>
                     </datalist>
+
+                    <label class="font-weight-bold">Youtube</label>
+                    <%= f.text_field :movie, class:"form-control" %>
+
                   </div>
 
                   <div class="form-group col-md-6">
