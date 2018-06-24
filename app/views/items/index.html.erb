@@ -46,7 +46,7 @@
                 <!-- ジャンル、アーティスト名、商品名 -->
                 <div class="mt-3 text-truncate">
                   <div class="text-dark"><%= item.genre.genre_english %></div>
-                  <%= link_to item.artist.name, item_path(item), class: "font-weight-bold", style: "color: #0033cc; font-size: 18px;" %><br>
+                  <%= link_to item.artist.name, artist_path(item.artist_id), class: "font-weight-bold", style: "color: #0033cc; font-size: 18px;" %><br>
                   <%= link_to item.title, item_path(item), class: "font-weight-bold", style: "color: #1a1a1a;" %><br>
                 </div>
                 <!-- 税抜価格 -->

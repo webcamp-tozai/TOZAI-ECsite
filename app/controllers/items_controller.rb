@@ -7,11 +7,6 @@ class ItemsController < ApplicationController
     @items = Item.page(params[:page]).reverse_order.per(PER_ITEM)
   end
 
-  def artist_index
-    @items = Item.where(artist_id: params[:id]).page(params[:page]).reverse_order
-    render 'items/index'
-  end
-
   def create
     @item = Item.new(item_params)
 
