@@ -17,26 +17,22 @@ Rails.application.routes.draw do
 
   root to: 'items#index'
   get '/admins_top' => 'admins#top', as: 'admins_top'
-  get '/genre/:id' => 'items#genre_index', as: 'genre'      # ジャンルの絞り込みページ
-  get '/artist/:id' => 'items#artist_index', as: 'artist'   # アーティストでの絞り込みページ
+  # get '/genre/:id' => 'items#genre_index', as: 'genre'      # ジャンルの絞り込みページ
+  # get '/artist/:id' => 'items#artist_index', as: 'artist'   # アーティストでの絞り込みページ
 
   resources :items, except: [:destroy] do
   	resources :item_reviews, only: [:create, :new, :edit, :update, :destroy, :index]
     resources :tracks, only: [:create, :new, :edit, :update, :destroy]
-    resources :labels, only: [:create, :new, :edit, :update]
-    resources :genres, only: [:create, :new, :edit, :update]
-    resources :artists, only: [:create, :new, :edit, :update]
+    resources :labels, only: [:create, :new]
+    resources :genres, only: [:create, :new]
+    resources :artists, only: [:create, :new]
     resources :cart_items, only: [:index, :destroy, :all_destroy, :create, :update]
   end
 
   resources :item_reviews, only: [:index, :destroy]
-
-  resources :genres, only: [:index]
-    resources :items, only: [:index]
-
-  resources :artists, only: [:index]
-    resources :items, only: [:index]
-
+  resources :labels, only: [:index, :edit, :update]
+  resources :genres, only: [:index, :show, :edit, :update]
+  resources :artists, only: [:index, :show, :edit, :update]
   resources :admins, except: [:destroy]
 
   get '/admins/:id/edit_password' => 'admins#edit_password', as: 'admin_edit_password'
