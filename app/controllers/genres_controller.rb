@@ -1,12 +1,14 @@
 class GenresController < ApplicationController
+
 	PER_ITEM = 12
 
 	def create
 	end
 
 	def index
+		@genre = Genre.all
 	end
- 
+
   def show
   	@items = Item.where(genre_id: params[:id]).page(params[:page]).reverse_order.per(PER_ITEM)
   	render 'items/index'
