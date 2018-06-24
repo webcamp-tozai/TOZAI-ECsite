@@ -84,18 +84,20 @@
 
         </div><!-- 商品一覧rowの閉じタグ -->
 
-        <div class="row mb-4">
-          <div class="col-12 text-center mb-1" >
-            <%= page_entries_info @items %>
+        <% if @items.count > 8   %>
+          <div class="row mb-4">
+            <div class="col-12 text-center mb-1" >
+              <%= page_entries_info @items %>
+            </div>
+            <div class="col-12">
+              <nav aria-label="Page navigation example">
+                <div class="pagination justify-content-center small">
+                  <%= paginate @items, window: 2 %>
+                </div>
+              </nav>
+            </div>
           </div>
-          <div class="col-12">
-            <nav aria-label="Page navigation example">
-              <div class="pagination justify-content-center small">
-                <%= paginate @items, window: 2 %>
-              </div>
-            </nav>
-          </div>
-        </div>
+        <% end %>
 
       </div><!-- メインページの閉じタグ -->
     </div><!-- 全体rowの閉じタグ -->

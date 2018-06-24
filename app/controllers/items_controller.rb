@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
 
-  # PER_ITEM = 12
+  PER_ITEM = 12
 
   def index
-    # application_controllersのset_searchで設定している
-    # @items = Item.page(params[:page]).reverse_order.per(PER_ITEM)
+    @search = Item.ransack(params[:q])
+		@items = @search.result.page(params[:page]).reverse_order.per(PER_ITEM)
   end
 
   def create
