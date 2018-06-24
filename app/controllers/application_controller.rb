@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	before_action :set_search
+	
+	PER_ITEM = 12
 
   def after_sign_in_path_for(resource)
 		if admin_signed_in?
@@ -17,9 +19,8 @@ class ApplicationController < ActionController::Base
 
 	# ransack用
 	def set_search
-		@items = Item.all
 		@search = Item.ransack(params[:q])
-		@items = @search.result.page(params[:page]).reverse_order
+		@items = @search.result.page(params[:page]).reverse_order.per(PER_ITEM)
 	end
 
 	protected
