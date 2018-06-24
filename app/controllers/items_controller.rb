@@ -152,6 +152,7 @@ class ItemsController < ApplicationController
                                  :content_type,
                                  :is_deleted,
                                  :artist_id,
+                                 :movie,
                                   tracks_attributes: [:disc_number,
                                                       :track_number,
                                                       :name,

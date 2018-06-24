@@ -17,6 +17,13 @@
         <div class="col-4">
           <%= attachment_image_tag @item, :image, fallback: "no_image.jpg", class: "card-img" %>
         </div>
+        <!-- YouTube -->
+        <% if @item.movie != nil %>
+          <div class="col-12 mt-4">
+            <%= movie(movie_id: @item.movie) %>
+          </div>
+        <% end %>
+
         <!-- 商品大情報 -->
         <div class="col-5" style="word-break: break-all;">
           <div>
