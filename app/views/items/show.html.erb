@@ -161,14 +161,14 @@
         <div class="col-12">
           <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">収録曲</p>
             <% @disc_numbers.each do |disc_number| %>
-              <table class="table table-sm table-striped"  style="width: 100%; table-layout: fixed; overflow: hidden;">
+              <table class="table table-sm table-striped"  style="table-layout: fixed; overflow: hidden;">
+                <p>ディスクNo.<%= disc_number %></p>
                 <thead>
-                  <p>ディスクNo.<%= disc_number %></p>
                 </thead>
                 <tbody>
                   <% track_infos = Track.where("item_id = ?", params[:id])
                                         .where("disc_number = ?", disc_number)
-                                        .select(:track_number, :name)
+                                        .select(:track_number, :name, :length_hour, :length_minute, :length_second)
                                         .order(track_number: :asc)  %>
                   <% track_infos.each do |track_info| %>
                     <tr>
@@ -177,6 +177,11 @@
                       </th>
                       <td>
                         <%= track_info.name %>
+                      </td>
+                      <td>
+                        <%= sprintf("%01d : ", track_info.length_hour) unless track_info.length_hour == 0 %> 
+                        <%= sprintf("%02d : ", track_info.length_minute) %>
+                        <%= sprintf("%02d", track_info.length_second) %>
                       </td>
                     </tr>
                   <% end %>
