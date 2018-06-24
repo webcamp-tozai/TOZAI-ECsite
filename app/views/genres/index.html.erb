@@ -1,0 +1,41 @@
+<!-- 管理者の商品一覧画面 -->
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-9 py-4">
+      <div class="row">
+        <div class="container">
+          <span class="font-weight-bold h3">ジャンル一覧</span>
+          <div class="box" style="height:10px;background-color:#005684;"></div>
+          <p>TOZAI Records -No music No life-</p>
+
+          <table class="table table-sm">
+            <thead>
+              <tr class="table-light">
+                <th>ジャンル名</th>
+                <th>ジャンル名(カナ)</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+            <% @genre.each do |genre| %>
+              <tr>
+                <td><%= genre.genre_english %></td>
+                <td><%= genre.genre_kana %></td>
+                <td><%= link_to "編集", edit_genre_path(genre.id), class:"btn btn-outline-warning btn-sm" %></td>
+              </tr>
+            <% end %>
+
+            </tbody>
+          </table>
+
+        </div><!--メインページのcontainer-->
+      </div> <!--メインページのrow-->
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->
