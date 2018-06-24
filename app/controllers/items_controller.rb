@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_admin, only: [:new, :edit]
 
   PER_ITEM = 12
 
@@ -129,6 +129,10 @@ class ItemsController < ApplicationController
   end
 
   private
+  
+  def authenticate_admin
+    redirect_to items_path unless admin_signed_in?
+  end
 
   def item_params
     params.require(:item).permit(:item_introduction,
