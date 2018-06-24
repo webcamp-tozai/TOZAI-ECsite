@@ -9,30 +9,28 @@
     <div class="col-10 py-4">
       <div class="row">
         <div class="container">
-          <span class="font-weight-bold h3">ジャンル一覧</span>
+          <span class="font-weight-bold h3">レーベル更新</span>
           <div class="box" style="height:10px;background-color:#005684;"></div>
           <p>TOZAI Records -No music No life-</p>
 
+          <%= form_for @label do |label| %>
           <table class="table table-sm">
             <thead>
               <tr class="table-light">
-                <th>ジャンル名</th>
-                <th>ジャンル名(カナ)</th>
+                <th>レーベル名</th>
                 <th></th>
               </tr>
             </thead>
 
             <tbody>
-            <% @genre.each do |genre| %>
               <tr>
-                <td><%= genre.genre_english %></td>
-                <td><%= genre.genre_kana %></td>
-                <td><%= link_to "編集", edit_genre_path(genre.id), class:"btn btn-outline-warning btn-sm" %></td>
+                <td><%= label.text_field :name, class:"form-control" %></td>
+                <td><%= label.submit "更新", class:"btn btn-outline-success btn-sm" %></td>
               </tr>
-            <% end %>
 
             </tbody>
           </table>
+          <% end %>
 
         </div><!--メインページのcontainer-->
       </div> <!--メインページのrow-->

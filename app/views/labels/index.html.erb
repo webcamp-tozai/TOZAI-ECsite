@@ -16,18 +16,16 @@
           <table class="table table-sm">
             <thead>
               <tr class="table-light">
-                <th>ジャンル名</th>
-                <th>ジャンル名(カナ)</th>
+                <th>レーベル名</th>
                 <th></th>
               </tr>
             </thead>
 
             <tbody>
-            <% @genre.each do |genre| %>
+            <% @label.each do |label| %>
               <tr>
-                <td><%= genre.genre_english %></td>
-                <td><%= genre.genre_kana %></td>
-                <td><%= link_to "編集", edit_genre_path(genre.id), class:"btn btn-outline-warning btn-sm" %></td>
+                <td><%= label.name %></td>
+                <td><%= link_to "編集", edit_label_path(label.id), class:"btn btn-outline-success btn-sm" %></td>
               </tr>
             <% end %>
 
