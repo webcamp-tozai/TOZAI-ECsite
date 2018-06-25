@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   end
 
   resources :item_reviews, only: [:index, :destroy]
-  resources :labels, only: [:index, :edit, :update]
+  resources :labels, only: [:index, :show, :edit, :update]
   resources :genres, only: [:index, :show, :edit, :update]
   resources :artists, only: [:index, :show, :edit, :update]
   resources :admins, except: [:destroy]
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
 
   resources :addresses, except: [:index, :show]
 
-  resources :orders, except: [:show, :edit, :destroy] do
+  resources :orders, except: [:edit, :destroy] do
     resource :order_items, only: [:create]
   end
 

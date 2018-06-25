@@ -1,5 +1,7 @@
 class ArtistsController < ApplicationController
 
+	before_action :authenticate_admin, except: [:show]
+
 	def index
 		@items = @items.select(:artist_id).distinct.page(params[:page]).reverse_order
 	end

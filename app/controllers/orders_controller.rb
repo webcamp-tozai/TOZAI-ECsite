@@ -1,21 +1,17 @@
 class OrdersController < ApplicationController
 	before_action :authenticate_user_or_admin, except: [:index]
-	before_action :authenticate_admin, except: [:index, :create, :new]
+	before_action :authenticate_admin, except: [:create, :new]
+	before_action :authenticate_user
 
 	def index
-		if user_signed_in?
-			@order = current_user.orders.all.page(params[:page]).reverse_order
-			@order_item = OrderItem.where(order_id: @order)
-		elsif admin_signed_in?
-			@status_name = "全て"
-			@orders = Order.all.page(params[:page]).reverse_order
-			@order_all = Order.all
-			@status1 = Order.where(status: "注文受付")
-			@status2 = Order.where(status: "発送準備中")
-			@status3 = Order.where(status: "発送済")
-			@status4 = Order.where(status: "配達完了")
-			@order_items = OrderItem.all
-		end
+		@status_name = "全て"
+		@orders = Order.all.page(params[:page]).reverse_order
+		@order_all = Order.all
+		@status1 = Order.where(status: "注文受付")
+		@status2 = Order.where(status: "発送準備中")
+		@status3 = Order.where(status: "発送済")
+		@status4 = Order.where(status: "配達完了")
+		@order_items = OrderItem.all
 	end
 
 	def orders_status1
@@ -126,26 +122,16 @@ class OrdersController < ApplicationController
 	  end
 	end
 
+	def show
+		redirect_to root_path
+	end
+
 	private
-
-  def authenticate_user_or_admin
-    if admin_signed_in? || user_signed_in?
-    else
-      redirect_to items_path
-    end
-  end
-
-  def authenticate_admin
-  	if admin_signed_in?
-	  else
-	  	redirect_to items_path
-	  end
-  end
 
   def find_cart_items
   	if CartItem.find_by(user_id: current_user.id)
 		else
-			redirect_to items_path
+			redirect_to root_path
 		end
   end
 
