@@ -1,8 +1,7 @@
 class ArtistsController < ApplicationController
-	PER_ITEM = 12
 
 	def index
-		@items = @items.select(:artist_id).distinct.page(params[:page]).reverse_order.per(PER_ITEM)
+		@items = @items.select(:artist_id).distinct.page(params[:page]).reverse_order
 	end
 
 	def create
@@ -12,7 +11,7 @@ class ArtistsController < ApplicationController
 	end
 
 	def show
-		@items = Item.where(artist_id: params[:id]).page(params[:page]).reverse_order.per(PER_ITEM)
+		@items = Item.where(artist_id: params[:id]).page(params[:page]).reverse_order
     render 'items/index'
 	end
 
