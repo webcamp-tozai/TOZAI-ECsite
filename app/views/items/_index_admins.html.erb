@@ -21,7 +21,6 @@
               <div class="input-group">
                 <%= search_form_for @search do |f| %>
                   <%= f.text_field :title_cont, class:"form-control mr-sm-1", placeholder: "タイトル"  %>
-                  <%#= f.collection_select :artist_id_eq, @artists, :id, :name, :include_blank => 'アーティスト指定なし' %>
                   <%= f.text_field :artist_name_or_artist_name_kana_cont, class: "form-control mr-sm-1",
                                                                                    placeholder: 'アーティスト名'
                    %>
