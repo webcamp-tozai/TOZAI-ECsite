@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action :authenticate_admin!
+  before_action :authenticate_admin
   before_action :admin_exists, except: [:index, :top]
   before_action :suspending_admin_account
 
@@ -8,6 +8,10 @@ class AdminsController < ApplicationController
   end
 
   def edit
+  end
+
+  def show
+    redirect_to admins_path
   end
 
   def edit_password
@@ -53,7 +57,7 @@ class AdminsController < ApplicationController
     if Admin.exists?(params[:id])
       @admin = Admin.find(params[:id])
     else
-      redirect_to admins_top_path
+      redirect_to admins_path
     end
   end
 
