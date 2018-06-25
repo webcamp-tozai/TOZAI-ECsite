@@ -125,11 +125,11 @@
 
       </div>
       <!-- YouTube -->
-        <% if @item.movie != nil %>
-          <div class="col-12 mt-4">
-            <%= movie(movie_id: @item.movie) %>
-          </div>
-        <% end %>
+      <% if @item.movie.present? %>
+        <div class="col-12 mt-4">
+          <%= movie(movie_id: @item.movie) %>
+        </div>
+      <% end %>
 
       <!-- 商品詳細情報 -->
       <div class="row">
@@ -201,7 +201,9 @@
           </div>
         </div>
       </div>
-
+<%
+=begin
+%>
       <div class="row">
         <div class="col-12">
           <p class="text-center my-4 h5 text-white " style="background-color:#B40404;">購入者レビュー</p>
@@ -234,7 +236,9 @@
             </table>
         </div>
       </div>
-
+<%
+=end
+%>
     </div><!-- メインページの閉じタグ -->
   </div><!-- 全体rowの閉じタグ -->
 </div><!-- 全体containerの閉じタグ -->
