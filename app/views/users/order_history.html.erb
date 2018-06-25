@@ -5,6 +5,11 @@
 <% else %>
 
   <div class="container pt-4">
+
+    <p class="flash-message text-success text-center">
+      <%= flash[:order_created] %>
+    </p>
+
     <div class="row">
 
       <div class="col-3 align-self-center">
