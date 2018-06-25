@@ -20,9 +20,9 @@
             <form class="form float-right">
               <div class="input-group">
                 <%= search_form_for @search do |f| %>
-                  <%=
-                    f.text_field :title_or_artist_name_or_artist_name_kana_cont, class:"form-control mr-sm-2",style: "width: 300px", placeholder: '商品名、アーティスト名で検索'
-                  %>
+                  <%= f.text_field :title_cont, class:"form-control mr-sm-2", placeholder: "タイトル"  %>
+                  <%= f.collection_select :artist_id_eq, @artists, :id, :name, :include_blank => 'アーティスト指定なし' %>
+                  <%= f.collection_select :genre_id_eq, @genres, :id, :genre_english, :include_blank => 'ジャンル指定なし' %>
                   <span class="d-flex align-items-center">在庫数：</span>
                   <%= f.number_field :stock_gteq, class: "form-control" %>
                   <span class="d-flex align-items-center">～</span>
