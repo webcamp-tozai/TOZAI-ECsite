@@ -14,9 +14,6 @@
           <p>TOZAI Records -No music No life-</p>
 
           <div class="col-12">
-            <span class="font-weight-bold">
-              <%= @items.count %>件のアーティスト
-            </span>
             <form class="form float-right">
               <div class="input-group">
                 <%= search_form_for @search do |f| %>
@@ -50,7 +47,8 @@
 
             </tbody>
           </table>
-
+          <p><%= page_entries_info @items %></p>
+          <p><%= paginate @items, window: 2 %></p>
         </div><!--メインページのcontainer-->
       </div> <!--メインページのrow-->
     </div><!-- メインページの閉じタグ -->
