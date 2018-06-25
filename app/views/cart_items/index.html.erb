@@ -62,7 +62,7 @@
                   <%= form_for ([current_user, cart_item]), :html => { :class => "form-inline" } do |f| %>
                     <div class="form-group">
                       <span>
-                        <%= f.number_field :item_count, min: 1, class: "col-3 mx-2 form-control form-control-sm" %>
+                        <%= f.number_field :item_count, min: 1, max: cart_item.item.stock, class: "col-3 mx-2 form-control form-control-sm", style: "width: 200px;" %>
                         <%= f.submit "変更", class: "btn btn-secondary btn-sm" %>
                       </span>
 
