@@ -33,10 +33,12 @@
                           <div class="list-group text-center" id="list-tab" role="tablist">
 
                             <% @address.first(1).each do |address| %>
-                              <a class="list-group-item list-group-item-action active small" id="list-<%= address.id %>-list" data-toggle="list" href="#list-<%= address.id %>" role="tab" aria-controls="home">
-                              <%= address.family_name_kanji %>
-                              <%= address.given_name_kanji %>
-                              </a>
+                              <!--<a class="list-group-item list-group-item-action active small" id="list-<%#= address.id %>-list" data-toggle="list" href="#list-<%#= address.id %>" role="tab" aria-controls="home">-->
+                              <p class="card border-primary">
+                                <%= address.family_name_kanji %>
+                                <%= address.given_name_kanji %>
+                              </p>
+                              <!--</a>-->
                             <% end %>
 
                             <% @address[1..-1].each do |address| %>
