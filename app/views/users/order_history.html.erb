@@ -75,14 +75,6 @@
                               <%= number_to_currency order.total_price, :unit => "￥", :precision => 0 %>
                             </span>
                           </div>
-                          <!-- 送付先 -->
-                          <div class="col-2">
-                            <span class="small text-secondary">送付先</span><br>
-                            <span class="">
-                              <%= order.address.family_name_kanji %>
-                              <%= order.address.given_name_kanji %>
-                            </span>
-                          </div>
                           <!-- ステータス -->
                           <div class="col-3">
                             <span class="small text-secondary">
@@ -137,47 +129,70 @@
                       </div>
 
                       <div class="card-body">
-                        <table class="table">
-                          <tbody>
+                        <div class="row">
+                          <div class="col-8">
 
-                          <% order_select = @order_item.select do |item| %>
-                            <% item.order_id == order.id %>
-                          <% end %>
+                            <table class="table">
+                              <tbody>
 
-                          <% order_select.each do |order_item| %>
+                              <% order_select = @order_item.select do |item| %>
+                                <% item.order_id == order.id %>
+                              <% end %>
 
-                            <tr><!-- ここでorder_itemsをeach -->
-                              <td>
-                                <div class="row">
-                                  <!-- ジャケット画像 -->
-                                  <div class="col-2">
-                                    <%= attachment_image_tag order_item.item, :image, fallback: "no_image.jpg",class: "card-img" %>
-                                  </div>
-                                  <!-- アーティスト名、商品名、税込価格 -->
-                                  <div class="col-9">
-                                    <span class="font-weight-bold" style="color:#0033cc;">
-                                      <%= link_to order_item.item.artist.name, artist_path(order_item.item.artist_id), class: "font-weight-bold", style: "color: #0033cc;" %>
-                                    </span><br>
-                                    <span href="#" >
-                                      <%= link_to order_item.item.title, item_path(order_item.item), class: "font-weight-bold", style: "color:#1a1a1a;" %>
-                                    </span>
-                                    <p class="text-secondary mt-3">
-                                      <%= number_to_currency order_item.item.price_without_tax, :unit => "￥", :precision => 0 %>
-                                      * 数量
-                                      <%= order_item.item_count %>
-                                    </p>
-                                    <p class="text-secondary">小計価格
-                                      <%= number_to_currency order_item.item.price_without_tax * order_item.item_count, :unit => "￥", :precision => 0  %>
-                                    </p>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr><!-- ここでorder_itemsのeachを終了 -->
+                              <% order_select.each do |order_item| %>
 
-                          <% end %>
+                                <tr><!-- ここでorder_itemsをeach -->
+                                  <td>
+                                    <div class="row">
+                                      <!-- ジャケット画像 -->
+                                      <div class="col-2">
+                                        <%= attachment_image_tag order_item.item, :image, fallback: "no_image.jpg",class: "card-img" %>
+                                      </div>
+                                      <!-- アーティスト名、商品名、税込価格 -->
+                                      <div class="col-9">
+                                        <span class="font-weight-bold" style="color:#0033cc;">
+                                          <%= link_to order_item.item.artist.name, artist_path(order_item.item.artist_id), class: "font-weight-bold", style: "color: #0033cc;" %>
+                                        </span><br>
+                                        <span href="#" >
+                                          <%= link_to order_item.item.title, item_path(order_item.item), class: "font-weight-bold", style: "color:#1a1a1a;" %>
+                                        </span>
+                                        <p class="text-secondary mt-3">
+                                          <%= number_to_currency order_item.item.price_without_tax, :unit => "￥", :precision => 0 %>
+                                          * 数量
+                                          <%= order_item.item_count %>
+                                        </p>
+                                        <p class="text-secondary">小計価格
+                                          <%= number_to_currency order_item.item.price_without_tax * order_item.item_count, :unit => "￥", :precision => 0  %>
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr><!-- ここでorder_itemsのeachを終了 -->
 
-                          </tbody>
-                        </table>
+                              <% end %>
+
+                              </tbody>
+                            </table>
+
+                          </div>
+
+                          <div class="col-4" style="line-height: 30px;">
+                            <!-- 送付先 -->
+                            <div>
+                              <span class="small text-secondary">送付先</span><br>
+                              <span class="">
+                                <%= order.address.family_name_kanji %><%= order.address.given_name_kanji %>
+                              </span>
+                            </div>
+
+                            <div>
+                                <span>〒<%= order.address.post_code %></span><br>
+                                <span><%= order.address.address %></span>
+                            </div>
+
+                          </div>
+
+                        </div>
                       </div>
                     </div><!-- cardの閉じタグ -->
                   </td>
