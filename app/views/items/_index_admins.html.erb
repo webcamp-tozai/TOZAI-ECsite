@@ -13,22 +13,27 @@
           <div class="box" style="height:10px;background-color:#005684;"></div>
           <p>TOZAI Records -No music No life-</p>
 
-          <div clas="col-8 ">
+          <div clas="col-8">
             <span class="font-weight-bold">
               <%= @items.count %>件の商品
             </span>
             <form class="form float-right">
               <div class="input-group">
                 <%= search_form_for @search do |f| %>
-                  <%=
-                    f.text_field :title_or_artist_name_or_artist_name_kana_cont, class:"form-control mr-sm-2",style: "width: 300px", placeholder: '商品名、アーティスト名で検索'
-                  %>
+                  <%= f.text_field :title_cont, class:"form-control mr-sm-1", placeholder: "タイトル"  %>
+                  <%= f.text_field :artist_name_or_artist_name_kana_cont, class: "form-control mr-sm-1",
+                                                                                   placeholder: 'アーティスト名'
+                   %>
+                  <%= f.text_field :genre_genre_english_or_genre_genre_kana_cont, class: "form-control mr-sm-2",
+                                                                                   placeholder: 'ジャンル名'
+                   %>
                   <span class="d-flex align-items-center">在庫数：</span>
-                  <%= f.number_field :stock_gteq, class: "form-control" %>
-                  <span class="d-flex align-items-center">～</span>
-                  <%= f.number_field :stock_lteq, class: "form-control mr-sm-2" %>
+                  <%= f.number_field :stock_gteq, class: "form-control", placeholder: '以上' %>
+                  <span class="d-flex align-items-center mx-1">～</span>
+                  <%= f.number_field :stock_lteq, class: "form-control mr-sm-2", placeholder: '以下' %>
                   <span class="input-group-btn">
                     <%= f.button fa_icon("search"), class: 'btn btn-primary'%>
+                    <%#= f.button fa_icon("ban"), type: :reset, class: 'btn btn-danger'%>
                   </span>
                 <% end %>
               </div>
@@ -40,8 +45,9 @@
               <tr class="table-light">
                 <th>タイトル</th>
                 <th>アーティスト</th>
+                <th>ジャンル</th>
                 <th class="text-right">価格</th>
-                <th>レビュー</th>
+                <th class="text-center">レビュー</th>
                 <th class="text-right">在庫数</th>
                 <th>商品タイプ</th>
               </tr>
@@ -52,6 +58,7 @@
               <tr>
                 <td><%= link_to item.title, edit_item_path(item.id) %></td>
                 <td><%= item.artist.name %></td>
+                <td><%= item.genre.genre_english %></td>
                 <td class="text-right">
                   <%= number_to_currency item.price_without_tax,:unit => "￥", :precision => 0 %>
                 </td>

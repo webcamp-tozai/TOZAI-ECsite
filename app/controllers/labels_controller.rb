@@ -3,7 +3,7 @@ class LabelsController < ApplicationController
 	end
 
 	def index
-		@label = Label.all
+		@items = @items.select(:label_id).distinct.page(params[:page]).reverse_order.per(PER_ITEM)
 	end
 
 	def new

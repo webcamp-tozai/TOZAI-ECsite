@@ -6,7 +6,7 @@ class GenresController < ApplicationController
 	end
 
 	def index
-		@genre = Genre.all
+		@items = @items.select(:genre_id).distinct.page(params[:page]).reverse_order.per(PER_ITEM)
 	end
 
   def show
