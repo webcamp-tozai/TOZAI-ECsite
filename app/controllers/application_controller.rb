@@ -21,7 +21,6 @@ class ApplicationController < ActionController::Base
 	# ransack用
 	def set_search
 		@search = Item.ransack(params[:q])
-		@artists = Artist.all.order(name: :asc)
 		@items = @search.result.page(params[:page]).reverse_order.per(PER_ITEM)
 	end
 

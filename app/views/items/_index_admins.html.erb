@@ -20,15 +20,21 @@
             <form class="form float-right">
               <div class="input-group">
                 <%= search_form_for @search do |f| %>
-                  <%= f.text_field :title_cont, class:"form-control mr-sm-2", placeholder: "タイトル"  %>
-                  <%= f.collection_select :artist_id_eq, @artists, :id, :name, :include_blank => 'アーティスト指定なし' %>
-                  <%= f.collection_select :genre_id_eq, @genres, :id, :genre_english, :include_blank => 'ジャンル指定なし' %>
+                  <%= f.text_field :title_cont, class:"form-control mr-sm-1", placeholder: "タイトル"  %>
+                  <%#= f.collection_select :artist_id_eq, @artists, :id, :name, :include_blank => 'アーティスト指定なし' %>
+                  <%= f.text_field :artist_name_or_artist_name_kana_cont, class: "form-control mr-sm-1",
+                                                                                   placeholder: 'アーティスト名'
+                   %>
+                  <%= f.text_field :genre_genre_english_or_genre_genre_kana_cont, class: "form-control mr-sm-2",
+                                                                                   placeholder: 'ジャンル名'
+                   %>
                   <span class="d-flex align-items-center">在庫数：</span>
-                  <%= f.number_field :stock_gteq, class: "form-control" %>
-                  <span class="d-flex align-items-center">～</span>
-                  <%= f.number_field :stock_lteq, class: "form-control mr-sm-2" %>
+                  <%= f.number_field :stock_gteq, class: "form-control", placeholder: '以上' %>
+                  <span class="d-flex align-items-center mx-1">～</span>
+                  <%= f.number_field :stock_lteq, class: "form-control mr-sm-2", placeholder: '以下' %>
                   <span class="input-group-btn">
                     <%= f.button fa_icon("search"), class: 'btn btn-primary'%>
+                    <%= f.button fa_icon("ban"), type: :reset, class: 'btn btn-danger'%>
                   </span>
                 <% end %>
               </div>
