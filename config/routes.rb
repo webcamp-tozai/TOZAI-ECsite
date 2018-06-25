@@ -64,10 +64,10 @@ Rails.application.routes.draw do
   get '/orders_status4' => 'orders#orders_status4', as: 'orders_status4'
 
   #支払い画面で表示、選択するためにID無しとID有りのURL生成
-  resources :payments, only: [:index, :show]
+  # resources :payments, only: [:index, :show]
 
-  resources :contacts, except: [:edit, :update, :destroy] do
+  # resources :contacts, except: [:edit, :update, :destroy] do
     #問い合わせ管理画面で絞り込むためにID無しとID有りのURL生成
-    resources :contact_statuses, only: [:index, :show]
-  end
+    # resources :contact_statuses, only: [:index, :show]
+  # end
 end
