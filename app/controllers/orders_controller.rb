@@ -90,6 +90,7 @@ class OrdersController < ApplicationController
 				item = Item.find(cart_item.item_id)
 		  	stock = item.stock - cart_item.item_count
 		  	item.update(stock: stock)
+		  	flash[:order_created] = "注文を受け付けました。注文IDは#{order.id}です。"
 	  	end
 			cart_items.destroy_all
 	 		redirect_to order_history_path(current_user)
