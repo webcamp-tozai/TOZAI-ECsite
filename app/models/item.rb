@@ -27,8 +27,8 @@ class Item < ApplicationRecord
   belongs_to :artist
   has_many :tracks
   has_many :cart_items # cart_item belongs_to :item
-  has_many :item_reviews
-  has_many :users, through: :item_reviews
+  # has_many :item_reviews
+  has_many :users#, through: :item_reviews
   has_many :order_items
   has_many :orders, through: :order_items
   accepts_nested_attributes_for :tracks
