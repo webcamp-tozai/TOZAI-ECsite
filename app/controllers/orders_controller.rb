@@ -112,10 +112,18 @@ class OrdersController < ApplicationController
 	end
 
 	def update
-    order = Order.find(params[:id])
-    order.update(order_params)
-    redirect_to orders_path(order_params)
-    flash[:order_updated] = "変更を保存しました"
+		path = Rails.application.routes.recognize_path(request.referer)
+		if path[:controller] == "orders"
+	    order = Order.find(params[:id])
+	    order.update(order_params)
+	    redirect_to orders_path(order_params)
+	    flash[:order_updated] = "変更を保存しました"
+	  elsif path[:controller] == "users"
+	  	order = Order.find(params[:id])
+	  	order.update(order_params)
+	  	user = User.find(order.user_id)
+	  	redirect_to order_history_path(user)
+	  end
 	end
 
 	private

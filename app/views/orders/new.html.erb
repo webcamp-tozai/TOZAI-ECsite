@@ -67,10 +67,16 @@
                                     <%= f.radio_button :address_id, address.id, :checked => true, class: "mx-1" %>
                                     ここに送る
                                   </label>
+<%
+=begin
+%>
 
                                   <p class="text-center">
                                     <%= link_to "送付先住所の登録・変更", edit_address_path(address), class: "btn btn-secondary btn-sm mt-3" %>
                                   </p>
+<%
+=end
+%>
 
                                 </ul>
                               </div>
@@ -94,10 +100,15 @@
                                     <%= f.radio_button :address_id, address.id, class: "mx-1" %>
                                     ここに送る
                                   </label>
-
+<%
+=begin
+%>
                                   <p class="text-center">
                                     <%= link_to "送付先住所の登録・変更", edit_address_path(address), class: "btn btn-secondary btn-sm mt-3" %>
                                   </p>
+<%
+=end
+%>
 
                                 </ul>
                               </div>
@@ -198,7 +209,7 @@
                   <td style="line-height: 20px; overflow: hidden;">
                     <div class="text-truncate">
                       <span class="font-weight-bold" style="color:#0033cc;">
-                        <%= link_to cart_item.item.artist.name, artists_path(cart_item), class: "font-weight-bold", style: "color: #0033cc;" %>
+                        <%= link_to cart_item.item.artist.name, artist_path(cart_item.item.artist_id), class: "font-weight-bold", style: "color: #0033cc;" %>
                       </span><br>
                       <span>
                         <%= link_to cart_item.item.title, item_path(cart_item.item), class: "font-weight-bold", style: "color:#1a1a1a;" %>

@@ -105,4 +105,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:cart_item_id, :order_id, :family_name_kanji, :given_name_kanji, :family_name_kana, :given_name_kana, :phone_number, :email, :password, :post_code, :address, :member_status)
   end
 
+  def order_params
+    params.require(:order).permit(:user_id, :address_id, :payment_id, :status, :total_count, :total_price_without_tax, :total_price, order_items_attributes: [:order_id, :item_id, :item_count, :total_price_without_tax])
+  end
+
 end
