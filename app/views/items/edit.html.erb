@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid py-4">
   <div class="row">
 
     <!-- サイドバー -->
@@ -228,12 +228,11 @@
             </li>
             <!-- カートか欲しいものリストに追加 -->
             <li class="list-group-item"><a href="#" class="btn btn-primary btn-sm">カートに追加</a></li>
-            <li class="list-group-item"><a href="#" class="btn btn-primary btn-sm">リストに追加</a></li>
           </ul>
         </div>
 
         <!-- YouTube -->
-        <% if @item.movie != nil %>
+        <% if @item.movie.present? %>
           <div class="col-12 mt-4">
             <%= movie(movie_id: @item.movie) %>
           </div>
@@ -280,7 +279,7 @@
                 <tbody>
                   <% track_infos = Track.where("item_id = ?", params[:id])
                                         .where("disc_number = ?", disc_number)
-                                        .select(:id, :track_number, :name)
+                                        .select(:id, :track_number, :name, :length_hour, :length_minute, :length_second)
                                         .order(track_number: :asc)  %>
                   <% track_infos.each do |track_info| %>
                     <tr>
@@ -289,6 +288,11 @@
                       </th>
                       <td>
                         <%= track_info.name %>
+                      </td>
+                      <td>
+                        <%= sprintf("%01d : ", track_info.length_hour) unless track_info.length_hour == 0 %> 
+                        <%= sprintf("%02d : ", track_info.length_minute) %>
+                        <%= sprintf("%02d", track_info.length_second) %>
                       </td>
                       <td style="float:right">
                       <%= link_to '削除',item_track_path(@item,track_info.id), method: :delete, data:{confirm: 'Are you sure??'},class:'btn btn-danger btn-sm ml-2' %>
@@ -309,12 +313,15 @@
           </div>
         </div>
       </div>
-
+<%
+=begin
+%>
       <div class="row">
         <div class="col-12">
           <p class="text-center my-4 h5 text-white " style="background-color:#B40404;">購入者レビュー</p>
           <table class="table" style="word-break: break-all;">
             <tbody>
+
               <% if @item.item_reviews.exists? %>
                 <%= @item.item_reviews.each do |reviews| %>
                   <tr>
@@ -337,7 +344,9 @@
                 <p class='text-center'>レビューは投稿されていません</p>
 
               <% end %>
-
+<%
+=end
+%>
             </tbody>
           </table>
         </div>
