@@ -4,8 +4,6 @@ class ItemsController < ApplicationController
   PER_ITEM = 12
 
   def index
-    @search = Item.ransack(params[:q])
-		@items = @search.result.page(params[:page]).reverse_order.per(PER_ITEM)
   end
 
   def create
@@ -120,12 +118,6 @@ class ItemsController < ApplicationController
       flash[:item_updated_error] = "入力項目を確認して下さい"
     end
 
-  end
-
-  def set_search
-    @items = Item.all
-    @search = Item.ransack(params[:q])
-    @items = @search.result.page(params[:page]).reverse_order
   end
 
   private
