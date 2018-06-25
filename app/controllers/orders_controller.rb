@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 	before_action :authenticate_user_or_admin, except: [:index]
 	before_action :authenticate_admin, except: [:create, :new]
-	before_action :authenticate_user
+	before_action :authenticate_user, only: [:new, :create]
 
 	def index
 		@status_name = "全て"
