@@ -1,10 +1,11 @@
 class ItemsController < ApplicationController
-  before_action :set_genre, only: [:index, :show, :genre_index, :artist_index]
+  before_action :authenticate_admin, only: [:new, :edit]
 
   PER_ITEM = 12
 
   def index
-    @items = Item.page(params[:page]).reverse_order.per(PER_ITEM)
+    @search = Item.ransack(params[:q])
+		@items = @search.result.page(params[:page]).reverse_order.per(PER_ITEM)
   end
 
   def create
@@ -128,9 +129,9 @@ class ItemsController < ApplicationController
   end
 
   private
-
-  def set_genre
-    @genres = Genre.all
+  
+  def authenticate_admin
+    redirect_to items_path unless admin_signed_in?
   end
 
   def item_params
