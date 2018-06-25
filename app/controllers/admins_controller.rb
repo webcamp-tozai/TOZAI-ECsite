@@ -11,7 +11,7 @@ class AdminsController < ApplicationController
   end
 
   def show
-    redirect_to root_path
+    redirect_to admins_path
   end
 
   def edit_password
@@ -57,7 +57,7 @@ class AdminsController < ApplicationController
     if Admin.exists?(params[:id])
       @admin = Admin.find(params[:id])
     else
-      redirect_to root_path
+      redirect_to admins_path
     end
   end
 
