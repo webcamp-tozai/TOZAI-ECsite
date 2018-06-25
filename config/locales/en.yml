@@ -45,7 +45,7 @@ en:
       one_page:
         display_entries:
           zero: "該当商品がありません。"
-          one: "1件中 1-1 件を表示"
+          one: "1件中 1 件を表示"
           other: "%{count}件中 1-%{count}件"
       more_pages:
         display_entries: "%{total} 件中 %{first}&nbsp;-&nbsp;%{last}</b> 件目 "

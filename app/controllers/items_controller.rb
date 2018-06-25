@@ -1,8 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_admin, only: [:new, :edit]
 
-  PER_ITEM = 12
-
   def index
   end
 
