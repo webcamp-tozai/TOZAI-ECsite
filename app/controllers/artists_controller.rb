@@ -2,7 +2,7 @@ class ArtistsController < ApplicationController
 	PER_ITEM = 12
 
 	def index
-		@artist = Artist.all
+		@items = @items.select(:artist_id).distinct.page(params[:page]).reverse_order.per(PER_ITEM)
 	end
 
 	def create
