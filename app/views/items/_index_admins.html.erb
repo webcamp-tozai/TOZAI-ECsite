@@ -46,8 +46,9 @@
               <tr class="table-light">
                 <th>タイトル</th>
                 <th>アーティスト</th>
+                <th>ジャンル</th>
                 <th class="text-right">価格</th>
-                <th>レビュー</th>
+                <th class="text-center">レビュー</th>
                 <th class="text-right">在庫数</th>
                 <th>商品タイプ</th>
               </tr>
@@ -58,6 +59,7 @@
               <tr>
                 <td><%= link_to item.title, edit_item_path(item.id) %></td>
                 <td><%= item.artist.name %></td>
+                <td><%= item.genre.genre_english %></td>
                 <td class="text-right">
                   <%= number_to_currency item.price_without_tax,:unit => "￥", :precision => 0 %>
                 </td>
