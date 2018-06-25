@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def set_genres
-		@genres = Genre.all
+		@genres = Genre.all.order(genre_english: :asc)
 	end
 
 	protected
