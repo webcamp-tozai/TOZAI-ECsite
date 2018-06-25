@@ -13,6 +13,22 @@
           <div class="box" style="height:10px;background-color:#005684;"></div>
           <p>TOZAI Records -No music No life-</p>
 
+          <div class="col-12">
+            <span class="font-weight-bold">
+              <%= @items.count %>件の商品
+            </span>
+            <form class="form float-right">
+              <div class="input-group">
+                <%= search_form_for @search do |f| %>
+                  <%= f.text_field :label_name_cont, class:"form-control mr-sm-1", placeholder: "レーベル"  %>
+                  <span class="input-group-btn">
+                    <%= f.button fa_icon("search"), class: 'btn btn-primary'%>
+                  </span>
+                <% end %>
+              </div>
+            </form>
+          </div>
+
           <table class="table table-sm">
             <thead>
               <tr class="table-light">
@@ -22,10 +38,10 @@
             </thead>
 
             <tbody>
-            <% @label.each do |label| %>
+            <% @items.each do |item| %>
               <tr>
-                <td><%= label.name %></td>
-                <td><%= link_to "編集", edit_label_path(label.id), class:"btn btn-outline-success btn-sm" %></td>
+                <td><%= item.label.name %></td>
+                <td><%= link_to "編集", edit_label_path(item.label.id), class:"btn btn-outline-success btn-sm" %></td>
               </tr>
             <% end %>
 
