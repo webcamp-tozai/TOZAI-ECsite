@@ -89,7 +89,7 @@
               <ul class="list-group list-group-flush">
                 <%= form_for [@item,@cart_item] do |f| %>
                   <li class="list-group-item form-group">
-                    <%= f.number_field :item_count, class: "form-control form-control-sm", placeholder: "数量を入力" %>
+                    <%= f.number_field :item_count, min: 0, max: @item.stock, class: "form-control form-control-sm", placeholder: "数量を入力" %>
                   </li>
                   <!-- カートに追加 -->
                   <li class="list-group-item">
