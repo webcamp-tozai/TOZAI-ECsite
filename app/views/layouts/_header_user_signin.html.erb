@@ -22,13 +22,13 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <!-- マイページ -->
-        <%= link_to user_path(current_user.id) do %>
-          <i class="fa fa-user fa-lg text-white text-center" ></i>
-          <p class="text-white small">
-            <%= current_user.family_name_kanji %>
-            <%= current_user.given_name_kanji %>
-          </p>
-        <% end %>
+        <li class="nav-item small">
+          <%= link_to user_path(current_user.id), class: 'nav-link text-white text-center' do %>
+            <%= fa_icon("user 2x") %><br>
+              <%= current_user.family_name_kanji %>
+              <%= current_user.given_name_kanji %>
+          <% end %>
+        </li>
 
         <!-- ログアウト -->
         <li class="nav-item">
@@ -39,9 +39,11 @@
 
         <!-- カートページ用リンク -->
         <li class="nav-item">
-          <% if CartItem.exists? %>
+          <% if CartItem.exists?(user_id: current_user.id) %>
             <%= link_to user_cart_items_path(current_user), class: 'nav-link text-white text-center' do %>
-              <%= fa_icon("shopping-cart 2x", text: "アイテム数") %>
+              <%= fa_icon("shopping-cart 2x", text: "") %>
+              <% cart_item = CartItem.where(user_id: current_user.id) %>
+              <%= cart_item.count %>
             <% end %>
           <% else %>
             <p class="nav-link text-white text-center">
