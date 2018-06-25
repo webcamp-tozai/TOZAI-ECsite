@@ -1,0 +1,40 @@
+<!-- 管理者の新規登録画面（メイン管理者のみ） -->
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-10 my-4">
+      <div class="row justify-content-center">
+        <div class="col-6 jumbotron">
+          <h1 class="text-center font-weight-bold">パスワード変更</h1>
+          <%= devise_error_messages! %>
+          <%= form_for(@admin) do |f| %>
+            <!-- パスワード -->
+            <%= f.label :Password %>
+            <div class="form-row">
+              <div class="form-group col-12">
+                <%= f.password_field :password, class:"form-control", id:"InputPassword", placeholder:"半角英数字(6文字~20文字)" %>
+              </div>
+            </div>
+            <!-- パスワード再入力 -->
+            <%= f.label :Password確認 %>
+            <div class="form-row">
+              <div class="form-group col-12">
+                <%= f.password_field :password_confirmation, class:"form-control", id:"InputPassword", placeholder:"もう一度、パスワードを入力して下さい" %>
+              </div>
+            </div>
+            <!-- 登録ボタン -->
+            <%= f.submit "-パスワードを変更-", class:"btn btn-warning btn-block" %>
+
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

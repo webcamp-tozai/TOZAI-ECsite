@@ -1,0 +1,244 @@
+<div class="container">
+  <div class="row">
+
+    <!-- サイドバー -->
+  	<%= render 'layouts/sidebar_users', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- 商品情報 -->
+    <div class="col-9 my-4">
+
+      <p class="flash-message text-danger">
+        <%= flash[:count_false] %>
+        <%= flash[:cart_item_create_faled] %>
+      </p>
+
+      <div class="row">
+        <!-- ジャケット画像 -->
+        <div class="col-4">
+          <%= attachment_image_tag @item, :image, fallback: "no_image.jpg", class: "card-img" %>
+        </div>
+
+        <!-- 商品大情報 -->
+        <div class="col-5" style="word-break: break-all;">
+          <div>
+            <p class="text-dark"><%= @item.genre.genre_english %></p>
+            <span>
+              <%= link_to @item.artist.name, artist_path(@item.artist_id), class: "font-weight-bold", style: "color: #0033cc; font-size: 18px;" %>
+            </span><br>
+            <span class="font-weight-bold", style="color: #1a1a1a;">
+              <%= @item.title %>
+            </span>
+          </div>
+
+          <!--在庫表示-->
+          <div class="mt-3">
+            <span class="text-dark">
+              <%= number_to_currency @item.price_without_tax, :unit => "￥", :precision => 0 %>
+            </span><br>
+            <!-- 在庫が20以下の場合 -->
+            <% if @item.stock <= 20 && @item.stock >= 1 %>
+              <span class="text-danger">
+                在庫残り<%= @item.stock %>点
+              </span>
+            <!-- 在庫切れの場合 -->
+            <% elsif @item.stock == 0 && @item.is_deleted == false %>
+              <span class="text-secondary">
+                【在庫切れ】再入荷中
+              </span>
+            <!-- 削除フラグtrueの場合 -->
+            <% elsif @item.is_deleted == true %>
+              <span class="text-secondary">
+                取扱終了
+              </span>
+            <!-- 在庫が21以上の場合 -->
+            <% else %>
+              <span class="text-dark font-weight-bold">
+                在庫有り
+              </span>
+            <% end %>
+          </div>  <!--在庫表示閉じタグ-->
+        </div>  <!-- 商品大情報閉じタグ -->
+
+        <!-- カート追加関連 -->
+        <% if user_signed_in? %>
+          <% if @item.is_deleted == false && @item.stock == 0  %>
+            <div class="col-3 align-self-end">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item form-group">
+                  <p class="text-center">【在庫切れ】<br>再入荷中</p>
+                </li>
+                <!--<li class="list-group-item">-->
+                <!--  <a href="#" class="btn btn-primary btn-sm">リストに追加</a>-->
+                <!--</li>-->
+              </ul>
+            </div>
+
+          <% elsif @item.is_deleted == true %>
+
+            <div class="col-3 align-self-center">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item form-group">
+                  <p class="text-center">取扱終了</p>
+                </li>
+              </ul>
+            </div>
+
+          <% else %>
+
+            <div class="col-3 align-self-end">
+              <ul class="list-group list-group-flush">
+                <%= form_for [@item,@cart_item] do |f| %>
+                  <li class="list-group-item form-group">
+                    <%= f.number_field :item_count, min: 0, max: @item.stock, class: "form-control form-control-sm", placeholder: "数量を入力" %>
+                  </li>
+                  <!-- カートに追加 -->
+                  <li class="list-group-item">
+                    <%= f.submit "カートに追加", class: "btn btn-primary btn-sm" %>
+                  </li>
+                <% end %>
+                  <!--
+                  <li class="list-group-item"><a href="#" class="btn btn-primary btn-sm">リストに追加</a></li>
+                  -->
+              </ul>
+            </div>
+
+          <% end %>
+
+        <% else %>
+
+          <div class="col-3 align-self-end">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <%= link_to new_user_registration_path do %>
+                  <span class="btn btn-primary btn-sm">会員登録</span>
+                <% end %>
+              </li>
+              <li class="list-group-item">
+                <%= link_to new_user_session_path do %>
+                  <span class="btn btn-primary btn-sm">ログイン</span>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+
+        <% end %>
+
+      </div>
+      <!-- YouTube -->
+      <% if @item.movie.present? %>
+        <div class="col-12 mt-4">
+          <%= movie(movie_id: @item.movie) %>
+        </div>
+      <% end %>
+
+      <!-- 商品詳細情報 -->
+      <div class="row">
+        <div class="col-12">
+          <table class="table table-sm small">
+            <thead class="text-white" style="background-color:#B40404;">
+              <tr>
+                <p class="text-center my-4 h5 text-white " style="background-color:#B40404;">商品情報</p>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="bg-secondary text-white">商品タイプ</th>
+                <td> <%= @item.content_type %> </td>
+                <th class="bg-secondary text-white">レーベル</th>
+                <td> <%= @item.label.name %> </td>
+              </tr>
+              <tr>
+                <th class="bg-secondary text-white">ディスク枚数</th>
+                <td> <%= @max_disc_number %> </td>
+                <th class="bg-secondary text-white">収録曲数</th>
+                <td> <%= @item.tracks.count %> </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 収録曲トラックナンバー、タイトル、アーティスト -->
+      <div class="row">
+        <div class="col-12">
+          <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">収録曲</p>
+            <% @disc_numbers.each do |disc_number| %>
+              <table class="table table-sm table-striped"  style="table-layout: fixed; overflow: hidden;">
+                <p>ディスクNo.<%= disc_number %></p>
+                <thead>
+                </thead>
+                <tbody>
+                  <% track_infos = Track.where("item_id = ?", params[:id])
+                                        .where("disc_number = ?", disc_number)
+                                        .select(:track_number, :name, :length_hour, :length_minute, :length_second)
+                                        .order(track_number: :asc)  %>
+                  <% track_infos.each do |track_info| %>
+                    <tr>
+                      <th scope="row" style="width: 50px;">
+                        <%= track_info.track_number %>.
+                      </th>
+                      <td>
+                        <%= track_info.name %>
+                      </td>
+                      <td>
+                        <%= sprintf("%01d : ", track_info.length_hour) unless track_info.length_hour == 0 %> 
+                        <%= sprintf("%02d : ", track_info.length_minute) %>
+                        <%= sprintf("%02d", track_info.length_second) %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <p class="text-center my-4 h5 text-white " style="background-color:#B40404;">商品紹介</p>
+          <div class="small" style="word-break: break-all;">
+            <%= @item.item_introduction %>
+          </div>
+        </div>
+      </div>
+<%
+=begin
+%>
+      <div class="row">
+        <div class="col-12">
+          <p class="text-center my-4 h5 text-white " style="background-color:#B40404;">購入者レビュー</p>
+            <table class="table" style="word-break: break-all;">
+              <tbody>
+                <% if @item.item_reviews.exists? %>
+                  <%= @item.item_reviews.each do |reviews| %>
+                    <tr>
+                      <td>
+                        <p class="text-dark">
+                          <%= reviews.user.name %>
+                        </p>
+                        <span class="text-secondary">
+                          <%= reviews.created_at %>
+                        </span>
+                        <div class="mt-1 small text-dark">
+                          <%= reviews.review %>
+                        </div>
+                      </td>
+                    </tr>
+                  <% end %>
+
+                <% else %>
+
+                  <p class='text-center'>レビューは投稿されていません</p>
+
+                <% end %>
+
+              </tbody>
+            </table>
+        </div>
+      </div>
+<%
+=end
+%>
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

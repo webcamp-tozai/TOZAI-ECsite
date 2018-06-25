@@ -1,0 +1,78 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-10 py-4">
+
+      <span class="font-weight-bold h2">ユーザー 一覧</span>
+      <div class="box" style="height:10px;background-color:#005684;"></div>
+
+        <table class="table table-striped">
+          <thead>
+            <tr class="text-center">
+              <th>名前</th>
+              <th>メールアドレス</th>
+              <th>購入回数</th>
+              <th>最終ログイン</th>
+              <th>会員ステータス</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+
+          	<% @users.each do |user| %>
+
+              <tr class="text-center">
+                <td>
+                	<%= user.family_name_kanji %>
+                	<%= user.given_name_kanji %>
+              	</td>
+                <td>
+                	<%= user.email %>
+               	</td>
+                <td>
+                  <%= user.orders.count %>
+              	</td>
+                <td>
+                	<%= truncate("#{user.last_sign_in_at}", length:16, :omission => "") %>
+              	</td>
+                <td class="font-weight-bold">
+                  <% if user.member_status == 0 %>
+                    <span class="text-success border border-success">通常会員</span>
+                  <% elsif user.member_status == 1 %>
+                    <span class="text-secondary border border-secondary">退会</span>
+                  <% elsif user.member_status == 2 %>
+                    <span class="text-danger border border-danger">強制退会</span>
+                  <% end %>
+                </td>
+                <td>
+                	<%= link_to "詳細", user_path(user),class: "btn btn-success btn-sm" %>
+                </td>
+              </tr>
+
+            <% end %>
+
+          </tbody>
+        </table>
+  		</div>
+
+      <div class="row"><!-- ページネーション -->
+        <div class="col-12">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <!--<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>-->
+            </ul>
+          </nav>
+        </div>
+      </div><!-- ページネーション閉じタグ -->
+
+    </div><!-- メインページcol-9の閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

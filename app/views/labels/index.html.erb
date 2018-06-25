@@ -1,0 +1,55 @@
+<!-- 管理者の商品一覧画面 -->
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-10 py-4">
+      <div class="row">
+        <div class="container">
+          <span class="font-weight-bold h3">レーベル一覧</span>
+          <div class="box" style="height:10px;background-color:#005684;"></div>
+          <p>TOZAI Records -No music No life-</p>
+
+          <div class="col-12">
+            <form class="form float-right">
+              <div class="input-group">
+                <%= search_form_for @search do |f| %>
+                  <%= f.text_field :label_name_cont, class:"form-control mr-sm-1", placeholder: "レーベル"  %>
+                  <span class="input-group-btn">
+                    <%= f.button fa_icon("search"), class: 'btn btn-primary'%>
+                  </span>
+                <% end %>
+              </div>
+            </form>
+          </div>
+
+          <table class="table table-sm">
+            <thead>
+              <tr class="table-light">
+                <th>レーベル名</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+            <% @items.each do |item| %>
+              <tr>
+                <td><%= item.label.name %></td>
+                <td><%= link_to "編集", edit_label_path(item.label.id), class:"btn btn-outline-success btn-sm" %></td>
+              </tr>
+            <% end %>
+
+            </tbody>
+          </table>
+          <div>
+            <p><%= page_entries_info @items %></p>
+            <p><%= paginate @items %></p>
+          </div>
+        </div><!--メインページのcontainer-->
+      </div> <!--メインページのrow-->
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

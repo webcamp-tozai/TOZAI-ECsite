@@ -1,0 +1,133 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-10 py-4">
+
+      <span class="font-weight-bold h2">
+        <%= @user.family_name_kanji %>
+        <%= @user.given_name_kanji %>
+         の情報
+      </span>
+      <div class="box" style="height:10px;background-color:#005684;">
+      </div>
+
+      <p class="flash-message text-danger">
+        <%= flash[:user_update_faled] %>
+      </p>
+
+      <p class="flash-message text-primary">
+        <%= flash[:user_updated] %>
+      </p>
+
+      <p class="bg-warning rounded text-center mt-3">基本情報</p>
+
+      <div class="card bg-light my-3">
+
+        <table class="table table">
+          <thead style="background-color:#A8C6D7;">
+            <th>基本情報</th>
+            <th>ステータス: 
+              <% if @user.member_status == 0 %>
+                <span class="text-success border border-success">通常会員</span>
+              <% elsif @user.member_status == 1 %>
+                <span class="text-secondary border border-secondary">退会</span>
+              <% elsif @user.member_status == 2 %>
+                <span class="text-danger border border-danger">強制退会</span>
+              <% end %>
+            </th>
+            <th>
+              最終ログイン日:
+              <%= truncate("#{@user.last_sign_in_at}", length:16, :omission => "") %>
+            </th>
+            <th>
+              <%= link_to "注文履歴", order_history_path(@user),class: "btn btn-secondary btn-sm float-right" %>
+              <%= link_to "編集", edit_user_path(@user),class: "btn btn-secondary btn-sm float-right mx-2" %>
+              <%= link_to "パスワード変更", user_edit_password_path(@user),class: "btn btn-secondary btn-sm float-right" %>
+            </th>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th>名前:</th>
+              <td>
+                <%= @user.family_name_kanji %>
+                <%= @user.given_name_kanji %>
+              </td>
+            </tr>
+            <tr>
+              <th>メールアドレス:</th>
+              <td><%= @user.email %></td>
+            </tr>
+            <tr>
+              <th>郵便番号:</th>
+              <td><%= @user.post_code %></td>
+            </tr>
+            <tr>
+              <th>住所:</th>
+              <td><%= @user.address %></td>
+            </tr>
+            <tr>
+              <th>TEL:</th>
+              <td><%= @user.phone_number %></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <p class="bg-warning rounded text-center">送付先住所一覧</p>
+
+      <div class="card bg-light my-3">
+
+        <% if Address.exists?(user_id: @user.id) %>
+
+          <table class="table table">
+            <thead style="background-color:#A8C6D7;">
+              <th>郵便番号</th>
+              <th>住所</th>
+<%
+=begin
+%>
+              <th>
+                <%= link_to "送付先住所追加", new_address_path, class: "btn btn-success float-right btn-sm" %>
+              </th>
+<%
+=end
+%>
+            </thead>
+            <tbody>
+
+              <% @address.each do |address| %>
+
+                <tr>
+                  <td><%= address.post_code %></td>
+                  <td><%= address.address %></td>
+<%
+=begin
+%>
+                  <td>
+                    <%= link_to "削除", address_path(address), method: :delete, "data-confirm" => "【 #{address.address} 】こちらの送付先住所を削除しますか？", class: "btn  btn-outline-danger btn-sm float-right" %>
+                  </td>
+                </tr>
+<%
+=end
+%>
+              <% end %>
+
+            </tbody>
+          </table>
+
+        <% else %>
+
+          <p class="text-center mt-3">送付先住所が登録されていません</p>
+
+        <% end %>
+
+      </div>
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

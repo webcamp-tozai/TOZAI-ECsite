@@ -1,0 +1,99 @@
+<!-- 管理者の一覧画面 -->
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-10 my-4">
+      <div class="row">
+        <div class="container">
+	        <span class="font-weight-bold h2">管理者一覧</span>
+	        <div class="box" style="height:10px;background-color:#005684;">
+	        </div>
+
+          <p class="flash-message text-danger">
+            <%= flash[:admin_suspended] %>
+          </p>
+
+          <p class="flash-message text-primary">
+            <%= flash[:admin_restored] %>
+          </p>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @admins.each do |admin| %>
+
+              <% if admin.is_main_administer == true %>
+
+                <tr class="font-weight-bold" style="background-color: #ffe4e1;">
+
+              <% elsif admin.is_deleted == true %>
+
+                <tr class="text-muted">
+
+              <% else %>
+
+                <tr>
+
+              <% end %>
+
+                <td>
+                  <%= admin.family_name_kanji %>
+                  <%= admin.given_name_kanji %>
+                </td>
+
+                <td>
+                  <%= admin.email %>
+                </td>
+
+                <td>
+                  <% if admin.is_main_administer == true %>
+                    <span>メイン管理者</span>
+                  <% elsif admin.is_main_administer == false && admin.is_deleted == false %>
+                    <span>サブ管理者</span>
+                  <% elsif admin.is_deleted == true %>
+                    <span>アカウント停止中</span>
+                  <% end %>
+                </td>
+
+                <td>
+                  <%= link_to "詳細", edit_admin_path(admin), class: "btn btn-success float-right btn-sm" %>
+                </td>
+
+                <td>
+                  <% if current_admin.is_main_administer == true && admin != current_admin && admin.is_deleted == false %>
+
+                    <%= link_to "アカウント停止", update_status_admin_path(admin), method: :post, "data-confirm" => "サブ管理者 #{admin.family_name_kanji}#{admin.given_name_kanji} を停止しますか？", class: "btn btn-danger float-right btn-sm" %>
+
+                  <% elsif current_admin.is_main_administer == true && admin != current_admin && admin.is_deleted == true %>
+
+                    <%= link_to "アカウント復旧", update_status_admin_path(admin), method: :post, "data-confirm" => "サブ管理者 #{admin.family_name_kanji}#{admin.given_name_kanji} のアカウントを復旧しますか？", class: "btn btn-primary float-right btn-sm" %>
+
+                  <% end %>
+
+                </td>
+              </tr>
+
+             <% end %>
+
+            </tbody>
+	        </table>
+        </div>
+      </div>
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+
+</div><!-- 全体containerの閉じタグ -->
+

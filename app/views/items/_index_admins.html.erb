@@ -1,0 +1,107 @@
+<!-- 管理者の商品一覧画面 -->
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-10 py-4">
+      <div class="row">
+        <div class="container">
+          <span class="font-weight-bold h3">商品一覧</span>
+          <div class="box" style="height:10px;background-color:#005684;"></div>
+          <p>TOZAI Records -No music No life-</p>
+
+          <div clas="col-8">
+
+            <form class="form float-right">
+              <div class="input-group">
+                <%= search_form_for @search do |f| %>
+                  <%= f.text_field :title_cont, class:"form-control mr-sm-1", placeholder: "タイトル"  %>
+                  <%= f.text_field :artist_name_or_artist_name_kana_cont, class: "form-control mr-sm-1",
+                                                                                   placeholder: 'アーティスト名'
+                   %>
+                  <%= f.text_field :genre_genre_english_or_genre_genre_kana_cont, class: "form-control mr-sm-2",
+                                                                                   placeholder: 'ジャンル名'
+                   %>
+                  <span class="d-flex align-items-center">在庫数：</span>
+                  <%= f.number_field :stock_gteq, class: "form-control", placeholder: '以上' %>
+                  <span class="d-flex align-items-center mx-1">～</span>
+                  <%= f.number_field :stock_lteq, class: "form-control mr-sm-2", placeholder: '以下' %>
+                  <span class="input-group-btn">
+                    <%= f.button fa_icon("search"), class: 'btn btn-primary'%>
+                    <%#= f.button fa_icon("ban"), type: :reset, class: 'btn btn-danger'%>
+                  </span>
+                <% end %>
+              </div>
+            </form>
+          </div><br>
+
+          <table class="table table-sm">
+            <thead>
+              <tr class="table-light">
+                <th>タイトル</th>
+                <th>アーティスト</th>
+                <th>ジャンル</th>
+                <th class="text-right">価格</th>
+                <!-- <th class="text-center">レビュー</th> -->
+                <th class="text-right">在庫数</th>
+                <th>商品タイプ</th>
+              </tr>
+            </thead>
+
+            <tbody>
+            <% @items.each do |item| %>
+              <tr>
+                <td><%= link_to item.title, edit_item_path(item.id) %></td>
+                <td><%= item.artist.name %></td>
+                <td><%= item.genre.genre_english %></td>
+                <td class="text-right">
+                  <%= number_to_currency item.price_without_tax,:unit => "￥", :precision => 0 %>
+                </td>
+<%
+=begin
+%>
+                <td class="text-center"><%= item.item_reviews.count %>件</td>
+<%
+=end
+%>
+                <td class="text-right">
+                  <!-- 在庫が20以下の場合 -->
+                  <% if item.stock <= 20 && item.stock >= 1 %>
+                    <span class="text-danger">
+                      <%= item.stock %>点
+                    </span>
+                  <!-- 在庫切れの場合 -->
+                  <% elsif item.stock == 0 && item.is_deleted == false %>
+                    <span class="text-secondary">
+                      在庫切れ
+                    </span>
+                  <!-- 削除フラグtrueの場合 -->
+                  <% elsif item.is_deleted == true %>
+                    <span class="text-secondary">
+                      取扱中止
+                    </span>
+                  <!-- 在庫が21以上の場合 -->
+                  <% else %>
+                    <span class="text-success">
+                      <%= item.stock %>点
+                    </span>
+                  <% end %>
+                </td>
+                <td><%= item.content_type %></td>
+              </tr>
+            <% end %>
+
+            </tbody>
+          </table>
+          <div>
+            <p><%= page_entries_info @items %></p>
+            <p><%= paginate @items %></p>
+          </div>
+        </div><!--メインページのcontainer-->
+      </div> <!--メインページのrow-->
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

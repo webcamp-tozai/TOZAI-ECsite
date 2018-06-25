@@ -1,0 +1,39 @@
+<!-- 管理者の商品一覧画面 -->
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-10 py-4">
+      <div class="row">
+        <div class="container">
+          <span class="font-weight-bold h3">レーベル更新</span>
+          <div class="box" style="height:10px;background-color:#005684;"></div>
+          <p>TOZAI Records -No music No life-</p>
+
+          <%= form_for @label do |label| %>
+          <table class="table table-sm">
+            <thead>
+              <tr class="table-light">
+                <th>レーベル名</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><%= label.text_field :name, class:"form-control" %></td>
+                <td><%= label.submit "更新", class:"btn btn-outline-success btn-sm" %></td>
+              </tr>
+
+            </tbody>
+          </table>
+          <% end %>
+
+        </div><!--メインページのcontainer-->
+      </div> <!--メインページのrow-->
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

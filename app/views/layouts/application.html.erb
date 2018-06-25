@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TOZAIEcsite</title>
+    <title>TOZAI Records</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,32 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="sticky-top">
+      <% if admin_signed_in? %>
+        <%= render 'layouts/header_admins' %>    
+      <% elsif  user_signed_in? %>
+        <%= render 'layouts/header_user_signin' %>
+      <% else %>
+        <%= render 'layouts/header_user' %>
+      <% end %>
+    </header>
+    
+    <div class="main-content">
+      <%= yield %>
+    </div>
+    
+    
+    <footer class="bg-dark" style=" z-index: 2">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; 2018 WebCampPro TOZAI Records</p>
+      </div>
+      <% if Rails.env.development?%>
+        <div class="debug">
+          <%= debug(params) %>
+        </div>
+      <% end %>
+    </footer>
+    
   </body>
+
 </html>

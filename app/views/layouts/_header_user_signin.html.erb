@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 100px;">
+  <div class="container">
+    <!-- 東西チームロゴ -->
+    <%= link_to root_path do  %>
+      <%= image_tag "logo.png", class: "mr-6", :size =>'60x60' %>
+    <% end %>
+    <!-- 検索フォーム -->
+    <div class="input-group form-inline">
+      <%= search_form_for @search do |f| %>
+        <%= 
+          f.text_field :title_or_artist_name_or_artist_name_kana_cont, class: "form-control ml-sm-5",
+                                                                       style: "width: 675px", 
+                                                                       placeholder: '商品名、アーティスト名で検索'
+        %>
+        <span class="input-group-btn">
+          <%= f.button fa_icon("search"), class: 'btn btn-primary'%>
+        </span>
+      <% end %>
+    </div>
+
+    <!--ログイン情報-->
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <!-- マイページ -->
+        <li class="nav-item small">
+          <%= link_to user_path(current_user.id), class: 'nav-link text-white text-center' do %>
+            <%= fa_icon("user 2x") %><br>
+              <%= current_user.family_name_kanji %>
+              <%= current_user.given_name_kanji %>
+          <% end %>
+        </li>
+
+        <!-- ログアウト -->
+        <li class="nav-item">
+          <%= link_to destroy_user_session_path, class: 'nav-link text-white text-center', method: :delete do %>
+            <%= fa_icon("sign-out 2x", text: "SignOut") %>
+          <% end %>
+        </li>
+
+        <!-- カートページ用リンク -->
+        <li class="nav-item">
+          <% if CartItem.exists?(user_id: current_user.id) %>
+            <%= link_to user_cart_items_path(current_user), class: 'nav-link text-white text-center' do %>
+              <%= fa_icon("shopping-cart 2x", text: "") %>
+              <% cart_item = CartItem.where(user_id: current_user.id) %>
+              <%= cart_item.count %>
+            <% end %>
+          <% else %>
+            <p class="nav-link text-white text-center">
+              <%= fa_icon("shopping-cart 2x", text: "0") %>
+            </p>
+          <% end %>
+        </li>
+        
+      </ul>
+    </div>
+    
+  </div>  <!-- cinteiner閉じタグ -->
+</nav>

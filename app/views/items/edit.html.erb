@@ -1,0 +1,357 @@
+<div class="container-fluid py-4">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- 商品情報 -->
+    <div class="col-10">
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="container">
+              <span class="font-weight-bold h2">商品編集</span>
+              <div class="box" style="height:10px;background-color:#005684;"></div>
+
+              <p>TOZAI Records -No pain No gain-</p>
+              <p class="flash-message text-success">
+                <%= flash[:item_updated] %>
+              </p>
+              <p class="flash-message text-danger">
+                <%= flash[:item_updated_error] %>
+              </p>
+              <p class="flash-message text-primary">
+                <%= flash[:item_created] %>
+              </p>
+
+              <div class="container">
+                <div class="jumbotron">
+                  <%= form_for @item do |item| %>
+                    <div class="form-row">
+                      <div class="form-group col-md-2">
+                        <label class="control-label font-weight-bold">商品タイプ</label>
+                        <div class="radio">
+                          <label><%= item.radio_button :content_type,"シングル" %>シングル</label>
+                          <label><%= item.radio_button :content_type,"アルバム" %>アルバム</label>
+                          <label><%= item.radio_button :content_type,"レコード" %>レコード</label>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="font-weight-bold">タイトル</label>
+                        <%= item.text_field :title, class:"form-control" %>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label class="font-weight-bold">レーベル名</label>
+                        <%= fields_for @label do |label| %>
+                          <%= label.text_field :name, class:"form-control", :list=>"label_list", :autocomplete => "off" %>
+                        <% end %>
+                        <datalist id="label_list">
+                          <% @label_name.each do |label| %>
+                          <option value="<%= label.name %>"><%= label.name %></option>
+                          <% end %>
+                        </datalist>
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label class="font-weight-bold">ジャンル</label>
+                          <%= fields_for @genre do |genre| %>
+                          <%= genre.text_field :genre_english,class:"form-control",:list=>"genre_english_list",:autocomplete => "off" %>
+                        <% end %>
+                        <datalist id="genre_english_list">
+                          <%= @genre_name.each do |genre| %>
+                          <option value="<%= genre.genre_english %>"><%= genre.genre_english %></option>
+                          <% end %>
+                        </datalist>
+                        <label class="font-weight-bold">ジャンル(カナ)</label>
+                        <%= fields_for @genre do |genre| %>
+                          <%= genre.text_field :genre_kana,class:"form-control",:list=>"genre_kana_list",:autocomplete => "off" %>
+                        <% end %>
+                        <datalist id="genre_kana_list">
+                          <%= @genre_name.each do |genre| %>
+                          <option value="<%= genre.genre_kana %>"><%= genre.genre_kana %></option>
+                          <% end %>
+                        </datalist>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="font-weight-bold">商品紹介</label>
+                      <%= item.text_area :item_introduction, rows: 10, class:"form-control" %>
+                    </div>
+
+                  <div class="form-row">
+                    <div class="form-group col-md-2">
+                      <label class="font-weight-bold">商品単価</label>
+                      <%= item.text_field :price_without_tax, class:"form-control" %>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                      <label class="font-weight-bold">在庫数</label>
+                      <%= item.text_field :stock, class:"form-control" %>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                      <label class="font-weight-bold ">ステータス</label>
+                      <% if @item.is_deleted  == false %>
+                            <p class="text-success">販売中</p>
+                      <% else %>
+                            <p class="text-danger">販売中止</p>
+                      <% end %>
+                        <%= item.select(:is_deleted, [['販売中', false], ['取扱中止',true]]) %>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label class="font-weight-bold">
+                      Youtube<br>("https://www.youtube.com/embed/〇〇")</label>
+                      <%= item.text_field :movie, class:"form-control", placeholder:"○○の部分を入力" %>
+                    </div>
+
+                  </div>
+
+
+                  <div class="form-group my-auto">
+                    <%= item.attachment_field :image,class:"form-control-file-sm" %>
+                  </div>
+                    <table class="table table-sm">
+                      <thead>
+                        <th class="text-center small font-weight-bold">ディスク<br>番号</th>
+                        <th class="text-center small font-weight-bold">トラック<br>番号</th>
+                        <th class="text-center small font-weight-bold" style="width:150px;">曲名</th>
+                        <th class="text-center small font-weight-bold">時間(h)</th>
+                        <th class="text-center small font-weight-bold">時間(m)</th>
+                        <th class="text-center small font-weight-bold">時間(s)</th>
+                        <th class="text-center small font-weight-bold" style="width:150px;">アーティスト名</th>
+                        <th class="text-center small font-weight-bold" style="width:150px;">アーティスト名<br>(カナ)</th>
+                      </thead>
+
+
+                      <tbody>
+
+                        <%= fields_for :track do |track| %>
+                          <td><%= track.text_field :disc_number, class:"form-control  text-center" %></td>
+                          <td><%= track.text_field :track_number, class:"form-control text-center" %></td>
+                          <td><%= track.text_field :name, class:"form-control" %></td>
+                          <td><%= track.text_field :length_hour, class:"form-control text-right" %></td>
+                          <td><%= track.text_field :length_minute, class:"form-control text-right" %></td>
+                          <td><%= track.text_field :length_second, class:"form-control text-right" %></td>
+                        <% end %>
+                        <td>
+                          <%= fields_for @artist do |artist| %>
+                            <%= artist.text_field :name, class:"form-control", :list=>"artist_list", :autocomplete => "off" %>
+                          <% end %>
+                          <datalist id="artist_list">
+                            <% @artist_name.each do |artist| %>
+                              <option value="<%= artist.name %>"><%= artist.name %></option>
+                            <% end %>
+                          </datalist>
+                        </td>
+                        <td>
+                          <%= fields_for @artist do |artist| %>
+                            <%= artist.text_field :name_kana, class:"form-control", :list=>"artist_name_kana_list", :autocomplete => "off" %>
+                          <% end %>
+                          <datalist id="artist_name_kana_list">
+                            <% @artist_name.each do |artist| %>
+                              <option value="<%= artist.name_kana %>"><%= artist.name_kana %></option>
+                            <% end %>
+                          </datalist>
+                        </td>
+
+                      </tbody>
+                    </table>
+                    <div class="btn-group">
+                      <%= link_to 'この商品の詳細ページへ', item_path(@item.id),class:"btn btn-outline-success btn-sm" %>
+                    </div>
+                    <div class="btn-group float-right">
+                      <%= item.submit "情報更新", class:"btn btn-outline-warning btn-sm"%>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <!-- ジャケット画像 -->
+        <div class="col-4">
+          <%= attachment_image_tag @item, :image, fallback: "no_image.jpg",class: "card-img" %>
+        </div>
+        <!-- 商品　大情報 -->
+        <div class="col-5" style="word-break: break-all;">
+          <div>
+            <div class="text-dark">
+              <%= @item.genre.genre_english %>
+            </div>
+            <%= link_to @item.artist.name, artists_path(@item), class: "font-weight-bold", style: "color: #0033cc; font-size: 18px;" %><br>
+            <span class="font-weight-bold", style="color: #1a1a1a;">
+              <%= @item.title %>
+            </span>
+          </div>
+
+          <div class="mt-3">
+            <span class="text-dark small">
+              <%= number_to_currency @item.price_without_tax, :unit => "￥", :precision => 0 %>
+            </span><br>
+            <!-- 在庫が20以下の場合 -->
+            <% if @item.stock <= 20 && @item.stock >= 1 %>
+              <span class="text-danger small">
+                在庫残り<%= @item.stock %>点
+              </span>
+            <!-- 在庫切れの場合 -->
+            <% elsif @item.stock == 0 && @item.is_deleted == false %>
+              <span class="text-secondary small">
+                【在庫切れ】再入荷中
+              </span>
+            <!-- 削除フラグtrueの場合 -->
+            <% elsif @item.is_deleted == true %>
+              <span class="text-secondary small">
+                取扱終了
+              </span>
+            <!-- 在庫が21以上の場合 -->
+            <% else %>
+              <span class="text-dark small font-weight-bold">
+                在庫有り
+              </span>
+            <% end %>
+          </div>
+
+        </div>
+        <!-- カート追加関連 -->
+        <div class="col-3 align-self-end">
+          <!-- カートに入れる数量 -->
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item form-group">
+              <input class="form-control form-control-sm" type="text" placeholder="数量を入力">
+              </input>
+            </li>
+            <!-- カートか欲しいものリストに追加 -->
+            <li class="list-group-item"><a href="#" class="btn btn-primary btn-sm">カートに追加</a></li>
+          </ul>
+        </div>
+
+        <!-- YouTube -->
+        <% if @item.movie.present? %>
+          <div class="col-12 mt-4">
+            <%= movie(movie_id: @item.movie) %>
+          </div>
+        <% end %>
+
+      </div>
+
+      <!-- 商品　小情報 -->
+      <div class="row">
+        <div class="col-12">
+          <table class="table table-sm small">
+            <thead class="text-white" style="background-color:#B40404;">
+              <tr>
+                <p class="text-center my-4 h5 text-white " style="background-color:#B40404;">商品情報</p>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="bg-secondary text-white"><%= @item.content_type %></th>
+                <td>シングル</td>
+                <th class="bg-secondary text-white">レーベル</th>
+                <td><%= @item.label.name %></td>
+              </tr>
+              <tr>
+                <th class="bg-secondary text-white">ディスク枚数</th>
+                <td><%= @max_disc_number %></td>
+                <th class="bg-secondary text-white">収録曲数</th>
+                <td><%= @item.tracks.count %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 収録曲トラックナンバー、タイトル、アーティスト -->
+      <div class="row">
+        <div class="col-12">
+          <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">収録曲</p>
+            <% @disc_numbers.each do |disc_number| %>
+              <table class="table table-sm table-striped"  style="width: 100%; table-layout: fixed; overflow: hidden;">
+                <thead>
+                  <p>ディスクNo.<%= disc_number %></p>
+                </thead>
+                <tbody>
+                  <% track_infos = Track.where("item_id = ?", params[:id])
+                                        .where("disc_number = ?", disc_number)
+                                        .select(:id, :track_number, :name, :length_hour, :length_minute, :length_second)
+                                        .order(track_number: :asc)  %>
+                  <% track_infos.each do |track_info| %>
+                    <tr>
+                      <th scope="row" style="width: 50px;">
+                        <%= track_info.track_number %>.
+                      </th>
+                      <td>
+                        <%= track_info.name %>
+                      </td>
+                      <td>
+                        <%= sprintf("%01d : ", track_info.length_hour) unless track_info.length_hour == 0 %> 
+                        <%= sprintf("%02d : ", track_info.length_minute) %>
+                        <%= sprintf("%02d", track_info.length_second) %>
+                      </td>
+                      <td style="float:right">
+                      <%= link_to '削除',item_track_path(@item,track_info.id), method: :delete, data:{confirm: 'Are you sure??'},class:'btn btn-danger btn-sm ml-2' %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <p class="text-center my-4 h5 text-white " style="background-color:#B40404;">商品紹介</p>
+          <div class="small" style="word-break: break-all;">
+            <%= @item.item_introduction %>
+          </div>
+        </div>
+      </div>
+<%
+=begin
+%>
+      <div class="row">
+        <div class="col-12">
+          <p class="text-center my-4 h5 text-white " style="background-color:#B40404;">購入者レビュー</p>
+          <table class="table" style="word-break: break-all;">
+            <tbody>
+
+              <% if @item.item_reviews.exists? %>
+                <%= @item.item_reviews.each do |reviews| %>
+                  <tr>
+                    <td>
+                      <p class="text-dark">
+                        <%= reviews.user.name %>
+                      </p>
+                      <span class="text-secondary">
+                        <%= reviews.created_at %>
+                      </span>
+                      <div class="mt-1 small text-dark">
+                        <%= reviews.review %>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+
+              <% else %>
+
+                <p class='text-center'>レビューは投稿されていません</p>
+
+              <% end %>
+<%
+=end
+%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

@@ -1,0 +1,148 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- サイドバー -->
+    <%= render 'layouts/sidebar_admins', {} %> <!-- 変数を再定義する必要有り -->
+
+    <!-- メインページ -->
+    <div class="col-9">
+      <div class="row">
+        <div class="container">
+          <span class="font-weight-bold h2">レビュー一覧</span>
+          <div class="box" style="height:10px;background-color:#005684;"></div>
+          <p>The .table-striped class adds zebra-stripes to a table:</p>
+          <div class="col-3 align-self-center">
+            <span class="font-weight-bold h3">全てのレビュー</span>
+          </div>
+          <div class="col-4 align-self-center">
+            <span class="font-weight-bold">2件</span><span>の投稿</span>
+          </div>
+          <div clas="col-8">
+            <form class="form-inline float-right">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="注文した商品名で検索"></input>
+                <a class="mx-3 fa fa-search text-secondary fa-lg text-right" href="#"></a>
+                <a href="#" class="ml-3 btn btn-secondary btn-sm">Back</a>
+              </div>
+            </form>
+          </div>
+          <div class="col-12">
+            <table class="table table-borderless">
+              <tbody>
+                <tr><!-- ここでordersをeach -->
+                  <td>
+                    <div class="card">
+                      <div class="card-header">
+                        <div class="row">
+                          <!-- 投稿日 -->
+                          <div class="col-2">
+                            <span class="small text-secondary">投稿日</span><br>
+                            <span class="text-dark"style="font-size:14px;">2018年6月9日</span>
+                          </div>
+                          <div class="col-2">
+                            <span class="small text-secondary">投稿者名</span><br>
+                            <span class="text-dark" style="font-size:14px;">西川きよし</span>
+                          </div>
+                          <div class="col-2">
+                            <span class="small text-secondary">レビュータイトル</span><br>
+                            <span class="text-dark" style="font-size:14px;">マジヤバイ!!</span>
+                          </div>
+                          <div class="col-2">
+                            <span class="small text-secondary">アーティスト名</span><br>
+                            <span class="text-dark" style="font-size:14px;">Lamb of God</span>
+                          </div>
+                          <div class="col-2">
+                            <span class="small text-secondary">商品名</span><br>
+                            <span class="text-dark" style="font-size:14px;">Sacrament</span>
+                          </div>
+                          <div class="col-2">
+                            <a href="#" class="btn btn-outline-info">詳細</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <table class="table">
+                          <tbody>
+                            <tr><!-- ここでorder_itemsをeach -->
+                              <td>
+                                  <!-- アーティスト名、商品名、税込価格 -->
+                                  <div class="col-9">
+                                    <p class="text-dark">レビュー本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文</p>
+                                  </div>
+                              </td>
+                            </tr><!-- ここでorder_itemsのeachを終了 -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div><!-- cardの閉じタグ -->
+                  </td>
+                </tr><!-- ここでordersのeachを終了 -->
+                <tr><!-- ここでordersをeach -->
+                  <td>
+                    <div class="card">
+                      <div class="card-header">
+                        <div class="row">
+                          <!-- 投稿日 -->
+                          <div class="col-2">
+                            <span class="small text-secondary">投稿日</span><br>
+                            <span class="text-dark"style="font-size:14px;">2018年6月7日</span>
+                          </div>
+                          <div class="col-2">
+                            <span class="small text-secondary">投稿者名</span><br>
+                            <span class="text-dark" style="font-size:14px;">田中角栄</span>
+                          </div>
+                          <div class="col-2">
+                            <span class="small text-secondary">レビュータイトル</span><br>
+                            <span class="text-dark" style="font-size:14px;">良い!!</span>
+                          </div>
+                          <div class="col-2">
+                            <span class="small text-secondary">アーティスト名</span><br>
+                            <span class="text-dark" style="font-size:14px;">Napalm Death</span>
+                          </div>
+                          <div class="col-2">
+                            <span class="small text-secondary">商品名</span><br>
+                            <span class="text-dark" style="font-size:14px;">Scum</span>
+                          </div>
+                          <div class="col-2">
+                            <a href="#" class="btn btn-outline-info">詳細</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <table class="table">
+                          <tbody>
+                            <tr><!-- ここでorder_itemsをeach -->
+                              <td>
+                                  <!-- アーティスト名、商品名、税込価格 -->
+                                  <div class="col-9">
+                                    <p class="text-dark">レビュー本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文</p>
+                                  </div>
+                              </td>
+                            </tr><!-- ここでorder_itemsのeachを終了 -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div><!-- cardの閉じタグ -->
+                  </td>
+                </tr><!-- ここでordersのeachを終了 -->
+              </tbody>
+            </table>
+            <div class="row"><!-- ページネーション -->
+              <div class="col-12">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div><!-- ページネーション閉じタグ -->
+          </div>
+        </div>
+      </div>
+    </div><!-- メインページの閉じタグ -->
+  </div><!-- 全体rowの閉じタグ -->
+</div><!-- 全体containerの閉じタグ -->

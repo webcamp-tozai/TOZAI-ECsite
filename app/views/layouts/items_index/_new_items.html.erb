@@ -1,0 +1,38 @@
+<%# 新入荷商品一覧 %>
+<div class="row">
+  <div class="col-12">
+    <p class="text-center my-4 h5 text-white" style="background-color:#B40404;">新着商品</p>
+    <div>
+      <table class="table small" style="width: 100%; table-layout: fixed; overflow: hidden;">
+        
+        <tbody>
+          <%# 表示件数は3件 %>
+          <% @items.first(3).each do |item|%>
+            <tr>
+              <th scope="row" style="width:15%;">
+                <%= link_to item_path(item) do %>
+                  <%= attachment_image_tag item, :image, fallback: "no_image.jpg", class: "card-img", fill: "80x80" %>
+                <% end %>
+              </th>
+              
+              <td style="width:20%; overflow: hidden;">
+              <div class="text-truncate">
+                <span><%= item.created_at.strftime('%Y/%m/%d')%></span><br>
+                <%= link_to item.artist.name, artist_path(item.artist_id) %><br>
+                <%= link_to item.title, item_path(item) %>
+              </div>
+              </td>
+              
+              <td style="width:65%;">
+                <div style="height: 6.4em; line-height: 1.6; overflow: hidden;">
+                  <%= item.item_introduction %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+        
+      </table>
+    </div>
+  </div>
+</div>
