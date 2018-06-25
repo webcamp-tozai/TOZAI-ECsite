@@ -28,6 +28,29 @@ class ApplicationController < ActionController::Base
 		@genres = Genre.all.order(genre_english: :asc)
 	end
 
+	private
+
+  def authenticate_user_or_admin
+    if admin_signed_in? || user_signed_in?
+    else
+      redirect_to root_path
+    end
+  end
+
+  def authenticate_user
+    if user_signed_in?
+    else
+      redirect_to root_path
+    end
+  end
+
+  def authenticate_admin
+    if admin_signed_in?
+    else
+    	redirect_to root_path
+    end
+  end
+
 	protected
 
 	def configure_permitted_parameters

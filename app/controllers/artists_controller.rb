@@ -1,4 +1,6 @@
 class ArtistsController < ApplicationController
+	before_action :authenticate_admin, except: [:show]
+
 	PER_ITEM = 12
 
 	def index

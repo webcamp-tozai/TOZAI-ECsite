@@ -1,4 +1,6 @@
 class LabelsController < ApplicationController
+	before_action :authenticate_admin
+
 	def create
 	end
 
@@ -6,7 +8,8 @@ class LabelsController < ApplicationController
 		@items = @items.select(:label_id).distinct.page(params[:page]).reverse_order.per(PER_ITEM)
 	end
 
-	def new
+	def show
+		redirect_to root_path
 	end
 
 	def edit
