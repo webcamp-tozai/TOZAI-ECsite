@@ -45,7 +45,7 @@
                 <th>アーティスト</th>
                 <th>ジャンル</th>
                 <th class="text-right">価格</th>
-                <th class="text-center">レビュー</th>
+                <!-- <th class="text-center">レビュー</th> -->
                 <th class="text-right">在庫数</th>
                 <th>商品タイプ</th>
               </tr>
@@ -60,7 +60,13 @@
                 <td class="text-right">
                   <%= number_to_currency item.price_without_tax,:unit => "￥", :precision => 0 %>
                 </td>
+<%
+=begin
+%>
                 <td class="text-center"><%= item.item_reviews.count %>件</td>
+<%
+=end
+%>
                 <td class="text-right">
                   <!-- 在庫が20以下の場合 -->
                   <% if item.stock <= 20 && item.stock >= 1 %>

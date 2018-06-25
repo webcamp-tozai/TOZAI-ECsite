@@ -71,7 +71,7 @@ class ItemsController < ApplicationController
   def show
     if Item.exists?(params[:id])
       @item = Item.find(params[:id])
-      @item_review = ItemReview.new
+      # @item_review = ItemReview.new
       @cart_item = CartItem.new
       # ディスク枚数の取得
       @disc_numbers = Track.where("item_id = ?", params[:id]).distinct.pluck(:disc_number)
