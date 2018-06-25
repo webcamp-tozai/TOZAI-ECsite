@@ -5,7 +5,7 @@ class LabelsController < ApplicationController
 	end
 
 	def index
-		@items = @items.select(:label_id).distinct.page(params[:page]).reverse_order.per(PER_ITEM)
+		@items = @items.select(:label_id).distinct.page(params[:page]).reverse_order
 	end
 
 	def show
