@@ -32,6 +32,7 @@
               <tr class="table-light">
                 <th>アーティスト名</th>
                 <th>アーティスト名(カナ)</th>
+                <th>関連商品数</th>
                 <th></th>
               </tr>
             </thead>
@@ -41,6 +42,7 @@
               <tr>
                 <td><%= item.artist.name %></td>
                 <td><%= item.artist.name_kana %></td>
+                <td><%= item.artist.items.count %>枚</td>
                 <td><%= link_to "編集", edit_artist_path(item.artist.id), class:"btn btn-outline-warning btn-sm" %></td>
               </tr>
             <% end %>

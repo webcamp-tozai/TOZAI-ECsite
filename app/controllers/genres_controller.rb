@@ -28,6 +28,12 @@ class GenresController < ApplicationController
 		redirect_to genres_path
 	end
 
+	def destroy
+		@genre = Genre.find(params[:id])
+		@genre.destroy
+		redirect_to genres_path
+	end
+
 	private
 	def genre_params
 		params.require(:genre).permit(:id,:genre_english,:genre_kana)

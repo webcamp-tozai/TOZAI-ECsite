@@ -20,6 +20,7 @@
                 <th>アーティスト名</th>
                 <th>アーティスト名(カナ)</th>
                 <th></th>
+                <th></th>
               </tr>
             </thead>
 
@@ -28,6 +29,9 @@
                 <td><%= artist.text_field :name, class:"form-control" %></td>
                 <td><%= artist.text_field :name_kana, class:"form-control" %>
                 <td><%= artist.submit "更新", class:"btn btn-outline-info btn-sm" %></td>
+                <% if Artist.find(params[:id]).items.count == 0 %>
+                <td><%= link_to "削除", artist_path(@artist), method: :delete, data:{confirm: 'Are you sure??'}, class:'btn btn-outline-dander btn-sm ml-2' %></td>
+                <% end %>
               </tr>
 
             </tbody>

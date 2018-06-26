@@ -26,12 +26,13 @@
               </div>
             </form>
           </div>
-          
+
           <table class="table table-sm">
             <thead>
               <tr class="table-light">
                 <th>ジャンル名</th>
                 <th>ジャンル名(カナ)</th>
+                <th>関連商品数</th>
                 <th></th>
               </tr>
             </thead>
@@ -41,6 +42,7 @@
                 <tr>
                   <td><%= item.genre.genre_english %></td>
                   <td><%= item.genre.genre_kana %></td>
+                  <td><%= item.genre.items.count %>枚</td>
                   <td><%= link_to "編集", edit_genre_path(item.genre.id), class:"btn btn-outline-warning btn-sm" %></td>
                 </tr>
               <% end %>

@@ -30,6 +30,7 @@
             <thead>
               <tr class="table-light">
                 <th>レーベル名</th>
+                <th>関連商品数</th>
                 <th></th>
               </tr>
             </thead>
@@ -38,6 +39,7 @@
             <% @items.each do |item| %>
               <tr>
                 <td><%= item.label.name %></td>
+                <td><%= item.label.items.count %>枚</td>
                 <td><%= link_to "編集", edit_label_path(item.label.id), class:"btn btn-outline-success btn-sm" %></td>
               </tr>
             <% end %>

@@ -29,6 +29,9 @@
                 <td><%= genre.text_field :genre_english, class:"form-control" %></td>
                 <td><%= genre.text_field :genre_kana, class:"form-control" %></td>
                 <td><%= genre.submit "更新", class:"btn btn-outline-info btn-sm" %></td>
+                <% if Genre.find(params[:id]).items.count == 0 %>
+                <td><%= link_to "削除", genre_path(@genre), method: :dlete, data:{confirm: 'Are you sure??'}, class:'btn btn-outline-danger btn-sm ml-2' %></td>
+                <% end %>
               </tr>
             <%# end %>
 

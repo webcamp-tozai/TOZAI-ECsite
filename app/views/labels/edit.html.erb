@@ -19,6 +19,7 @@
               <tr class="table-light">
                 <th>レーベル名</th>
                 <th></th>
+                <th></th>
               </tr>
             </thead>
 
@@ -26,6 +27,9 @@
               <tr>
                 <td><%= label.text_field :name, class:"form-control" %></td>
                 <td><%= label.submit "更新", class:"btn btn-outline-success btn-sm" %></td>
+                <% if Label.find(params[:id]).items.count == 0 %>
+                <td><%= link_to "削除", label_path(@label), method: :delete, data:{confirm: 'Are you sure??'}, class:'btn btn-outline-danger btn-sm ml-2' %></td>
+                <% end %>
               </tr>
 
             </tbody>
