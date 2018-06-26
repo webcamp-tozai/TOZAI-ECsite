@@ -28,11 +28,17 @@
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; 2018 WebCampPro TOZAI Records</p>
       </div>
+<%
+=begin
+%>
       <% if Rails.env.development?%>
         <div class="debug">
           <%= debug(params) %>
         </div>
       <% end %>
+<%
+=end
+%>
     </footer>
     
   </body>
