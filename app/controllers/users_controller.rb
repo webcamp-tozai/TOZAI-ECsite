@@ -21,7 +21,6 @@ class UsersController < ApplicationController
   def order_history
     @user = User.find(params[:id])
     @order = Order.where(user_id: @user).page(params[:page]).reverse_order
-    @order_item = @order_item = OrderItem.where(order_id: @order)
   end
 
   def show
