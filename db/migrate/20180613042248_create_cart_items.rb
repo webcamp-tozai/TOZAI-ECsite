@@ -1,6 +1,6 @@
 class CreateCartItems < ActiveRecord::Migration[5.1]
   def change
-    create_table :cart_items do |t|
+    create_table :cart_items, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
       # 追加
       # NOT NULL => false
       # index指定 => true

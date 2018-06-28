@@ -65,20 +65,25 @@ group :development, :test do
   gem 'hirb-unicode'
 end
 
-group :development do
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rails-erd'
-end
+#group :development do
+#  gem 'web-console', '>= 3.3.0'
+#  gem 'listen', '>= 3.0.5', '< 3.2'
+#  gem 'spring'
+#  gem 'spring-watcher-listen', '~> 2.0.0'
+#  gem 'rails-erd'
+#end
 
-group :test do
-  gem 'rails-controller-testing'
-  gem 'minitest-reporters'
-  gem 'guard'
-  gem 'guard-minitest'
-end
+#group :test do
+#  gem 'rails-controller-testing'
+#  gem 'minitest-reporters'
+#  gem 'guard'
+#  gem 'guard-minitest'
+#end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'json'
+gem 'mysql2'
+gem 'psych', '~> 2.2.1'
+gem 'yaml_db'

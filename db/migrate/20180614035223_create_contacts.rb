@@ -1,6 +1,6 @@
 class CreateContacts < ActiveRecord::Migration[5.1]
   def change
-    create_table :contacts do |t|
+    create_table :contacts, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
       # 追加
       # NOT NULL => false
       # index指定 => true
